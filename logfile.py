@@ -8,15 +8,17 @@ def countChars(char, str):
 
 def mylog(string):
     with open("log.txt", 'a') as f:
-        f.write(str(string) +"\n")
+        f.write(str(string) + "\n")
     return
+
 
 mylog("App started")
 with open('sample1.txt', 'r') as f:
     lineNumber = 0
     for line in f:
         lineNumber += 1
-        newString = "Line Number:" + str(lineNumber)+ "Chars Count:"+ str(countChars("s", line))
+        newString = "Line Number:" + \
+            str(lineNumber) + "Chars Count:" + str(countChars("s", line))
         mylog(newString)
         print(newString)
 mylog("App finished")
