@@ -2,7 +2,7 @@ print("sasha privet")
 
 i=0
 while 1==1:	
-	x=input("what is your age:")
+	x=input("what is your age?")
 	x=int(x)
 	if x==99:
 		break
