@@ -1,4 +1,12 @@
-# initial txt file (We need to read the whole text and save together the encoded and decoded files)
+import sys
+
+key = sys.argv[1]
+source_file = sys.argv[2]
+target_file = sys.argv[3]
+
+# print('Sourse file:', source_file)
+# print('Target file:', target_file)
+# print('key:', key)
 
 
 def encode(key, string):
@@ -27,7 +35,7 @@ def read_content_from_file(file_name):
 
 
 def save_encoded_file(file_name, text):
-    encoded = encode("aaa", text)
+    encoded = encode(key, text)
     save_content_to_file(file_name, encoded)
 
 
@@ -36,12 +44,5 @@ def save_content_to_file(file_name, text):
         f.write(text)
 
 
-def read_encoded_file(file_name):
-    encoded = read_content_from_file(file_name)
-    return decode("aaa", encoded)
-
-
-content = read_content_from_file("1.txt")
-save_encoded_file("encoded.txt", content)
-decoded_content = read_encoded_file("encoded.txt")
-save_content_to_file("decoded.txt", decoded_content)
+content = read_content_from_file(source_file)
+save_encoded_file(target_file, content)
