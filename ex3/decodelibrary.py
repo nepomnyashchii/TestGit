@@ -1,4 +1,3 @@
-
 def encode(key, string):
     encoded_chars = []
     for i in range(len(string)):
@@ -29,9 +28,14 @@ def save_content_to_file(file_name, text):
         f.write(text)
 
 
-def read_encoded_file(file_name):
-    encoded = read_content_from_file(file_name)
-    return decode(key, encoded)
+
+
+
+
+
+
+
+
 
 
 
