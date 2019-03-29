@@ -22,10 +22,6 @@ target_file = sys.argv[3]
 
 import decodelibrary
 
-def read_encoded_file(file_name):
-    encoded = read_content_from_file(file_name)
-    return decode(key, encoded)
-    
 if os.path.isfile(source_file):
     decoded_content = read_encoded_file(source_file)
     save_content_to_file(target_file, decoded_content)
