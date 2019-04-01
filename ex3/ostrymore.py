@@ -1,5 +1,5 @@
-# import os
-# print (dir(os))
+import os
+print (dir(os))
 
 # import os
 # print(os.getcwd())

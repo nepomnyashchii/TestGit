@@ -59,8 +59,15 @@
 # student={"name": "John", "age": 25, "courses": ["Math", "CompSci"]}
 # print(len(student))
 
-# student={"name": "John", "age": 25, "courses": ["Math", "CompSci"]}
-# print(student.keys)
+student = {
+    "name": "John",
+    "age": 25,
+    "courses": [
+        "Math",
+        "CompSci"
+    ]}
+
+print(student.keys)
 
 # student={"name": "John", "age": 25, "courses": ["Math", "CompSci"]}
 # print(student.values())
@@ -72,6 +79,21 @@
 # for key in student:
 #     print(key)
 
-student={"name": "John", "age": 25, "courses": ["Math", "CompSci"]}
-for key, value in student.items():
-    print(key, value)
+# student = {
+#     "name": "John",
+#     "age": 25,
+#     "courses": [
+#         "Math",
+#         "CompSci",
+#         "Algebra"
+#     ],
+#     "address": {
+#         "tel": "05298479879",
+#         "zip": 11235
+#     },
+# }
+# for key, value in student.items():
+#     print(key, value)
+
+# if "address" in student:
+#     print(student["address"])
