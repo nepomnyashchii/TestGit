@@ -1,5 +1,5 @@
 class Price:
-    def final_price (self, vat, discount=0):
+    def final_price (self, vat, discount):
         """Returns price after applying vat and fixed discount"""
         return(self.net_price*(100+vat)/100)-discount
 p1 = Price()

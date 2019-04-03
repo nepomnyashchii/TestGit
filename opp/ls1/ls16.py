@@ -1,6 +1,6 @@
 class Square:
     side =8
-    def area(self):
+    def area (self):
         return self.side **2
 sq= Square()
 print(sq.area())
