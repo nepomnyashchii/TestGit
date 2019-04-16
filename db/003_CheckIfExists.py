@@ -1,5 +1,7 @@
 import mysql.connector
 
+print('Please wait...')
+
 mydb = mysql.connector.connect(
     host="db4free.net",
     user="coolspammail",
@@ -11,4 +13,4 @@ mycursor = mydb.cursor()
 mycursor.execute("SHOW DATABASES")
 
 for x in mycursor:
-    print(x) #.value.decode("utf-8"))
+    print(x[0])
