@@ -4,8 +4,8 @@ mydb = mysql.connector.connect(
     host="db4free.net",
     user="coolspammail",
     passwd="coolspammail-pass",
-    database="SHOW DATABASES"
-)
+    database="Show Databases"
+    )
 
 mycursor = mydb.cursor()
 
