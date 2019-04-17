@@ -8,14 +8,14 @@ mydb = mysql.connector.connect(
     )
 mycursor = mydb.cursor()
 
-sql = "INSERT INTO products (name) VALUES"
-val = [("Chocolate Heaven"),
-("Tasty Lemons"),
-("Vanilla Dreams")]
+sql = "INSERT INTO products (name) VALUES (%s)"
+val = [("Cake"),
+("Telephone"),
+("Music")]
 
 
 mycursor.executemany(sql, val)
 
 mydb.commit()
 
-print(mycursor.rowcount, "was inserted.")
+print(mycursor)
