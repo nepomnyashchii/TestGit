@@ -5,6 +5,7 @@ mydb = mysql.connector.connect(
     user="coolspammail",
     passwd="coolspammail-pass",
     database="coolspammail"
-    )
+)
 mycursor = mydb.cursor()
-print(mycursor.execute("ALTER TABLE customers ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY"))
+print(mycursor.execute(
+    "ALTER TABLE customers ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY"))

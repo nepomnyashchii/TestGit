@@ -5,9 +5,10 @@ mydb = mysql.connector.connect(
     user="coolspammail",
     passwd="coolspammail-pass",
     database="coolspammail"
-    )
+)
 
 mycursor = mydb.cursor()
 
-y= mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
+y = mycursor.execute(
+    "CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
 print(y)

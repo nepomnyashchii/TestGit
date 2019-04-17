@@ -5,12 +5,12 @@ mydb = mysql.connector.connect(
     user="coolspammail",
     passwd="coolspammail-pass",
     database="coolspammail"
-    )
-mycursor = mydb.cursor()
+)
+
 mycursor = mydb.cursor()
 
 mycursor.execute("SELECT * FROM customers")
 
 myresult = mycursor.fetchone()
-
+# myresult = mycursor.fetchall()
 print(myresult)
