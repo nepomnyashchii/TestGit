@@ -8,9 +8,14 @@ mydb = mysql.connector.connect(
     )
 mycursor = mydb.cursor()
 
+sql = "DELETE FROM customers WHERE address = %s"
+adr = ("Yellow Garden 2", )
 
-sql = "DROP TABLE IF EXISTS customers"
+mycursor.execute(sql, adr)
 
-mycursor.execute(sql)
+mydb.commit()
+
+print(mycursor.rowcount, "record(s) deleted")
+
 
 

@@ -8,13 +8,7 @@ mydb = mysql.connector.connect(
     )
 mycursor = mydb.cursor()
 
-sql = "SELECT \
-  users.name AS user, \
-  products.name AS favorite \
-  FROM users \
-  INNER JOIN products ON users.fav = products.id"
-
-mycursor.execute(sql)
+mycursor.execute("SELECT * FROM customers LIMIT 5")
 
 myresult = mycursor.fetchall()
 

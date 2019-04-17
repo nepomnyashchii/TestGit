@@ -8,14 +8,14 @@ mydb = mysql.connector.connect(
     )
 mycursor = mydb.cursor()
 
-sql = "DELETE FROM customers WHERE address = %s"
-adr = ("Yellow Garden 2", )
 
-mycursor.execute(sql, adr)
+sql = "SELECT * FROM customers ORDER BY name"
 
-mydb.commit()
+mycursor.execute(sql)
 
-print(mycursor.rowcount, "record(s) deleted")
+myresult = mycursor.fetchall()
 
+for x in myresult:
+  print(x)
 
 

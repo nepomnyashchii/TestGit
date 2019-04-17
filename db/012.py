@@ -7,14 +7,10 @@ mydb = mysql.connector.connect(
     database="coolspammail"
     )
 mycursor = mydb.cursor()
-sql = "SELECT * FROM customers WHERE address = %s"
-adr = ("Yellow Garden 2", )
+mycursor = mydb.cursor()
 
-mycursor.execute(sql, adr)
+mycursor.execute("SELECT * FROM customers")
 
-myresult = mycursor.fetchall()
+myresult = mycursor.fetchone()
 
-for x in myresult:
-  print(x)
-
-
+print(myresult)

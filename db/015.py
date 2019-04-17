@@ -7,9 +7,7 @@ mydb = mysql.connector.connect(
     database="coolspammail"
     )
 mycursor = mydb.cursor()
-
-
-sql = "SELECT * FROM customers ORDER BY name"
+sql = "SELECT * FROM customers ORDER BY name DESC"
 
 mycursor.execute(sql)
 

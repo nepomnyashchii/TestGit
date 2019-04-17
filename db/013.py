@@ -7,7 +7,9 @@ mydb = mysql.connector.connect(
     database="coolspammail"
     )
 mycursor = mydb.cursor()
-sql = "SELECT * FROM customers ORDER BY name DESC"
+
+
+sql = "SELECT * FROM customers WHERE address LIKE '%way%'"
 
 mycursor.execute(sql)
 
@@ -15,5 +17,3 @@ myresult = mycursor.fetchall()
 
 for x in myresult:
   print(x)
-
-

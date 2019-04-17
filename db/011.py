@@ -7,11 +7,7 @@ mydb = mysql.connector.connect(
     database="coolspammail"
     )
 mycursor = mydb.cursor()
-
-
-sql = "SELECT * FROM customers WHERE address LIKE '%way%'"
-
-mycursor.execute(sql)
+mycursor.execute("SELECT name, address FROM customers")
 
 myresult = mycursor.fetchall()
 

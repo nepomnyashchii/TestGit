@@ -6,13 +6,8 @@ mydb = mysql.connector.connect(
     passwd="coolspammail-pass",
     database="coolspammail"
     )
+
 mycursor = mydb.cursor()
 
-sql = "INSERT INTO customers (name, address) VALUES (%s, %s)"
-val = ("John", "Highway 21")
-
-mycursor.execute(sql, val)
-
-mydb.commit()
-
-print(mycursor.rowcount, "record inserted.")
+x= mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
+print(x)

@@ -8,15 +8,11 @@ mydb = mysql.connector.connect(
     )
 mycursor = mydb.cursor()
 
-sql = "SELECT \
-  users.name AS user, \
-  products.name AS favorite \
-  FROM users \
-  INNER JOIN products ON users.fav = products.id"
+sql = "UPDATE customers SET address = 'Canyon 123' WHERE address = 'Valley 345'"
 
 mycursor.execute(sql)
 
-myresult = mycursor.fetchall()
+mydb.commit()
 
-for x in myresult:
-  print(x)
+print(mycursor.rowcount, "record(s) affected")
+

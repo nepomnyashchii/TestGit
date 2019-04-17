@@ -7,10 +7,10 @@ mydb = mysql.connector.connect(
     database="coolspammail"
     )
 mycursor = mydb.cursor()
-mycursor = mydb.cursor()
+sql = "INSERT INTO customers (name, address) VALUES (%s, %s)"
+val = ("Michelle", "Blue Village")
+mycursor.execute(sql, val)
 
-mycursor.execute("SELECT * FROM customers")
+mydb.commit()
 
-myresult = mycursor.fetchone()
-
-print(myresult)
+print("1 record inserted, ID:", mycursor.lastrowid)

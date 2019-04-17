@@ -7,10 +7,12 @@ mydb = mysql.connector.connect(
     database="coolspammail"
     )
 mycursor = mydb.cursor()
+
 sql = "INSERT INTO customers (name, address) VALUES (%s, %s)"
-val = ("Michelle", "Blue Village")
+val = ("John", "Highway 21")
+
 mycursor.execute(sql, val)
 
 mydb.commit()
 
-print("1 record inserted, ID:", mycursor.lastrowid)
+print(mycursor.rowcount, "record inserted.")
