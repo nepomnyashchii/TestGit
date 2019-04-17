@@ -6,17 +6,8 @@ mydb = mysql.connector.connect(
     passwd="coolspammail-pass",
     database="coolspammail"
     )
+
 mycursor = mydb.cursor()
 
-sql = "SELECT \
-  users.name AS user, \
-  products.name AS favorite \
-  FROM users \
-  INNER JOIN products ON users.fav = products.id"
-
-mycursor.execute(sql)
-
-myresult = mycursor.fetchall()
-
-for x in myresult:
-  print(x)
+y= mycursor.execute("CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), fav INT)")
+print(y)

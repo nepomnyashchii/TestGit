@@ -9,5 +9,5 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-x= mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
-print(x)
+y= mycursor.execute("CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))")
+print(y)
