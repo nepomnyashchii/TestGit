@@ -8,10 +8,12 @@ mydb = mysql.connector.connect(
     )
 mycursor = mydb.cursor()
 
-sql = "INSERT INTO products (name) VALUES"
-val = [("Chocolate Heaven"),
-("Tasty Lemons"),
-("Vanilla Dreams")]
+sql = "INSERT INTO users (name, fav) VALUES (%s, %s)"
+val = [('John', 154),
+('Peter', 154),
+('Amy', 155),
+('Hannah', 20),
+('Michael', 23)]
 
 
 mycursor.executemany(sql, val)

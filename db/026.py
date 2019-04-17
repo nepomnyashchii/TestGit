@@ -6,19 +6,8 @@ mydb = mysql.connector.connect(
     passwd="coolspammail-pass",
     database="coolspammail"
     )
+
 mycursor = mydb.cursor()
 
-sql = "INSERT INTO users (name, fav) VALUES (%s, %s)"
-val = [
-('John', 154),
-('Peter', 154),
-('Amy', 155),
-('Hannah', 20),
-('Michael', 23)
-]
-
-mycursor.execute(sql, val)
-
-mydb.commit()
-
-print(mycursor.rowcount, "record inserted.")
+y= mycursor.execute("CREATE TABLE products (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255))")
+print(y)
