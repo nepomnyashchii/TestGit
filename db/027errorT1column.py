@@ -9,9 +9,9 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 
 sql = "INSERT INTO products (name) VALUES (%s)"
-val = [("Cake"),
-("Telephone"),
-("Music")]
+val = [("Cake",),
+("Telephone",),
+("Music",)]
 
 
 mycursor.executemany(sql, val)
