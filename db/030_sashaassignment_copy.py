@@ -19,11 +19,23 @@
 # mydb.commit()
 # print(mycursor.rowcount, "record inserted.")
 # #  return uuid on success on fail return '' (empty string)
+
+import uuid
+my_uuid = uuid.uuid4()
+print(my_uuid)
+import mysql.connector
+mydb = mysql.connector.connect(
+    host="db4free.net",
+    user="coolspammail",
+    passwd="coolspammail-pass",
+    database="coolspammail"
+    )
+mycursor = mydb.cursor()
 def put_secret(msg, exp, pin):
     print(msg, exp, pin)
 put_secret ("privet", 600, 1234)
-import uuid
-my_uuid = uuid.uuid4()
+# import uuid
+# my_uuid = uuid.uuid4()
 print(my_uuid)
 def get_secret(pin, my_uuid):
     print(pin, my_uuid)

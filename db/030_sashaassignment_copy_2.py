@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
     database="coolspammail"
     )
 mycursor = mydb.cursor()
-sql = "INSERT INTO secrets (msg,) VALUES (%s, %s, %s)"
+sql = "INSERT INTO secrets (put_secret) VALUES (%s, %s, %s)"
 val = ("John", "Highway 21")
 
 mycursor.execute(sql, val)
