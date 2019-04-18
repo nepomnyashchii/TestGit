@@ -11,8 +11,9 @@ mydb = mysql.connector.connect(
 mycursor = mydb.cursor()
 def put_secret(msg, exp, pin):
     print(msg, exp, pin)
-    sql = "INSERT INTO customers (uuid, msg, pin, exp, Created) VALUES (%s, %s, %s, %s, %s)"
+    sql = "INSERT INTO secret (id, msg, pin, exp) VALUES (%s, %s, %s, %s)" ('', 'ggg', '1234', '600')
     val = ('monkey', 'apple', 1234, 600, 2007)
+
     mycursor.execute(sql, val)
     mydb.commit()
     print(mycursor.rowcount, "was inserted.")
@@ -23,3 +24,4 @@ def get_secret(pin, my_uuid):
     return "ura"
 msg= get_secret(1234, "fakeuuid")
 print(msg)
+-
