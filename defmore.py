@@ -1,11 +1,11 @@
 # def print_lyrics():
 #     print("I'm a lumberjack, and I'm okay.")
 #     print("I sleep all night and I work all day.")
-#
+
 # def repeat_lyrics():
 #     print_lyrics()
 #     print_lyrics()
-#
+
 # def exp_1 ():
 #     repeat_lyrics()
 # exp_1 ()
@@ -42,9 +42,9 @@
 #     return("{} Function".format (greeting))
 # print(hello_func("Hi Friend"))
 
-# def hello_func (greeting, name="you"):
-#     return("{}, {}".format (greeting, name))
-# print(hello_func("Hi Friend"))
+def hello_func (greeting, name="you"):
+    return("{}, {}".format (greeting, name))
+print(hello_func("Hi Friend"))
 
 # def hello_func (greeting, name="you"):
 #     return("{}, {}".format (greeting, name))
@@ -155,14 +155,14 @@
 # func (1, 2, 3, *(5,7,9), **{"A": 'a', "B": "b"})
 # func (1,2,3, 5, 7, 9, A="a", B="b")
 
-def additional(*args, **kwargs):
-    print(args)
-    print(kwargs)
-args1 = (1,2,3)
-args2 = (4,5)
-kwargs1 = dict (option1=10, option2=20)
-kwargs2={"option3":30}
-additional(*args1, *args2, **kwargs1, **kwargs2)
+# def additional(*args, **kwargs):
+#     print(args)
+#     print(kwargs)
+# args1 = (1,2,3)
+# args2 = (4,5)
+# kwargs1 = dict (option1=10, option2=20)
+# kwargs2={"option3":30}
+# additional(*args1, *args2, **kwargs1, **kwargs2)
 
 # def func(a=[], b= []):
 #     print(a)

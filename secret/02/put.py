@@ -19,7 +19,7 @@ try:
     )
 
     mycursor = mydb.cursor()
-    sql = "INSERT INTO secre2t (id, msg, pin, exp) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO secret (id, msg, pin, exp) VALUES (%s, %s, %s, %s)"
     val = (sid, msg, pin, exp)
     mycursor.execute(sql, val)
     mydb.commit()
