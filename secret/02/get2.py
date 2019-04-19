@@ -1,5 +1,6 @@
 import mysql.connector
 print("Please wait...")
+msg ="Privet"
 try:
     mydb = mysql.connector.connect(
         host="db4free.net",
@@ -23,6 +24,12 @@ try:
 
     for x in myresult:
         print(x)
+    msg ="Privet"
+    return_value=msg
+
+
 except:
     print ("Something went Wrong")
+print('return_value:' + return_value)
+
 
