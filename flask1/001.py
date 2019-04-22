@@ -13,7 +13,7 @@ def hello():
 
 @app.route("/hello2")
 def hello2():
-    return "I'm Flask"
+    return "I lova all"
 
 @app.route('/user/<username>')
 def show_user_profile(username):

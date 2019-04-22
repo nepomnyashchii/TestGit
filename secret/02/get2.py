@@ -1,6 +1,6 @@
 import mysql.connector
 print("Please wait...")
-msg ="Privet"
+return_value = ''
 try:
     mydb = mysql.connector.connect(
         host="db4free.net",
@@ -10,26 +10,17 @@ try:
     )
     mycursor = mydb.cursor()
 
-    sid = 'cc27a6dc-2e22-4a71-8a7f-4d104d2abad4'
+    sid = '47cafc3f-8cb2-46f9-ae9b-824b3b8f4ed0'
     pin = 12345
 
-
-    sql = "SELECT * FROM secret WHERE id =  %s AND pin = %s"
+    sql = "SELECT msg FROM secret WHERE id =  %s AND pin = %s"
     params = (sid, int(pin))
 
     mycursor.execute(sql, params)
 
-
-    myresult = mycursor.fetchall()
-
-    for x in myresult:
-        print(x)
-    msg ="Ura"
-    return_value=msg
-
-
+    myresult = mycursor.fetchone()
+    return_value = myresult[0]
 except:
-    print ("Something went Wrong")
-print('return_value:' + return_value)
+    print("Record not found")
 
-
+print(return_value)
