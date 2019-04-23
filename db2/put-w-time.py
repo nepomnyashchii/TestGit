@@ -5,11 +5,11 @@ import uuid
 print("Please wait...")
 
 
-msg = "time"
+msg = "time3"
 exp = 600
 pin = 1234
 sid = str(uuid.uuid4())
-
+mytime=time.strftime('%Y-%m-%d %H:%M:%S')
 return_value = ''
 
 try:
@@ -22,7 +22,7 @@ try:
 
     mycursor = mydb.cursor()
     sql = "INSERT INTO secret (id, msg, pin, exp, created) VALUES (%s, %s, %s, %s, %s)"
-    val = (sid, msg, pin, exp, time.strftime('%Y-%m-%d %H:%M:%S'))
+    val = (sid, msg, pin, exp, mytime)
     mycursor.execute(sql, val)
     mydb.commit()
     print("1 record inserted, ID:", mycursor.lastrowid)
