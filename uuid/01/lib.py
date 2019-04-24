@@ -1,10 +1,22 @@
-import lib
+import uuid
+import mysql.connector
 
 
-msg = "privet"
-exp = 600
-pin = 1234
+mydb = mysql.connector.connect(
+    host="db4free.net",
+    user="coolspammail",
+    passwd="coolspammail-pass",
+    database="coolspammail")
 
-sid = lib.put_secret(msg, pin, exp)
-msg = lib.get_secret(sid, pin)
-print(msg)
+
+def put_secret(msg, pin, exp):
+    """put secret into db table."""
+    sid = str(uuid.uuid4())
+    print(msg, exp, pin, sid)
+    return sid
+
+
+def get_secret(sid, pin):
+    """get secret from db."""
+    print(sid, pin)
+    return "ura"
