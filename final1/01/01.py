@@ -1,12 +1,7 @@
 import lib
+import datetime
 
-
-# msg = "privet"
-exp = 6000
-# # pin = 1234
-created = (2019, 4, 24, 12, 30, 11)
-finaltime = lib.time_expired(created, exp)
-# print(finaltime)
-# sid = lib.put_secret(msg, pin, exp)
-# msg = lib.get_secret(sid, pin)
-# print(msg)
+exp = 6
+created = datetime.datetime(2019, 4, 25, 17, 10, 11)
+isEpx = lib.is_expired(created, exp)
+print(isEpx)
