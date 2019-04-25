@@ -1,5 +1,7 @@
 import datetime
-def time_expired (created, exp):
+
+
+def time_expired(created, exp):
     my_time = created + datetime.timedelta(0, exp)
     current_time = datetime.datetime.now()
     print(created, current_time, my_time)
@@ -7,4 +9,3 @@ def time_expired (created, exp):
         return True
     else:
         return False
-
