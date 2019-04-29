@@ -4,12 +4,12 @@ import datetime
 import time
 
 
-def is_expired(created, exp):
+def is_not_expired(created, exp):
     my_time = created + datetime.timedelta(0, exp)
     current_time = datetime.datetime.utcnow()
     # datetime.datetime.now()
     print(created, current_time, my_time)
-    if my_time < current_time:
+    if my_time > current_time:
         return True
     else:
         return False
@@ -66,8 +66,7 @@ def get_secret(sid, pin):
         dbtime = myresult[1]
         exp = myresult[2]
 
-        is_exp = is_expired(dbtime, exp)
-        if not is_exp:
+        if is_not_expired(dbtime, exp):
             return_value = msg
 
     except:
