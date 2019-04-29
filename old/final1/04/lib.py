@@ -4,11 +4,22 @@ import datetime
 import time
 
 
-def put_secret(msg, pin, exp, created):
+def is_expired(created, exp):
+    my_time = created + datetime.timedelta(0, exp)
+    current_time = datetime.datetime.utcnow()
+    # datetime.datetime.now()
+    print(created, current_time, my_time)
+    if my_time < current_time:
+        return True
+    else:
+        return False
+
+
+def put_secret(msg, pin, exp):
     """put secret into db table."""
 
     sid = str(uuid.uuid4())
-    created=time.strftime('%Y-%m-%d %H:%M:%S')
+    created = time.strftime('%Y-%m-%d %H:%M:%S')
     return_value = ''
     try:
         mydb = mysql.connector.connect(
@@ -51,14 +62,13 @@ def get_secret(sid, pin):
         params = (sid, int(pin))
         mycursor.execute(sql, params)
         myresult = mycursor.fetchone()
-        return_value = myresult[0]
+        msg = myresult[0]
         dbtime = myresult[1]
         exp = myresult[2]
-        newtime = dbtime + datetime.timedelta(0, exp)
-        current_time = datetime.datetime.now()
 
-        if newtime < current_time:
-            return_value=''
+        is_exp = is_expired(dbtime, exp)
+        if not is_exp:
+            return_value = msg
 
     except:
         print("Record not found")

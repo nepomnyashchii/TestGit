@@ -4,10 +4,9 @@ import time
 import uuid
 
 msg = "success"
-exp = 600
+exp = 60000
 pin = 1234
 sid = str(uuid.uuid4())
-created=time.strftime('%Y-%m-%d %H:%M:%S')
 
 # sid = lib.put_secret(msg, pin, exp, created)
 # msg = lib.get_secret(sid, pin)
@@ -15,7 +14,7 @@ created=time.strftime('%Y-%m-%d %H:%M:%S')
 # # lib.del_secret(sid, pin)
 
 # print("Please wait...")
-sid = lib.put_secret(msg, pin, exp, created)
+sid = lib.put_secret(msg, pin, exp)
 
 if len(sid) > 0:
     print("Please wait...")
@@ -23,6 +22,6 @@ if len(sid) > 0:
     if len(msg) > 0:
         print(msg)
     else:
-        print("secret not found in db")
+        print("secret not found or expired")
 else:
     print("cant put msg to db")

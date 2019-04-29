@@ -1,2 +1,2 @@
 # TestGit
-this is for testing git
+this is a playground for python
