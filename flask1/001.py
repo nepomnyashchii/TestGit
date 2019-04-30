@@ -18,12 +18,12 @@ app = Flask(__name__)
 #     return "I lova all"
 
 
-@app.route('/source/<sourceName>')
-def source_by_name(sourceName):
-    if sourceName == 'cnn' or sourceName == 'bbc':
-        return 'hurray'
-    else:
-        return 'bad source'
+# @app.route('/source/<sourceName>')
+# def source_by_name(sourceName):
+#     if sourceName == 'cnn' or sourceName == 'bbc':
+#         return 'hurray'
+#     else:
+#         return 'bad source'
 
 
 # @app.route('/put/<msg>/<int:pin>/<int:exp>')
@@ -49,10 +49,10 @@ def source_by_name(sourceName):
 #     return 'Post %d' % post_id
 
 
-# @app.route('/path/<path:subpath>')
-# def show_subpath(subpath):
-#     # show the subpath after /path/
-#     return 'Subpath %s' % subpath
+@app.route('/path/<path:subpath>')
+def show_subpath(subpath):
+    # show the subpath after /path/
+    return 'Subpath %s' % subpath
 
 
 # @app.route('/projects/')
