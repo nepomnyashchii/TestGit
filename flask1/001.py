@@ -3,9 +3,9 @@ from flask import Flask
 app = Flask(__name__)
 
 
-# @app.route('/')
-# def index():
-#     return 'Index Page'
+@app.route('/')
+def index():
+    return 'Index Page'
 
 
 # @app.route('/hello')
@@ -49,10 +49,10 @@ app = Flask(__name__)
 #     return 'Post %d' % post_id
 
 
-@app.route('/path/<path:subpath>')
-def show_subpath(subpath):
-    # show the subpath after /path/
-    return 'Subpath %s' % subpath
+# @app.route('/path/<path:subpath>')
+# def show_subpath(subpath):
+#     # show the subpath after /path/
+#     return 'Subpath %s' % subpath
 
 
 # @app.route('/projects/')
