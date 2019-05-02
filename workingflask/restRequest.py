@@ -1,16 +1,12 @@
 import http.client
 
-conn = http.client.HTTPConnection("5000-f731954c-233a-4c2a-b948-35aa66e8bf06.ws-us0.gitpod.io:443")
+conn = http.client.HTTPConnection("api,icndb,com")
 
-payload = "{\n    \"login\": \"Hello sdfsdfData\",\n    \"password\": \"This is maeesage1\"\n}"
+payload = ""
 
-headers = {
-    'Content-Type': "application/json",
-    'cache-control': "no-cache",
-    'Postman-Token': "3bf00d27-cb3b-4829-90c9-3fc2525683c6"
-    }
+headers = {'Content-Type': "application/json"}
 
-conn.request("POST", "postdata", payload, headers)
+conn.request("GET", "jokes,random", payload, headers)
 
 res = conn.getresponse()
 data = res.read()
