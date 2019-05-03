@@ -14,9 +14,8 @@ def api_message():
     elif request.headers['Content-Type'] == 'application/octet-stream':
         f = open('./binary', 'wb')
         f.write(request.data)
-                f.close()
+        f.close()
         return "Binary message written!"
 
     else:
         return "415 Unsupported Media Type ;)"
-        

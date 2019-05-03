@@ -64,6 +64,6 @@ def api_postdata():
     # data from body request.json
     # return request.args['aaa']
     # messages = json.loads(request.json)
-    messages = request.json
+    # messages = request.json
     print(request.is_json)
     return jsonify(data=request.json, urlparams=request.args)
