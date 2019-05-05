@@ -14,7 +14,7 @@ def api_hello():
 
 @app.route('/req')
 def api_req():
-    print(request)
+    # print(request)
     return jsonify(username="aaa",
                    email="asd@asd.asd",
                    id="234")
