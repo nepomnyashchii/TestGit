@@ -1,21 +1,18 @@
-from flask import Flask
-from flask import Response
-from flask import jsonify
+from flask import Flask, jsonify, request
 
 # print(__name__)
 app = Flask(__name__)
 
 
-@app.route('/hello', methods = ['GET'])
+@app.route('/hello', methods=['GET'])
 def api_hello():
+    a = request.headers['A']
     data = {
-        'hello'  : 'world',
-        'number' : 3
+        'hello': 'world' + a,
+        'number': 3
     }
     resp = jsonify(data)
-    resp.status_code = 200
-    resp.headers['Link'] = 'http://luisrei.com'
+    resp.status_code = 201
+    resp.headers['AAA'] = 'asdasdas'
 
     return resp
-    
-

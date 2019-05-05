@@ -1,0 +1,7 @@
+2019-05-05 04:16:08,374 - spam_application - DEBUG - Start my super App
+2019-05-05 04:16:08,375 - spam_application - DEBUG - Testing put_secret() with msg= success   exp = 60000   pin = 1234 
+2019-05-05 04:16:09,391 - spam_application - DEBUG -  put_secret() returned sid = 4bae8533-8bf5-43b7-9c1d-f743b43cec33 
+2019-05-05 04:16:09,391 - spam_application - DEBUG - lib.get_secret with  sid = 4bae8533-8bf5-43b7-9c1d-f743b43cec33   pin= 1234
+2019-05-05 04:16:29,251 - spam_application - DEBUG -  get_secret returned msg  = success
+2019-05-05 04:16:29,251 - spam_application - DEBUG - app succesdd
+2019-05-05 04:16:29,251 - spam_application - INFO - End my super App

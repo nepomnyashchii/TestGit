@@ -1,0 +1,1 @@
+FLASK_APP=008.py flask run

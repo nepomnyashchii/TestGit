@@ -19,6 +19,9 @@ def authenticate():
 
     return resp
 
+
+
+
 def requires_auth(f):
     @wraps(f)
     def decorated(*args, **kwargs):
@@ -31,6 +34,8 @@ def requires_auth(f):
         return f(*args, **kwargs)
 
     return decorated
+
+
 
 @app.route('/secrets')
 @requires_auth
