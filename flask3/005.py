@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import Response
+# from flask import Response
 from flask import jsonify
 
 # print(__name__)
@@ -17,5 +17,5 @@ def api_hello():
     resp.headers['Link'] = 'http://luisrei.com'
 
     return resp
-    
+
 
