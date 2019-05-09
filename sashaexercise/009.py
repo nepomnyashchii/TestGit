@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify, json
-
+import datetime, time
+created_time = datetime.datetime.utcnow()
+created_time = "created time"
 app = Flask(__name__)
 
 @ app.route("/run/alex/goodmorning")
@@ -7,7 +9,7 @@ def good_morning():
     alex= {"scriptName": "goodmorning",
     "description": "Dedicated server for web hosting",
     "status": "active",
-    "created_time": "2019-04-05 17:38:06",
+    "created_time"
     "data": {
         "norris": [
             "Who let the dogs out? Chuck Norris let the dogs out and then roundhouse kicked them through an Oldsmobile.",
@@ -22,6 +24,8 @@ def good_morning():
     }
 }
     return jsonify(alex)
+
+
 
 
 
@@ -68,3 +72,4 @@ def good_morning():
 # }
 
 
+current_time = datetime.datetime.now()

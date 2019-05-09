@@ -1,5 +1,5 @@
-import flask
-from flask import request, jsonify
+import FLASK from fla
+from flask import request, jsonify, json
 
 app = flask.Flask(__name__)
 
@@ -25,8 +25,8 @@ alex= {"scriptName": "goodmorning",
 }
 @ app.route("/run/alex/goodmorning")
 def good_morning():
-    return jsonify (alex)
-# app.run()
+    return jsonify(alex)
+app.run()
 
 
 # {{ApiUrl}}/run/alex/goodmorning
