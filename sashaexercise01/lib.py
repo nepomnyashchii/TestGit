@@ -28,10 +28,7 @@ def get_mixedtables(username, flow):
 
 def run_action(actionline):
     splited = actionline[0].split(":")
-    print(splited)
-    action = splited[0]
-    print(action)
-    # action = actionline[0].split(":")[0]
+    action = actionline[0].split(":")[0]
     if action == 'news':
         return get_news(actionline)
     if action == 'norris':
@@ -43,10 +40,8 @@ def run_action(actionline):
 
 
 def get_news(actionline):
-    # splited = actionline[0].split(":")
-    # count = int(splited[1])
+    splited = actionline[0].split(":")
     count= int(actionline[0].split(":")[1])
-    # fetch data from internet here
     return {
         "news": [],
         "count": str(count)
@@ -56,7 +51,6 @@ def get_news(actionline):
 def get_norris(actionline):
     splited = actionline[0].split(":")
     count = int(splited[1])
-    # fetch data from internet here
     return {
         "norris": [],
         "count": str(count)

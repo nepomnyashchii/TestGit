@@ -12,13 +12,13 @@ def index():
 
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
-#     # data = lib.get_mixedtables(username, flow)
-#     # return jsonify(
-#     #     data=data,
-#     #     username=username,
-#     #     flow=flow
-#     # )
-    data = [(u'news:3', 1), (u'norris:3', 2)]
+    # data = lib.get_mixedtables(username, flow)
+    # return jsonify(
+    #     data=data,
+    #     username=username,
+    #     flow=flow)
+    
+    data = [(u'news:5', 1), (u'norris:6', 2)]
     print(data)
     simpleList = []
     for line in data:
@@ -31,3 +31,5 @@ def run(username, flow):
         flow=flow,
         time=datetime.datetime.now()
     )
+
+
