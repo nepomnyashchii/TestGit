@@ -11,7 +11,8 @@ def index():
 
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
-    data = lib.get_mixedtables(username, flow)
+    # data = lib.get_mixedtables(username, flow)
+    data = [(u'news:5', 1), (u'norris:6', 2)]
     return jsonify(
         data=data,
         username=username,
