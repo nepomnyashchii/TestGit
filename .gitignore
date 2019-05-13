@@ -1,2 +1,4 @@
 .idea
 .theia
+**/__pycache__
+**/*.pyc
