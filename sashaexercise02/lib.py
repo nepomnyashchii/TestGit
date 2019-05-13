@@ -1,5 +1,5 @@
 import requests
-
+import json
 
 def get_news(count):
     news_data = requests.get(
@@ -10,5 +10,7 @@ def get_news(count):
 def get_norris(count):
     norris_data = requests.get(
         'http://api.icndb.com/jokes/random/' + str(count))
+    # norris=json.loads(norris_data.json())
+    # return norris["value"]
     return norris_data.json()
 

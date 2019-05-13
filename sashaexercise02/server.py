@@ -1,6 +1,8 @@
 from flask import Flask, jsonify
 import datetime
 
+
+
 import lib
 app = Flask(__name__)
 print("\n\n\n\n\n")
@@ -15,6 +17,7 @@ def index():
     norris = lib.get_norris(count)
     simpleList.append(norris)
     return jsonify(
-        data=simpleList,
+        news=news,
+        norris=norris,
         time=datetime.datetime.now()
     )
