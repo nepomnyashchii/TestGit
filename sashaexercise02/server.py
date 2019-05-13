@@ -11,11 +11,8 @@ print("\n\n\n\n\n")
 @app.route('/')
 def index():
     count = 4
-    simpleList = []
     news = lib.get_news(count)
-    simpleList.append(news)
     norris = lib.get_norris(count)
-    simpleList.append(norris)
     return jsonify(
         news=news,
         norris=norris,
