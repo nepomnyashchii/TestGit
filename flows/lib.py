@@ -16,7 +16,7 @@ def get_flowdata(username, flow):
 
         mycursor = mydb.cursor()
         sql = """
-            SELECT action ,action_order as a_order
+            SELECT action
             FROM `flows` INNER JOIN users ON flows.user_id = users.id
             WHERE LOWER(users.name)=%s AND flows.name =%s
             ORDER BY action_order
@@ -41,7 +41,7 @@ def get_flowdata(username, flow):
 
 
 def run_action(actionline):
-    splited = actionline[0].split(":")
+    splited = actionline.split(":")
     action = splited[0]
     if action == 'news':
         return run_news_action(actionline)
@@ -53,15 +53,15 @@ def run_action(actionline):
 
 
 def run_news_action(actionline):
-    splited = actionline[0].split(":")
+    splited = actionline.split(":")
     count = int(splited[1])
     return get_news(count)
 
+
 def run_norris_action(actionline):
-    splited = actionline[0].split(":")
+    splited = actionline.split(":")
     count = int(splited[1])
     return get_norris(count)
-
 
 
 def get_news(count):
@@ -69,6 +69,7 @@ def get_news(count):
         "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
     return_articles_list = convert_news(news_data, count)
     return return_articles_list
+
 
 def get_norris(count):
     norris_data = requests.get(
