@@ -17,13 +17,16 @@ def run(username, flow):
     #     data=data,
     #     username=username,
     #     flow=flow)
-    
+
     data = [(u'news:5', 1), (u'norris:6', 2)]
     print(data)
     simpleList = []
     for line in data:
         action_data = lib.run_action(line)
         simpleList.append(action_data)
+    count = 4
+    news = lib.get_news(count)
+    norris = lib.get_norris(count)
 
     return jsonify(
         data=simpleList,
