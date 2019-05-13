@@ -8,7 +8,6 @@ def get_news(count):
     return_articles_list = convert_news(news_data, count)
     return return_articles_list
 
-
 def get_norris(count):
     norris_data = requests.get(
         'http://api.icndb.com/jokes/random/' + str(count))

@@ -1,4 +1,4 @@
-import mysql.connector
+import mysql.connector, requests, json
 
 
 def get_mixedtables(username, flow):
@@ -38,21 +38,38 @@ def run_action(actionline):
 
         }
 
-
-def get_news(actionline):
+def get_news(actionline, count):
     splited = actionline[0].split(":")
     count= int(actionline[0].split(":")[1])
+    news_data = requests.get(
+        "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
+
     return {
-        "news": [],
+        "news": [news_data],
         "count": str(count)
     }
 
 
-def get_norris(actionline):
+def get_norris(actionline, count):
     splited = actionline[0].split(":")
     count = int(splited[1])
+    norris_data = requests.get(
+        'http://api.icndb.com/jokes/random/' + str(count))
     return {
-        "norris": [],
+        "norris": [norris_data],
         "count": str(count)
     }
+
+# def get_news(count):
+#     news_data = requests.get(
+#         "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
+#     return news_data.json()
+
+# def get_norris(count):
+#     norris_data = requests.get(
+#         'http://api.icndb.com/jokes/random/' + str(count))
+#     # norris=json.loads(norris_data.json())
+#     # return norris["value"]
+#     return norris_data.json()
+
 
