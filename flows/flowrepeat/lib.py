@@ -48,10 +48,10 @@ def run_action(actionline):
         return news_data(actionline)
     if action == "norris":
         return norris_data(actionline)
-    # if action == "thecocktail":
-    #     return cocktail_data(actionline)
-    # if action == "weather":
-    #     return weather_data(actionline)
+    if action == "thecocktail":
+        return cocktail_data(actionline)
+    if action == "weather":
+        return weather_data(actionline)
     return {
         "action": action,
     }
@@ -114,13 +114,17 @@ def convert_norris(norris_results):
 
 
 def cocktail_data(actionline):
-    cocktail_message = requests.get(
+    response = requests.get(
         'https://www.thecocktaildb.com/api/json/v1/1/random.php')
-    return cocktail_message
 
-# def weather_data (actionline):
-#     weather_data = requests.get('http://api.openweathermap.org/data/2.5/forecast?q=Brooklyn&APPID=1bdcae6b7d23f180361c8878a965c9f8')
-#     return weather_data
+    print(response)
+    return response.json()
+
+def weather_data (actionline):
+    response = requests.get('http://api.openweathermap.org/data/2.5/forecast?q=Brooklyn&APPID=1bdcae6b7d23f180361c8878a965c9f8')
+    if response.status_code != 200:
+        return {"error": response.json()}
+    return response.json()
 
 
 # def api_weather():
