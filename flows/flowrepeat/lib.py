@@ -41,40 +41,54 @@ def get_flowdata(username, flow):
     return myresult
 
 
-def run_action (actionline):
+def run_action(actionline):
     splited = actionline.split(":")
     action = splited[0]
     if action == "news":
         return news_data(actionline)
     if action == "norris":
         return norris_data(actionline)
-    if action == "thecocktail":
-        return cocktail_data(actionline)
+    # if action == "thecocktail":
+    #     return cocktail_data(actionline)
     # if action == "weather":
     #     return weather_data(actionline)
+    return {
+        "action": action,
+    }
+
 
 def news_data(actionline):
     splited = actionline.split(":")
     count = int(splited[1])
     return apinews_data(count)
-    print("apinews_data")
 
 
 def norris_data(actionline):
     splited = actionline.split(":")
     count = int(splited[1])
-    return apinorris_data (count)
+    return apinorris_data(count)
 
 
 def apinews_data(count):
-    news_results = requests.get("https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
+    print("apinews_data invoked: " + str(count))
+    news_results = requests.get(
+        "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
+
+    if news_results.status_code != 200:
+        return {"error": news_results.json()}
+
+    print("apinews_data news_results: " + str(news_results))
     return_articles_list = convert_news(news_results, count)
+    print("apinews_data invoked: " + str(return_articles_list))
     return return_articles_list
 
+
 def apinorris_data(count):
-    norris_results =requests.get('http://api.icndb.com/jokes/random/' + str(count))
+    norris_results = requests.get(
+        'http://api.icndb.com/jokes/random/' + str(count))
     return_articles_list = convert_norris(norris_results)
     return return_articles_list
+
 
 def convert_news(news_results, count):
     news_obj = news_results.json()
@@ -89,6 +103,7 @@ def convert_news(news_results, count):
 
     return return_articles_list
 
+
 def convert_norris(norris_results):
     obj = norris_results.json()
     source_list = obj["value"]
@@ -97,8 +112,10 @@ def convert_norris(norris_results):
         return_list.append(source_item["joke"])
     return return_list
 
+
 def cocktail_data(actionline):
-    cocktail_message = requests.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+    cocktail_message = requests.get(
+        'https://www.thecocktaildb.com/api/json/v1/1/random.php')
     return cocktail_message
 
 # def weather_data (actionline):
@@ -106,8 +123,6 @@ def cocktail_data(actionline):
 #     return weather_data
 
 
-
 # def api_weather():
 #     weather_data = requests.get()
 #     return weather_data
-
