@@ -47,6 +47,8 @@ def run_action (actionline):
         return news_data(actionline)
     if action == "norris":
         return norris_data(actionline)
+    if action == "thecocktail":
+        return cocktail_data(actionline)
 
 def news_data(actionline):
     splited = actionline.split(":")
@@ -91,7 +93,14 @@ def convert_norris(norris_results):
         return_list.append(source_item["joke"])
     return return_list
 
-def api_weather():
-    weather_data = requests.get()
-    return weather_data
+def cocktail_data(actionline):
+    cocktail_message = requests.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+    return cocktail_message
+
+
+
+
+# def api_weather():
+#     weather_data = requests.get()
+#     return weather_data
 
