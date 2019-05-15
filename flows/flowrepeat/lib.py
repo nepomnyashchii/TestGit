@@ -52,7 +52,7 @@ def news_data(actionline):
     splited = actionline.split(":")
     count = int(splited[1])
     return apinews_data(count)
-    
+
 
 def norris_data(actionline):
     splited = actionline.split(":")
@@ -74,10 +74,10 @@ def convert_news(news_results, count):
     news_obj = news_results.json()
     source_articles = news_obj["articles"]
     return_articles_list = []
-    for source_article in source_articles[:count]:
+    for source_lexus in source_articles[:count]:
         article = {
-            "title": source_article["title"],
-            "description": source_article["description"]
+            "title": source_lexus["title"],
+            "description": source_lexus["description"]
         }
         return_articles_list.append(article)
 
@@ -90,3 +90,8 @@ def convert_norris(norris_results):
     for source_item in source_list:
         return_list.append(source_item["joke"])
     return return_list
+
+def api_weather():
+    weather_data = requests.get()
+    return weather_data
+

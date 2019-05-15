@@ -42,11 +42,12 @@ def run(username, flow):
     #     actionline = line[0]
     #     action_data = lib.run_action(actionline)
     #     simple_list.append(action_data)
-
+    weather_data =lib.run_weather(action)
     return jsonify(
         username=username,
         flow=flow,
         time=datetime.datetime.now(),
         data=simple_list
+        weather=weather_data
     )
 
