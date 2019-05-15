@@ -4,10 +4,9 @@ import json
 
 
 def get_flowdata(username, flow):
-    print("jopa")
+    print("get_flowdata invoked with:" + username + " " + flow)
     """get flowdata from db."""
     myresult = ''
-    print("jopah")
     try:
         mydb = mysql.connector.connect(
             host="db4free.net",
@@ -38,9 +37,9 @@ def get_flowdata(username, flow):
         print('You cancelled the operation.')
     except:
         print('An error occured.')
-
+    print("get_flowdata finished with:" + str(myresult))
     return myresult
-    print("hello world")
+
 
 def run_action (actionline):
     splited = actionline.split(":")

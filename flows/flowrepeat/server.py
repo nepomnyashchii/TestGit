@@ -4,7 +4,7 @@ import datetime
 import lib
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
-print("\n\n\n\n\n")
+print("\n\n\n\n\n\n\n\n\n\n")
 
 
 @app.route('/')
@@ -14,9 +14,10 @@ def index():
 
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
-    data = lib.get_flowdata(username, flow)
-    # data = [(u'news:3', 1), (u'norris:3', 2)]
-    # print(data)
+    print('run invoked')
+    # data = lib.get_flowdata(username, flow)
+    data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
+    print("data from DB:" + str(data))
     if not data:  # len(data) == 0:
         return jsonify(
             error="no data for this user and flow",
@@ -26,16 +27,16 @@ def run(username, flow):
         )
 
     simple_list = []
-    for idx, line in enumerate(data):
-        actionline = line[0]
-        # print(actionline)
-        action_data = lib.run_action(actionline)
-        # print(action_data)
-        simple_list.append({
-            "action": idx,
-            "type": actionline.split(":")[0],
-            "data": action_data
-        })
+    # for idx, line in enumerate(data):
+    #     actionline = line[0]
+    #     # print(actionline)
+    #     action_data = lib.run_action(actionline)
+    #     # print(action_data)
+    #     simple_list.append({
+    #         "action": idx,
+    #         "type": actionline.split(":")[0],
+    #         "data": action_data
+    #     })
 
     # simpleList = []
     # for line in data:
