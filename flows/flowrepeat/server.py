@@ -16,7 +16,7 @@ def index():
 def run(username, flow):
     data = lib.get_flowdata(username, flow)
     # data = [(u'news:3', 1), (u'norris:3', 2)]
-    print(data)
+    # print(data)
     if not data:  # len(data) == 0:
         return jsonify(
             error="no data for this user and flow",
@@ -28,7 +28,7 @@ def run(username, flow):
     simple_list = []
     for idx, line in enumerate(data):
         actionline = line[0]
-        print(actionline)
+        # print(actionline)
         action_data = lib.run_action(actionline)
         # print(action_data)
         simple_list.append({

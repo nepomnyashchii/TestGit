@@ -39,7 +39,6 @@ def get_flowdata(username, flow):
 
     return myresult
 
-
 def run_action (actionline):
     splited = actionline.split(":")
     action = splited[0]
@@ -49,6 +48,8 @@ def run_action (actionline):
         return norris_data(actionline)
     if action == "thecocktail":
         return cocktail_data(actionline)
+    if action == "weather":
+        return weather_data(actionline)
 
 def news_data(actionline):
     splited = actionline.split(":")
@@ -97,6 +98,9 @@ def cocktail_data(actionline):
     cocktail_message = requests.get('https://www.thecocktaildb.com/api/json/v1/1/random.php')
     return cocktail_message
 
+def weather_data (actionline):
+    weather_data = requests.get('http://api.openweathermap.org/data/2.5/forecast?q=Brooklyn&APPID=1bdcae6b7d23f180361c8878a965c9f8')
+    return weather_data
 
 
 
