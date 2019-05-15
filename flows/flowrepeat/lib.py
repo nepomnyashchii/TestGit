@@ -71,22 +71,22 @@ def norris_data(actionline):
 
 def apinews_data(count):
     print("apinews_data invoked: " + str(count))
-    news_results = requests.get(
+    response = requests.get(
         "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
 
-    if news_results.status_code != 200:
-        return {"error": news_results.json()}
+    if response.status_code != 200:
+        return {"error": response.json()}
 
-    print("apinews_data news_results: " + str(news_results))
-    return_articles_list = convert_news(news_results, count)
+    print("apinews_data news_results: " + str(response))
+    return_articles_list = convert_news(response, count)
     print("apinews_data invoked: " + str(return_articles_list))
     return return_articles_list
 
 
 def apinorris_data(count):
-    norris_results = requests.get(
+    response = requests.get(
         'http://api.icndb.com/jokes/random/' + str(count))
-    return_articles_list = convert_norris(norris_results)
+    return_articles_list = convert_norris(response)
     return return_articles_list
 
 
@@ -125,8 +125,3 @@ def weather_data (actionline):
     if response.status_code != 200:
         return {"error": response.json()}
     return response.json()
-
-
-# def api_weather():
-#     weather_data = requests.get()
-#     return weather_data
