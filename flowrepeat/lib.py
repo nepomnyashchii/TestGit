@@ -75,16 +75,16 @@ def norris_data(actionline):
 
 
 def apinews_data(count):
-    print("apinews_data invoked: " + str(count))
+    logger.debug("apinews_data invoked: " + str(count))
     response = requests.get(
         "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
 
     if response.status_code != 200:
         return {"error": response.json()}
 
-    print("apinews_data news_results: " + str(response))
+    logger.debug("apinews_data news_results: " + str(response))
     return_articles_list = convert_news(response, count)
-    print("apinews_data invoked: " + str(return_articles_list))
+    logger.debug("apinews_data invoked: " + str(return_articles_list))
     return return_articles_list
 
 
@@ -122,13 +122,13 @@ def cocktail_data(actionline):
     response = requests.get(
         'https://www.thecocktaildb.com/api/json/v1/1/random.php')
 
-    print(response)
+    logger.debug(response)
     return response.json()
 
 
 def weather_data(actionline):
     response = requests.get(
-        'http://api.openweathermap.org/data/2.5/forecast?q=Brooklyn&APPID=1bdcae6b7d23f180361c8878a965c9f8')
+        'https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=1bdcae6b7d23f180361c8878a965c9f8')
     if response.status_code != 200:
         return {"error": response.json()}
     return response.json()
