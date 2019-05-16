@@ -1,10 +1,13 @@
 import mysql.connector
 import requests
 import json
+import logger_module
+
+logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
 
 def get_flowdata(username, flow):
-    print("get_flowdata invoked with:" + username + " " + flow)
+    logger.debug("get_flowdata invoked with:" + username + " " + flow)
     """get flowdata from db."""
     myresult = ''
     try:
@@ -26,22 +29,23 @@ def get_flowdata(username, flow):
         mycursor.execute(sql, val)
         myresult = mycursor.fetchall()
     except IOError:
-        print('An error occured trying to read the file.')
+        logger.error('An error occured trying to read the file.')
     except ValueError:
-        print('Non-numeric data found in the file.')
+        logger.error('Non-numeric data found in the file.')
     except ImportError:
-        print("NO module found")
+        logger.error("NO module found")
     except EOFError:
-        print('Why did you do an EOF on me?')
+        logger.error('Why did you do an EOF on me?')
     except KeyboardInterrupt:
-        print('You cancelled the operation.')
+        logger.error('You cancelled the operation.')
     except:
-        print('An error occured.')
-    print("get_flowdata finished with:" + str(myresult))
+        logger.error('An error occured.')
+    logger.debug("get_flowdata finished with:" + str(myresult))
     return myresult
 
 
 def run_action(actionline):
+    logger.debug('run_action invoked actionline: ' + actionline)
     splited = actionline.split(":")
     action = splited[0]
     if action == "news":
@@ -52,6 +56,7 @@ def run_action(actionline):
         return cocktail_data(actionline)
     if action == "weather":
         return weather_data(actionline)
+    logger.error('action not implemented' + action)
     return {
         "action": action,
     }
@@ -120,8 +125,10 @@ def cocktail_data(actionline):
     print(response)
     return response.json()
 
-def weather_data (actionline):
-    response = requests.get('http://api.openweathermap.org/data/2.5/forecast?q=Brooklyn&APPID=1bdcae6b7d23f180361c8878a965c9f8')
+
+def weather_data(actionline):
+    response = requests.get(
+        'http://api.openweathermap.org/data/2.5/forecast?q=Brooklyn&APPID=1bdcae6b7d23f180361c8878a965c9f8')
     if response.status_code != 200:
         return {"error": response.json()}
     return response.json()

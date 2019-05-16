@@ -1,9 +1,14 @@
 from flask import Flask, jsonify
 import datetime
-
 import lib
+import logger_module
+logger = logger_module.setup_logger("flowsapp")
+logger.debug('Start my super App')
+
+
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
+
 print("\n\n\n\n\n\n\n\n\n\n")
 
 
@@ -14,10 +19,10 @@ def index():
 
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
-    print('run invoked')
+    logger.debug('run invoked')
     # data = lib.get_flowdata(username, flow)
     data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
-    print("data from DB:" + str(data))
+    logger.debug("data from DB:" + str(data))
     if not data:  # len(data) == 0:
         return jsonify(
             error="no data for this user and flow",

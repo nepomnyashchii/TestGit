@@ -2,16 +2,22 @@ import uuid
 import mysql.connector
 import datetime
 import time
+import logging
+
+logger = logging.getLogger('spam_application.lib')
 
 
 def is_not_expired(created, exp):
+    logger.debug('LIB: is_not_expired invoked')
     my_time = created + datetime.timedelta(0, exp)
     current_time = datetime.datetime.utcnow()
     # datetime.datetime.now()
     print(created, current_time, my_time)
     if my_time > current_time:
+        logger.debug('is_not_expired return True')
         return True
     else:
+        logger.debug('is_not_expired return False')
         return False
 
 
@@ -104,3 +110,23 @@ def del_secret(sid, pin):
         print("Record not found")
 
     return return_value
+
+
+def setup_logger():
+    logger = logging.getLogger('spam_application')
+    logger.setLevel(logging.DEBUG)
+
+    dh = logging.FileHandler('debug.log')
+    dh.setLevel(logging.DEBUG)
+
+    eh = logging.FileHandler('error.log')
+    eh.setLevel(logging.ERROR)
+
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    dh.setFormatter(formatter)
+    eh.setFormatter(formatter)
+
+    logger.addHandler(eh)
+    logger.addHandler(dh)
+    return logger

@@ -2,3 +2,4 @@
 .theia
 **/__pycache__
 **/*.pyc
+logs
