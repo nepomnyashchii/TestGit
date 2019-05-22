@@ -49,8 +49,16 @@ def weather_data(actionline):
     response = requests.get("https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=1bdcae6b7d23f180361c8878a965c9f8")
     return response.json()
 
-def get_apinews(count:):
-    listnews = []
-    response
+def get_apinews(count):
+    news_obj = response.json()
+    source_articles = news_obj["articles"]
+    return_articles_list = []
+    for source_lexus in source_articles[:count]:
+        article = {
+            "title": source_lexus["title"],
+            "description": source_lexus["description"]
+        }
+        return_articles_list.append(article)
+        return return_articles_list
 
 
