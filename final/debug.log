@@ -5,3 +5,12 @@
 2019-05-05 04:16:29,251 - spam_application - DEBUG -  get_secret returned msg  = success
 2019-05-05 04:16:29,251 - spam_application - DEBUG - app succesdd
 2019-05-05 04:16:29,251 - spam_application - INFO - End my super App
+2019-05-22 17:04:17,319 - spam_application - DEBUG - Start my super App
+2019-05-22 17:04:17,319 - spam_application - DEBUG - Testing put_secret() with msg= success   exp = 60000   pin = 1234 
+2019-05-22 17:04:46,476 - spam_application - DEBUG -  put_secret() returned sid = 1e2f0e8f-b6da-4087-927a-7b38b064d80e 
+2019-05-22 17:04:46,476 - spam_application - DEBUG - lib.get_secret with  sid = 1e2f0e8f-b6da-4087-927a-7b38b064d80e   pin= 1234
+2019-05-22 17:05:15,345 - spam_application.lib - DEBUG - LIB: is_not_expired invoked
+2019-05-22 17:05:15,345 - spam_application.lib - DEBUG - is_not_expired return True
+2019-05-22 17:05:15,345 - spam_application - DEBUG -  get_secret returned msg  = success
+2019-05-22 17:05:15,346 - spam_application - DEBUG - app succesdd
+2019-05-22 17:05:15,346 - spam_application - DEBUG - End my super App
