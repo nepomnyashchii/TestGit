@@ -92,6 +92,7 @@ def apinorris_data(count):
     response = requests.get(
         'http://api.icndb.com/jokes/random/' + str(count))
     return_articles_list = convert_norris(response)
+    logger.debug("apinorris_data invoked: " +str(return_articles_list))
     return return_articles_list
 
 
@@ -105,6 +106,7 @@ def convert_news(news_results, count):
             "description": source_lexus["description"]
         }
         return_articles_list.append(article)
+        logger.debug("convert_news invoked: " + str(return_articles_list))
 
     return return_articles_list
 
@@ -115,6 +117,7 @@ def convert_norris(norris_results):
     return_list = []
     for source_item in source_list:
         return_list.append(source_item["joke"])
+        logger.debug("convert norris invoked: " +str(return_list))
     return return_list
 
 
@@ -127,8 +130,10 @@ def cocktail_data(actionline):
 
 
 def weather_data(actionline):
+    logger.debug("weather results invoked")
     response = requests.get(
         'https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=1bdcae6b7d23f180361c8878a965c9f8')
     if response.status_code != 200:
         return {"error": response.json()}
+        logger.debug(response)
     return response.json()

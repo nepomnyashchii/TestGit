@@ -20,8 +20,9 @@ def index():
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
     logger.debug('run invoked')
-    # data = lib.get_flowdata(username, flow)
-    data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
+    data = lib.get_flowdata(username, flow)
+    print(data)
+    # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
     logger.debug("data from DB:" + str(data))
     if not data:  # len(data) == 0:
         return jsonify(
@@ -36,7 +37,6 @@ def run(username, flow):
         actionline = line[0]
         # print(actionline)
         action_data = lib.run_action(actionline)
-        logger.debug("action data:" + str(action_data)
         # print(action_data)
         simple_list.append({
             "action": idx,
@@ -50,10 +50,10 @@ def run(username, flow):
     #     action_data = lib.run_action(actionline)
     #     simple_list.append(action_data)
     # weather_data =lib.run_weather(action)
+    logger.debug("action data" +str(action_data))
     return jsonify(
         username=username,
         flow=flow,
         time=datetime.datetime.now(),
         data=simple_list
     )
-
