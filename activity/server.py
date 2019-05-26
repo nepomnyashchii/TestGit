@@ -50,7 +50,7 @@ def run(username, flow):
     #     action_data = lib.run_action(actionline)
     #     simple_list.append(action_data)
     # weather_data =lib.run_weather(action)
-    logger.debug("action data" +str(action_data))
+    logger.debug("action data" + str(action_data))
     return jsonify(
         username=username,
         flow=flow,
