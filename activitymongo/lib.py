@@ -14,6 +14,9 @@ def get_flowdata(username, flow):
         dbURL="mongodb://coolspammail:coolspammailpass1!@ds261626.mlab.com:61626/aaa"
         myclient = pymongo.MongoClient(dbURL)
         mydb = myclient["aaa"]
+
+        mycol = mydb["user"]
+
         s_name='alex'
         s_flow='goodmorning'
 
@@ -27,6 +30,7 @@ def get_flowdata(username, flow):
                     print(flow.get(s_flow))
         else:
             print('data not found')
+
 
     except IOError:
         logger.error('An error occured trying to read the file.')
