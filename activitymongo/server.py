@@ -17,18 +17,18 @@ def index():
     return 'Flow Runner :)'
 
 
-@app.route('/run/<string:s_name>/<string:s_flow>')
-def run(s_name, s_flow):
+@app.route('/run/<string:username>/<string:flow>')
+def run(username, flow):
     logger.debug('run invoked')
-    data = lib.get_flowdata(s_name, s_flow)
-#     print(data)
-#     # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
+    data = lib.get_flowdata(username, flow)
+    print(data)
+    # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
     logger.debug("data from DB:" + str(data))
     if not data:  # len(data) == 0:
         return jsonify(
             error="no data for this user and flow",
-            username=s_name,
-            flow=s_flow,
+            username=username,
+            flow=flow,
             time=datetime.datetime.now()
         )
 
@@ -44,9 +44,16 @@ def run(s_name, s_flow):
             "data": action_data
         })
 
+    # simpleList = []
+    # for line in data:
+    #     actionline = line[0]
+    #     action_data = lib.run_action(actionline)
+    #     simple_list.append(action_data)
+    # weather_data =lib.run_weather(action)
+    logger.debug("action data" + str(action_data))
     return jsonify(
-        username=s_name,
-        flow=s_flow,
+        username=username,
+        flow=flow,
         time=datetime.datetime.now(),
         data=simple_list
     )

@@ -38,6 +38,7 @@ def get_flowdata(s_name, s_flow):
     return myresult
 
 
+
 def run_action(actionline):
     logger.debug('run_action invoked actionline: ' + actionline)
     splited = actionline.split(":")
