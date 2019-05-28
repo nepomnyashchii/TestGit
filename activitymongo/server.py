@@ -21,9 +21,9 @@ def index():
 def run(s_name, s_flow):
     logger.debug('run invoked')
     data = lib.get_flowdata(s_name, s_flow)
-    # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
-    print("RUN: data from DB:" + str(data))
-    logger.debug("data from DB:" + str(data))
+#     print(data)
+#     # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
+#     logger.debug("data from DB:" + str(data))
     if not data:  # len(data) == 0:
         return jsonify(
             error="no data for this user and flow",
