@@ -47,7 +47,7 @@ def run_action(actionline):
         return apinews_data(actionline)
     if action == "norris":
         return apinorris_data(actionline)
-    if action == "thecocktail":
+    if action == "coctail":
         return cocktail_data(actionline)
     if action == "weather":
         return weather_data(actionline)
@@ -108,6 +108,7 @@ def convert_norris(norris_results):
 
 
 def cocktail_data(actionline):
+
     response = requests.get(
         'https://www.thecocktaildb.com/api/json/v1/1/random.php')
 
