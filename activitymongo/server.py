@@ -23,7 +23,7 @@ def run(username, flow):
     # data = lib.get_flowdata(username, flow)
     # print(data)
     data = [u'news:3', u'norris:3', u'coctail:random', u'weather:Brooklyn, NY']
-    data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
+    # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
     # logger.debug("data from DB:" + str(data))
     # if not data:  # len(data) == 0:
     #     return jsonify(
@@ -35,7 +35,7 @@ def run(username, flow):
 
     simple_list = []
     for idx, line in enumerate(data):
-        actionline = line[0]
+        actionline = line
         print(actionline)
         action_data = lib.run_action(actionline)
         # print(action_data)
