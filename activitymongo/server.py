@@ -23,7 +23,7 @@ def run(s_name, s_flow):
     data = lib.get_flowdata(s_name, s_flow)
 #     print(data)
 #     # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
-#     logger.debug("data from DB:" + str(data))
+    logger.debug("data from DB:" + str(data))
     if not data:  # len(data) == 0:
         return jsonify(
             error="no data for this user and flow",
@@ -32,28 +32,21 @@ def run(s_name, s_flow):
             time=datetime.datetime.now()
         )
 
-    # simple_list = []
-    # for idx, line in enumerate(data):
-    #     actionline = line[0]
-    #     # print(actionline)
-    #     action_data = lib.run_action(actionline)
-    #     # print(action_data)
-    #     simple_list.append({
-    #         "action": idx,
-    #         "type": actionline.split(":")[0],
-    #         "data": action_data
-    #     })
+    simple_list = []
+    for idx, line in enumerate(data):
+        actionline = line[0]
+        # print(actionline)
+        action_data = lib.run_action(actionline)
+        # print(action_data)
+        simple_list.append({
+            "action": idx,
+            "type": actionline.split(":")[0],
+            "data": action_data
+        })
 
-    # # simpleList = []
-    # # for line in data:
-    # #     actionline = line[0]
-    # #     action_data = lib.run_action(actionline)
-    # #     simple_list.append(action_data)
-    # # weather_data =lib.run_weather(action)
-    # logger.debug("action data" + str(action_data))
-    # return jsonify(
-    #     username=username,
-    #     flow=flow,
-    #     time=datetime.datetime.now(),
-    #     data=simple_list
-    # )
+    return jsonify(
+        username=s_name,
+        flow=s_flow,
+        time=datetime.datetime.now(),
+        data=simple_list
+    )
