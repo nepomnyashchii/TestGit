@@ -7,7 +7,7 @@ POST
 todo/
 {"text":"asdasdasd"}
 
-NSERT INTO `todo` (`id`, `text`, `done`, `created`) VALUES (NULL, %s, '0', CURRENT_DATE());
+INSERT INTO `todo` (`id`, `text`, `done`, `created`) VALUES (NULL, %s, '0', CURRENT_DATE());
 
 
 PUT
