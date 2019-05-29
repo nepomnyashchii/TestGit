@@ -81,8 +81,20 @@ def apinews_data(actionline):
 def apinorris_data(actionline):
     splited = actionline.split(":")
     count = int(splited[1])
-    response = requests.get(
-        'http://api.icndb.com/jokes/random/' + str(count))
+
+    # ----------------------------
+    name_change = splited[2]
+    splitedname = name_change.split(" ")
+    firstName = splitedname[0]
+    lastName = splitedname[2]
+    url = 'http://api.icndb.com/jokes/random/{}?firstName={}&lastName={}'.format(
+        str(count), firstName, lastName)
+    response = requests.get(url)
+    # -------------------------
+    
+    # response = requests.get(
+    # 'http://api.icndb.com/jokes/random/' + str(count))
+
     jokes = convert_norris(response, actionline)
     logger.debug("apinorris_data invoked: " + str(jokes))
     return jokes
