@@ -20,9 +20,9 @@ def index():
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
     logger.debug('run invoked')
-    # data = lib.get_flowdata(username, flow)
+    data = lib.get_flowdata(username, flow)
     # print(data)
-    data = [u'news:3', u'norris:3', u'coctail:random', u'weather:Brooklyn, NY']
+    # data = [u'news:3', u'norris:3', u'coctail:random', u'weather:Brooklyn, NY']
     # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
     # logger.debug("data from DB:" + str(data))
     # if not data:  # len(data) == 0:
