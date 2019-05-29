@@ -83,7 +83,7 @@ def apinorris_data(actionline):
     count = int(splited[1])
     response = requests.get(
         'http://api.icndb.com/jokes/random/' + str(count))
-    jokes = convert_norris(response)
+    jokes = convert_norris(response, actionline)
     logger.debug("apinorris_data invoked: " + str(jokes))
     return jokes
 
@@ -102,16 +102,16 @@ def convert_news(news_results, count):
     return return_articles_list
 
 
-def convert_norris(norris_results):
+def convert_norris(norris_results, actionline):
     obj = norris_results.json()
     source_list = obj["value"]
+    splited = actionline.split(":")
+    name_change = splited[2]
     return_list = []
     for source_item in source_list:
-        return_list.append(source_item["joke"])
+        changed_joke = source_item["joke"].replace("Chuck Norris", name_change)
+        return_list.append(changed_joke)
     logger.debug("convert norris finished: " + str(return_list))
-    splited =actionline.split(":")
-    name_change = splited [2]
-    name_change = return_list.replace("Chuck Norris", "Alexander Yakovis")
     return return_list
 
 
