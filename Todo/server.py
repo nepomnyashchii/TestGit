@@ -16,7 +16,7 @@ def index():
 def get_todo():
     data = lib.get_todo()
     print(data)
-    return data
+    return str(data)
 
 # data = lib.get_todo()
 # print(data)

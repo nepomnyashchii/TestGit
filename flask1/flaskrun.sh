@@ -1,2 +1,2 @@
-FLASK_server.py flask run
+FLASK_APP=003.py flask run
 find . -name '*.pyc' -delete
