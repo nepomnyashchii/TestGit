@@ -109,6 +109,9 @@ def convert_norris(norris_results):
     for source_item in source_list:
         return_list.append(source_item["joke"])
     logger.debug("convert norris finished: " + str(return_list))
+    splited =actionline.split(":")
+    name_change = splited [2]
+    name_change = return_list.replace("Chuck Norris", "Alexander Yakovis")
     return return_list
 
 
