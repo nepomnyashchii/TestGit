@@ -33,6 +33,7 @@ def get_todo(id):
 
     sql = "SELECT * FROM todo WHERE id = %s;"
     val = (id,)
+    # necessary to put commar for the tuple at the end of the sentence
     mycursor.execute(sql, val)
 
     myresult = mycursor.fetchone()
