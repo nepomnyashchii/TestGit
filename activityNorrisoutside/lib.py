@@ -81,20 +81,8 @@ def apinews_data(actionline):
 def apinorris_data(actionline):
     splited = actionline.split(":")
     count = int(splited[1])
-
-    # ----------------------------
-    name_change = splited[2]
-    splitedname = name_change.split(" ")
-    firstName = splitedname[0]
-    lastName = splitedname[1]
-    url = 'http://api.icndb.com/jokes/random/{}?firstName={}&lastName={}'.format(
-        str(count), firstName, lastName)
+    url = 'http://api.icndb.com/jokes/random/' + str(count)
     response = requests.get(url)
-    # -------------------------
-
-    # response = requests.get(
-    # 'http://api.icndb.com/jokes/random/' + str(count))
-
     jokes = convert_norris(response, actionline)
     logger.debug("apinorris_data invoked: " + str(jokes))
     return jokes
@@ -104,10 +92,10 @@ def convert_news(news_results, count):
     news_obj = news_results.json()
     source_articles = news_obj["articles"]
     return_articles_list = []
-    for source_lexus in source_articles[:count]:
+    for source_article in source_articles[:count]:
         article = {
-            "title": source_lexus["title"],
-            "description": source_lexus["description"]
+            "title": source_article["title"],
+            "description": source_article["description"]
         }
         return_articles_list.append(article)
     logger.debug("convert_news finished: " + str(return_articles_list))
@@ -117,12 +105,13 @@ def convert_news(news_results, count):
 def convert_norris(norris_results, actionline):
     obj = norris_results.json()
     source_list = obj["value"]
-    # splited = actionline.split(":")
-    # name_change = splited[2]
+    splited = actionline.split(":")
+    name_change = splited[2]
+    logger.debug("Norris to Alexander Yakovis name change: " + str(name_change))
     return_list = []
     for source_item in source_list:
-        # changed_joke = source_item["joke"].replace("Chuck Norris", name_change)
-        # return_list.append(changed_joke)
+        changed_joke = source_item["joke"].replace("Chuck Norris", name_change)
+        return_list.append(changed_joke)
         return_list.append(source_item["joke"])
 
     logger.debug("convert norris finished: " + str(return_list))
