@@ -28,10 +28,19 @@ def index():
 # data = lib.get_todo()
 # print(data)
 
-@app.route('/todo/<user>', methods = ['POST'])
-def insert_todo(user):
-    user = {"text":"asdasdasd"}
-    data = lib.insert_todo(user)
-    print(data)
-    return(str(data))
+# @app.route('/todo/<user>', methods = ['POST'])
+# def insert_todo(user):
+#     user = {"text":"asdasdasd"}
+#     data = lib.insert_todo(user)
+#     print(data)
+#     return(str(data))
 
+@app.route('/todo', methods = ['POST'])
+def insert_todo():
+    data = request.json
+    print(data)
+    return jsonify(
+        data=data,
+    )
+
+INSERT INTO `todo` (`id`, `text`, `done`, `created`) VALUES (NULL, %s, '0', CURRENT_DATE());

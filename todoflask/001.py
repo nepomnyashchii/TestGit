@@ -11,15 +11,25 @@ def index():
     return 'Flow Runner :)'
 
 
-# @app.route('/todo', methods = ['POST'])
-# def insert_todo():
-#     return "You said: " + request.form['text']
+@app.route('/todo', methods = ['POST'])
+def insert_todo():
+    data = request.json
+    print(data)
+    return jsonify(
+        data=data,
+    )
+
+
+@app.route('/todo', methods = ['PUT'])
+def insert_todo():
+    data = request.json
+    print(data)
+    return jsonify(
+        data=data,
+    )
 
 # @app.route("/echo", methods=['POST'])
 # def echo():
 #     return "You said: " + request.form['text']
 
-@app.route("/echo", methods=['POST'])
-def echo():
-    r = requests.post('https://httpbin.org/post', data = {'key':'value'})
-    return "You said: "+ request.form["text"]
+INSERT INTO `todo` (`id`, `text`, `done`, `created`) VALUES (NULL, %s, '0', CURRENT_DATE());

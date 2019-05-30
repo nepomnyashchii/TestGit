@@ -3,7 +3,10 @@ import datetime
 import time
 import uuid
 import logging
-logger = lib.setup_logger()
+import logger_module
+
+logger = logger_module.setup_logger("flowsapp")
+
 logger.debug('Start my super App')
 
 msg = "success"
