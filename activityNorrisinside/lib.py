@@ -169,8 +169,6 @@ def weather_data(actionline):
 
 def convert_weather (weather_results):
     weather = weather_results.json()
-    source_data = weather["main"]
+    # source_data = weather["main"]
     return_data = {"temperature": weather["main"]["temp"]}
     return return_data
-
-

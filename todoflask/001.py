@@ -32,4 +32,3 @@ def insert_todo():
 # def echo():
 #     return "You said: " + request.form['text']
 
-INSERT INTO `todo` (`id`, `text`, `done`, `created`) VALUES (NULL, %s, '0', CURRENT_DATE());
