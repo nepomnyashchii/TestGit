@@ -104,10 +104,10 @@ def convert_news(news_results, count):
     news_obj = news_results.json()
     source_articles = news_obj["articles"]
     return_articles_list = []
-    for source_lexus in source_articles[:count]:
+    for source_article in source_articles[:count]:
         article = {
-            "title": source_lexus["title"],
-            "description": source_lexus["description"]
+            "title": source_article["title"],
+            "description": source_article["description"]
         }
         return_articles_list.append(article)
     logger.debug("convert_news finished: " + str(return_articles_list))
