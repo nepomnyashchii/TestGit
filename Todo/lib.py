@@ -55,6 +55,6 @@ def insert_todo(id, text, done, created):
     mycursor.execute(sql, val)
     val = (id, text, done, created)
     print("1 record inserted, ID:", mycursor)
-    return return_value
+    return return_value= (id, text, done, created,)
 
 
