@@ -18,12 +18,20 @@ def index():
 #     print(data)
 #     return str(data)
 
-@app.route('/todo/<int:id>')
-def get_todo(id):
-    data = lib.get_todo(id)
-    print(data)
-    return str(data)
+# @app.route('/todo/<int:id>')
+# def get_todo(id):
+#     data = lib.get_todo(id)
+#     print(data)
+#     return str(data)
 
 
 # data = lib.get_todo()
 # print(data)
+
+@app.route('/todo/<user>', methods = ['POST'])
+def insert_todo(user):
+    user = {"text":"asdasdasd"}
+    data = lib.insert_todo(user)
+    print(data)
+    return(str(data))
+
