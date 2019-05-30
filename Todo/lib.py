@@ -39,7 +39,7 @@ import json
 #     myresult = mycursor.fetchone()
 #     return myresult
 
-def insert_todo(user):
+def insert_todo(id, text, done, created):
     return_value = ""
 
     mydb = mysql.connector.connect(
@@ -50,9 +50,10 @@ def insert_todo(user):
     )
     mycursor = mydb.cursor()
 
-    sql = "INSERT INTO `todo` (`id`, `text`, `done`, `created`) VALUES (NULL, %s, '0', CURRENT_DATE())"
+    sql = "INSERT INTO todo (id, text, done, created) VALUES (NULL, %s, '0', CURRENT_DATE())"
     # necessary to put commar for the tuple at the end of the sentence
     mycursor.execute(sql, val)
+    val = (id, text, done, created)
     print("1 record inserted, ID:", mycursor)
     return return_value
 

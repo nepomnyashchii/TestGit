@@ -35,12 +35,19 @@ def index():
 #     print(data)
 #     return(str(data))
 
-@app.route('/todo', methods = ['POST'])
-def insert_todo():
-    data = request.json
-    print(data)
-    return jsonify(
-        data=data,
-    )
+# @app.route('/todo', methods = ['POST'])
+# def insert_todo():
+#     data = request.json
+#     print(data)
+#     return jsonify(
+#         data=data,
+#     )
 
-INSERT INTO `todo` (`id`, `text`, `done`, `created`) VALUES (NULL, %s, '0', CURRENT_DATE());
+# @app.route('/todo', methods = ['POST'])
+# def insert_todo():
+#     data = lib.insert_data(data)
+#     print(data)
+#     return jsonify(
+#         data=data,
+#     )
+
