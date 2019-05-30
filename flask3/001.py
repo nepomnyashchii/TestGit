@@ -9,3 +9,5 @@ def api_hello():
         return 'Hello ' + request.args['name']
     else:
         return 'Hello John Doe'
+        
+# ?name=Alec
