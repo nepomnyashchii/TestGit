@@ -141,7 +141,7 @@ def weather_data(actionline):
     # url = 'https://samples.openweathermap.org/data/2.5/weather?q=' + \
     #     location + '&appid=1bdcae6b7d23f180361c8878a965c9f8'
     appid = '1bdcae6b7d23f180361c8878a965c9f8'
-    url = 'https://samples.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
         location, appid)
     logger.debug('weather_data url=' + url)
     response = requests.get(url)

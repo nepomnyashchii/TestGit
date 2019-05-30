@@ -7,6 +7,7 @@ app = Flask(__name__)
 @app.route('/hello', methods=['GET'])
 def api_hello():
     a = request.headers['A']
+    # arrange into headers information
     data = {
         'hello': 'world' + a,
         'number': 3
