@@ -149,3 +149,28 @@ def weather_data(actionline):
         return {"error": response.json()}
     logger.debug(response)
     return response.json()
+
+# def weather_data(actionline):
+#     logger.debug('weather_data invoked' + actionline)
+#     splited = actionline.split(":")
+#     location = splited[1]
+#     logger.debug('weather_data location=' + location)
+#     # url = 'https://samples.openweathermap.org/data/2.5/weather?q=' + \
+#     #     location + '&appid=1bdcae6b7d23f180361c8878a965c9f8'
+#     appid = '1bdcae6b7d23f180361c8878a965c9f8'
+#     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
+#         location, appid)
+#     logger.debug('weather_data url=' + url)
+#     response = requests.get(url)
+#     if response.status_code != 200:
+#         return {"error": response.json()}
+#     logger.debug(response)
+#     return convert_weather(response)
+
+# def convert_weather (weather_results):
+#     weather = weather_results.json()
+#     source_data = weather["main"]
+#     return_data = weather["main"]["temperature"]
+#     return return_data
+
+
