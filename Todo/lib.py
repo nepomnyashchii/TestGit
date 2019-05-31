@@ -40,7 +40,7 @@ import json
 #     return myresult
 
 def insert_todo(text):
-    return_value = ""
+    # return_value = ""
 
     mydb = mysql.connector.connect(
         host="db4free.net",
@@ -50,10 +50,11 @@ def insert_todo(text):
     )
     mycursor = mydb.cursor()
 
-    sql = "INSERT INTO todo (text, done) VALUES ( %s, '0')
+    sql = "INSERT INTO todo (text, done) VALUES ( %s, "0")
     # necessary to put commar for the tuple at the end of the sentence
+    val = (text, done)
     mycursor.execute(sql, val)
-    val = (text, done, created)
+
     print("1 record inserted, ID:", mycursor)
     return 1
 
