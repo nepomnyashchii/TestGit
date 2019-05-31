@@ -2,6 +2,13 @@ import mysql.connector
 import requests
 import json
 
+mydb = mysql.connector.connect(
+        host="db4free.net",
+        user="coolspammail",
+        passwd="coolspammail-pass",
+        database="coolspammail"
+    )
+
 # def get_todo():
 #     """get flowdata from db."""
 #     myresult = ''
@@ -40,22 +47,9 @@ import json
 #     return myresult
 
 def insert_todo(text):
-    # return_value = ""
-
-    mydb = mysql.connector.connect(
-        host="db4free.net",
-        user="coolspammail",
-        passwd="coolspammail-pass",
-        database="coolspammail"
-    )
     mycursor = mydb.cursor()
-
-    sql = "INSERT INTO todo (text, done) VALUES ( %s, '0')
-    # necessary to put commar for the tuple at the end of the sentence
-    val = (text, done)
+    sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
+    val = (text, 0)
     mycursor.execute(sql, val)
-
-    print("1 record inserted, ID:", mycursor)
-    return 1
-
-
+    mydb.commit()
+    return mycursor.lastrowid
