@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-import libtodo
+import libget1
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
@@ -14,6 +14,6 @@ def index():
 
 @app.route('/todo')
 def get_todo():
-    data = libtodo.get_todo()
+    data = libget1.get_todo()
     print(data)
     return str(data)
