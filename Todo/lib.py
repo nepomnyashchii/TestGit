@@ -73,6 +73,7 @@ mydb = mysql.connector.connect(
 #     print(mycursor.rowcount, "record(s) deleted")
 
 def update_todo ():
+    myresult =" "
     mydb = mysql.connector.connect(
         host="db4free.net",
         user="coolspammail",
@@ -81,13 +82,15 @@ def update_todo ():
     )
     mycursor = mydb.cursor()
 
-    sql = "UPDATE todo SET `text` = "lion" WHERE id=3"
+    sql = "UPDATE todo SET `text` = 'drink' WHERE id=3"
 
     mycursor.execute(sql)
 
     mydb.commit()
 
     print(mycursor.rowcount, "record(s) affected")
+    return myresult
+
 
 
 
