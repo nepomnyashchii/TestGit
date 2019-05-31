@@ -50,7 +50,7 @@ def insert_todo(text):
     )
     mycursor = mydb.cursor()
 
-    sql = "INSERT INTO todo (text, done) VALUES ( %s, "0")
+    sql = "INSERT INTO todo (text, done) VALUES ( %s, '0')
     # necessary to put commar for the tuple at the end of the sentence
     val = (text, done)
     mycursor.execute(sql, val)
