@@ -170,5 +170,7 @@ def weather_data(actionline):
 def convert_weather (weather_results):
     weather = weather_results.json()
     # source_data = weather["main"]
-    return_data = {"temperature": weather["main"]["temp"]}
+    return_data = {"temperature": weather["main"]["temp"],
+    "pressure": weather["main"]["pressure"],
+    "city name": weather["name"]}
     return return_data
