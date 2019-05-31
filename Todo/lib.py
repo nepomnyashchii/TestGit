@@ -46,10 +46,51 @@ mydb = mysql.connector.connect(
 #     myresult = mycursor.fetchone()
 #     return myresult
 
-def insert_todo(text):
+# def insert_todo(text):
+#     mycursor = mydb.cursor()
+#     sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
+#     val = (text, 0)
+#     mycursor.execute(sql, val)
+#     mydb.commit()
+#     return mycursor.lastrowid
+
+# def delete_todo():
+
+#     mydb = mysql.connector.connect(
+#     host="db4free.net",
+#     user="coolspammail",
+#     passwd="coolspammail-pass",
+#     database="coolspammail"
+#     )
+#     mycursor = mydb.cursor()
+
+#     sql = "DELETE FROM todo where id=2"
+
+#     mycursor.execute(sql)
+
+#     mydb.commit()
+
+#     print(mycursor.rowcount, "record(s) deleted")
+
+def update_todo ():
+    mydb = mysql.connector.connect(
+        host="db4free.net",
+        user="coolspammail",
+        passwd="coolspammail-pass",
+        database="coolspammail"
+    )
     mycursor = mydb.cursor()
-    sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
-    val = (text, 0)
-    mycursor.execute(sql, val)
+
+    sql = "UPDATE todo SET `text` = "lion" WHERE id=3"
+
+    mycursor.execute(sql)
+
     mydb.commit()
-    return mycursor.lastrowid
+
+    print(mycursor.rowcount, "record(s) affected")
+
+
+
+
+
+
