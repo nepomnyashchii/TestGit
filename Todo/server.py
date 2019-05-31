@@ -12,11 +12,11 @@ def index():
     return 'Flow Runner :)'
 
 
-# @app.route('/todo')
-# def get_todo():
-#     data = lib.get_todo()
-#     print(data)
-#     return str(data)
+@app.route('/todo')
+def get_todo():
+    data = lib.get_todo()
+    print(data)
+    return str(data)
 
 # @app.route('/todo/<int:id>')
 # def get_todo(id):

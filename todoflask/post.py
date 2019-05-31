@@ -18,17 +18,3 @@ def insert_todo():
     return jsonify(
         data=data,
     )
-
-
-# @app.route('/todo', methods = ['PUT'])
-# def insert_todo():
-#     data = request.json
-#     print(data)
-#     return jsonify(
-#         data=data,
-#     )
-
-# @app.route("/echo", methods=['POST'])
-# def echo():
-#     return "You said: " + request.form['text']
-

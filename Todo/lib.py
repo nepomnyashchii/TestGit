@@ -2,28 +2,28 @@ import mysql.connector
 import requests
 import json
 
-mydb = mysql.connector.connect(
-        host="db4free.net",
-        user="coolspammail",
-        passwd="coolspammail-pass",
-        database="coolspammail"
-    )
+# mydb = mysql.connector.connect(
+#         host="db4free.net",
+#         user="coolspammail",
+#         passwd="coolspammail-pass",
+#         database="coolspammail"
+#     )
 
-# def get_todo():
-#     """get flowdata from db."""
-#     myresult = ''
-#     mydb = mysql.connector.connect(
-#             host="db4free.net",
-#             user="coolspammail",
-#             passwd="coolspammail-pass",
-#             database="coolspammail"
-#         )
+def get_todo():
+    """get flowdata from db."""
+    myresult = ''
+    mydb = mysql.connector.connect(
+            host="db4free.net",
+            user="coolspammail",
+            passwd="coolspammail-pass",
+            database="coolspammail"
+        )
 
-#     mycursor = mydb.cursor()
-#     sql = " SELECT * FROM `todo`"
-#     mycursor.execute(sql)
-#     myresult = mycursor.fetchall()
-#     return myresult
+    mycursor = mydb.cursor()
+    sql = " SELECT * FROM `todo`"
+    mycursor.execute(sql)
+    myresult = mycursor.fetchall()
+    return myresult
 
 
 # def get_todo(id):
