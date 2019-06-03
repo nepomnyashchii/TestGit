@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 
 def insert_furniture(chairs, tables):
     mycursor = mydb.cursor()
-    sql = "INSERT INTO `furniture` (id, `chairs`,`tables`) VALUES (%s,%s,%s)"
+    sql = "INSERT INTO `furniture` (id, `chairs`,`tables`) VALUES (%s, %s, %s)"
     val = (id, chairs, tables)
     mycursor.execute(sql, val)
     mydb.commit()
