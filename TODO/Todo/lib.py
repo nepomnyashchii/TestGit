@@ -1,6 +1,5 @@
 import mysql.connector
-import requests
-import json
+
 
 mydb = mysql.connector.connect(
     host="db4free.net",
@@ -14,7 +13,7 @@ def get_all():
     """get flowdata from db."""
     myresult = ''
     mycursor = mydb.cursor()
-    sql = " SELECT * FROM `todo`"
+    sql = "SELECT * FROM `todo`"
     mycursor.execute(sql)
     myresult = mycursor.fetchall()
     return myresult
@@ -44,14 +43,14 @@ def delete_todo_by_id(id):
     sql = "DELETE FROM todo where id=" + str(id)
     mycursor.execute(sql)
     mydb.commit()
-    print(mycursor)
     return mycursor.rowcount
 
 
 def update_todo_by_id(id, text, done):
     myresult = ""
     mycursor = mydb.cursor()
-    sql = "UPDATE todo SET `text` = '" + text + "', `done` = " + str(done) + "  WHERE id=" + str(id)
+    sql = "UPDATE todo SET `text` = '" + text + "', `done` = " + str(done) + " WHERE id=" + str(id)
+    #  UPDATE todo SET `text` = 'jopa', `done` = 1 WHERE id= 5
     mycursor.execute(sql)
     mydb.commit()
     print(mycursor.rowcount, "record(s) affected")
