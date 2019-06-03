@@ -10,8 +10,8 @@ mydb = mysql.connector.connect(
 
 def insert_furniture(chairs, tables):
     mycursor = mydb.cursor()
-    sql = "INSERT INTO `furniture` (id, `chairs`,`tables`) VALUES (%s, %s, %s)"
-    val = (id, chairs, tables)
+    sql = "INSERT INTO `furniture` (`chairs`,`tables`) VALUES (%s, %s)"
+    val = (chairs, tables)
     mycursor.execute(sql, val)
     mydb.commit()
     return mycursor.lastrowid
