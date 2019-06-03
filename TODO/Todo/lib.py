@@ -10,7 +10,7 @@ mydb = mysql.connector.connect(
 )
 
 
-def get_todo():
+def get_all():
     """get flowdata from db."""
     myresult = ''
     mycursor = mydb.cursor()
