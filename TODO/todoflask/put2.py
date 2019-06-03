@@ -13,7 +13,9 @@ def index():
 
 @app.route('/<int:id>', methods = ['PUT'])
 def update_todo(id):
-    updated = libput2.update_todo_by_id(id, "FFF", 2)
+    id = libput2.insert_todo("jopa")
+    print(id)
+    updated = libput2.update_todo_by_id(id, "FFF", 100)
     print(updated)
     data = request.json
     print(data)

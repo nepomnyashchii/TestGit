@@ -8,6 +8,13 @@ mydb = mysql.connector.connect(
     database="coolspammail"
 )
 
+def insert_todo(text):
+    mycursor = mydb.cursor()
+    sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
+    val = (text, 0)
+    mycursor.execute(sql, val)
+    mydb.commit()
+    return mycursor.lastrowid
 
 def update_todo_by_id(id, text, done):
     myresult = ""
