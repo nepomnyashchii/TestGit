@@ -1,3 +1,3 @@
 
-FLASK_APP=get1.py flask run
+FLASK_APP=put2.py flask run
 find . -name '*.pyc' -delete
