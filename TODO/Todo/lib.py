@@ -38,39 +38,21 @@ def insert_todo(text):
     mydb.commit()
     return mycursor.lastrowid
 
-# def delete_todo():
 
-#     mydb = mysql.connector.connect(
-#     host="db4free.net",
-#     user="coolspammail",
-#     passwd="coolspammail-pass",
-#     database="coolspammail"
-#     )
-#     mycursor = mydb.cursor()
+def delete_todo_by_id(id):
+    mycursor = mydb.cursor()
+    sql = "DELETE FROM todo where id=" + str(id)
+    mycursor.execute(sql)
+    mydb.commit()
+    print(mycursor)
+    return mycursor.rowcount
 
-#     sql = "DELETE FROM todo where id=2"
 
-#     mycursor.execute(sql)
-
-#     mydb.commit()
-
-#     print(mycursor.rowcount, "record(s) deleted")
-
-# def update_todo ():
-#     myresult =" "
-#     mydb = mysql.connector.connect(
-#         host="db4free.net",
-#         user="coolspammail",
-#         passwd="coolspammail-pass",
-#         database="coolspammail"
-#     )
-#     mycursor = mydb.cursor()
-
-#     sql = "UPDATE todo SET `text` = 'drink' WHERE id=3"
-
-#     mycursor.execute(sql)
-
-#     mydb.commit()
-
-#     print(mycursor.rowcount, "record(s) affected")
-#     return myresult
+def update_todo_by_id(id, text):
+    myresult = ""
+    mycursor = mydb.cursor()
+    sql = "UPDATE todo SET `text` = '" + text + "' WHERE id=" + str(id)
+    mycursor.execute(sql)
+    mydb.commit()
+    print(mycursor.rowcount, "record(s) affected")
+    return myresult

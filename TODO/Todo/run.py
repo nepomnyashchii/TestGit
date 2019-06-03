@@ -10,13 +10,8 @@ print(all_data)
 one = lib.get_todo_by_id(new_id)
 print(one)
 
+updated = lib.update_todo_by_id(new_id, "FFF")
+print(updated)
 
-# return jsonify(
-# data=data,
-#     )
-
-# data = lib.delete_todo()
-# print(data)
-
-# data =lib.update_todo()
-# print(data)
+response = lib.delete_todo_by_id(new_id-1)
+print(response)
