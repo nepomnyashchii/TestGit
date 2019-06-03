@@ -48,10 +48,10 @@ def delete_todo_by_id(id):
     return mycursor.rowcount
 
 
-def update_todo_by_id(id, text):
+def update_todo_by_id(id, text, done):
     myresult = ""
     mycursor = mydb.cursor()
-    sql = "UPDATE todo SET `text` = '" + text + "' WHERE id=" + str(id)
+    sql = "UPDATE todo SET `text` = '" + text + "', `done` = " + str(done) + "  WHERE id=" + str(id)
     mycursor.execute(sql)
     mydb.commit()
     print(mycursor.rowcount, "record(s) affected")
