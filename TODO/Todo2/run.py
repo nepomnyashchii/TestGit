@@ -34,7 +34,7 @@ def insert_todo():
     return jsonify(
         data=data,
     )
-@app.route('/<int:id>', methods = ['PUT'])
+@app.route('/todo/<int:id>', methods = ['PUT'])
 def update_delete_todo(id):
     updated = lib.update_todo_by_id(id, "FFF", 100)
     print(updated)
