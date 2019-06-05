@@ -52,7 +52,7 @@ def get_furniture_by_id(id):
     return myresult
 
 
-def update_furniture_by_id(id, chairs,tables):
+def update_furniture_by_id(id, chairs, tables):
     myresult = ""
     mycursor = mydb.cursor()
     sql = "UPDATE furniture SET `chairs` = %s, `tables` = %s  WHERE id=%s"
