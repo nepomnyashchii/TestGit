@@ -47,7 +47,7 @@ def update_todo(id):
 @app.route('/todo/<int:id>')
 def delete_todo(id):
     delete_previousid = lib.delete_todo_by_id(id-1)
-    return "data deleted"
+    return "data successfully deleted"
 
 # {
 #     "text":"asdasd",
