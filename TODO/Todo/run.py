@@ -13,5 +13,5 @@ print(new_id)
 updated = lib.update_todo_by_id(new_id, "FFF", 1)
 print(updated)
 
-# response = lib.delete_todo_by_id(new_id-1)
-# print(response)
+delete_id = lib.delete_todo_by_id(new_id-1)
+print(delete_id)
