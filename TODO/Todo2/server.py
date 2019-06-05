@@ -28,25 +28,27 @@ def get_all(id):
 
 @app.route('/todo', methods = ['POST'])
 def insert_todo():
-    data = request.json
-    jsonify(data)
-    new_id = lib.insert_todo(json.dumps(data))
+    result = request.json
+    jsonify(result)
+    new_id = lib.insert_todo(json.dumps(result))
     print(new_id)
-    return str(new_id)
+    return jsonify(new_id=str(new_id))
     # return jsonify(
     #     data=data,
     # )
-# @app.route('/todo/<int:id>', methods = ['PUT'])
-# def update_delete_todo(id):
-#     updated = lib.update_todo_by_id(id, "monkey", 100)
-#     print(updated)
-#     data = request.json
-#     # delete_previous_id = lib.delete_todo_by_id(id-1)
-#     # print (delete_previous_id)
-#     print(data)
-#     return jsonify(
-#         data=data,
-#     )
+@app.route('/todo/<int:id>', methods = ['PUT'])
+def update_todo(id):
+    result = request.json
+    jsonify(result)
+    new_information_id = lib.update_todo_by_id(id, "train", 100)
+    print(new_information_id)
+    return jsonify(new_information_id= str(new_information_id))
+    # delete_previous_id = lib.delete_todo_by_id(id-1)
+    # print (delete_previous_id)
+    # print(data)
+    # return jsonify(
+    #     data=data,
+    # )
 
 
 # {
