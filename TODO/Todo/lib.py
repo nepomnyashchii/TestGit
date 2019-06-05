@@ -49,7 +49,7 @@ def insert_todo(text):
 def update_todo_by_id(id, text, done):
     myresult = ""
     mycursor = mydb.cursor()
-    sql = "UPDATE todo SET `text` = '" + text + "', `done` = " + str(done) + " WHERE id=" + str(id)
+    sql = "UPDATE todo SET `text` = '" + text +  "', `done` = " + str(done) + " WHERE id=" + str(id)
     #  UPDATE todo SET `text` = 'jopa', `done` = 1 WHERE id= 5
     mycursor.execute(sql)
     mydb.commit()
