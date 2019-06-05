@@ -48,11 +48,10 @@ def delete_todo_by_id(id):
 
 
 def update_todo_by_id(id, text, done):
-    myresult = ""
     mycursor = mydb.cursor()
     sql = "UPDATE todo SET `text` = %s, `done` = %s  WHERE id=%s"
     val = (text, done, id)
     mycursor.execute(sql, val)
     mydb.commit()
-    print(mycursor.rowcount, "record(s) affected")
-    return myresult
+    # print(mycursor.rowcount, "record(s) affected")
+    return id
