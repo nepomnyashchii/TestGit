@@ -4,7 +4,7 @@ lecture ="jopa"
 print(lecture)
 print("abc"+str(9))
 print("abs{0}".format(9))
-print("nba{:2f}".format(9.1756))
+print("nba{:0.3}".format(9.1756))
 print "{} {} {} {} {}".format("hello", "world", 25, [1,1,2,3], (1,2,3))
 print("{} {} {} {} {} {}").format(1,2,3,4,5,6)
 count ="9"
