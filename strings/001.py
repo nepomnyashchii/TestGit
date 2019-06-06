@@ -1,5 +1,8 @@
 print("I bought %d Euro worth of %s!" %(200, 'cookies'))
 print("I bought 200 Euro worth of cookies!")
+lecture ="jopa"
+"text" = '" + lecture +  "'
+print(lake)
 print("abc"+str(9))
 print("abs{0}".format(9))
 count =5
@@ -21,8 +24,7 @@ name ="Alec"
 print ("Hello %s, welcome to the computer!" % name)
 text ='" + text + "'
 print(text)
-id=" + str(id)
-print(id)
+
 
 
 

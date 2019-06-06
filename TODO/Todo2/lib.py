@@ -1,4 +1,7 @@
 import mysql.connector
+import logger_module
+import logger_module
+logger = logger_module.setup_logger("todo")
 
 
 mydb = mysql.connector.connect(
@@ -35,6 +38,7 @@ def insert_todo(text):
     val = (text, 0)
     mycursor.execute(sql, val)
     mydb.commit()
+    # logger.debug ("Information from insertion: " + str(text))
     return mycursor.lastrowid
 
 
