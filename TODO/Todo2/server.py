@@ -29,6 +29,7 @@ def get_all(id):
 @app.route('/todo', methods = ['POST'])
 def insert_todo():
     result = request.json
+    print(result)
     data= result["text"]
     print(data)
     new_id = lib.insert_todo(data)
@@ -38,7 +39,9 @@ def insert_todo():
 @app.route('/todo/<int:id>', methods = ['PUT'])
 def update_todo(id):
     result= request.json
+    print(result)
     new_result=result["text"]
+    print(new_result)
     new_data=result["done"]
     new_information_id = lib.update_todo_by_id(id, new_result, new_data)
     print(new_information_id)
