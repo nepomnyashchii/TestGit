@@ -15,47 +15,58 @@ mydb = mysql.connector.connect(
 def get_all():
     """get flowdata from db."""
     myresult = ''
-    mycursor = mydb.cursor()
-    sql = "SELECT * FROM `todo`"
-    mycursor.execute(sql)
-    myresult = mycursor.fetchall()
+    try:
+        mycursor = mydb.cursor()
+        sql = "SELECT * FROM `todo`"
+        mycursor.execute(sql)
+        myresult = mycursor.fetchall()
+    except: print("Something went wrong in get_all")
     return myresult
+
 
 
 def get_todo_by_id(id):
     myresult = ''
-    mycursor = mydb.cursor()
-    sql = "SELECT * FROM todo WHERE id = %s;"
-    val = (id,)
-    mycursor.execute(sql, val)
-    myresult = mycursor.fetchone()
+    try:
+        mycursor = mydb.cursor()
+        sql = "SELECT * FROM todo WHERE id = %s;"
+        val = (id,)
+        mycursor.execute(sql, val)
+        myresult = mycursor.fetchone()
+    except: print("Something went wrong with get_to_do_by_id")
     return myresult
 
 
 def insert_todo(text):
-    mycursor = mydb.cursor()
-    sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
-    val = (text, 0)
-    mycursor.execute(sql, val)
-    mydb.commit()
-    # logger.debug ("Information from insertion: " + str(text))
-    return mycursor.lastrowid
+    try:
+        mycursor = mydb.cursor()
+        sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
+        val = (text, 0)
+        mycursor.execute(sql, val)
+        mydb.commit()
+        return mycursor.lastrowid
+    except: print("Something went wrong with insert_todo")
+
 
 
 def delete_todo_by_id(id):
-    mycursor = mydb.cursor()
-    sql = "DELETE FROM todo where id=%s"
-    val = (id,)
-    mycursor.execute(sql,val)
-    mydb.commit()
-    return mycursor.rowcount
+    try:
+        mycursor = mydb.cursor()
+        sql = "DELETE FROM todo where id=%s"
+        val = (id,)
+        mycursor.execute(sql,val)
+        mydb.commit()
+        return mycursor.rowcount
+    except:print("Something went wrong with delete_todo_by_id")
 
 
 def update_todo_by_id(id, text, done):
-    mycursor = mydb.cursor()
-    sql = "UPDATE todo SET `text` = %s, `done` = %s  WHERE id=%s"
-    val = (text, done, id)
-    mycursor.execute(sql, val)
-    mydb.commit()
-    # print(mycursor.rowcount, "record(s) affected")
-    return id
+    try:
+        mycursor = mydb.cursor()
+        sql = "UPDATE todo SET `text` = %s, `done` = %s  WHERE id=%s"
+        val = (text, done, id)
+        mycursor.execute(sql, val)
+        mydb.commit()
+        # print(mycursor.rowcount, "record(s) affected")
+        return id
+    except:  print("Something went wrong with updata_todo_by_id")
