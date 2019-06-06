@@ -26,7 +26,7 @@ def get_all():
 
 
 def get_todo_by_id(id):
-    myresult = ''
+    # myresult = ''
     try:
         mycursor = mydb.cursor()
         sql = "SELECT * FROM todo WHERE id = %s;"
