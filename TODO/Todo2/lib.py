@@ -1,7 +1,7 @@
 import mysql.connector
 import logger_module
 import logger_module
-logger = logger_module.setup_logger("todo")
+logger = logger_module.setup_logger("todo2-lib")
 
 
 mydb = mysql.connector.connect(
@@ -14,15 +14,17 @@ mydb = mysql.connector.connect(
 
 def get_all():
     """get flowdata from db."""
+    logger.debug("get_all invoked")
     myresult = ''
     try:
         mycursor = mydb.cursor()
         sql = "SELECT * FROM `todo`"
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
-    except: print("Something went wrong in get_all")
+    except:
+        print("Something went wrong in get_all")
+    logger.debug("get_all myresult" + str(myresult))
     return myresult
-
 
 
 def get_todo_by_id(id):
@@ -33,7 +35,8 @@ def get_todo_by_id(id):
         val = (id,)
         mycursor.execute(sql, val)
         myresult = mycursor.fetchone()
-    except: print("Something went wrong with get_to_do_by_id")
+    except:
+        print("Something went wrong with get_to_do_by_id")
     return myresult
 
 
@@ -45,8 +48,8 @@ def insert_todo(text):
         mycursor.execute(sql, val)
         mydb.commit()
         return mycursor.lastrowid
-    except: print("Something went wrong with insert_todo")
-
+    except:
+        print("Something went wrong with insert_todo")
 
 
 def delete_todo_by_id(id):
@@ -54,10 +57,11 @@ def delete_todo_by_id(id):
         mycursor = mydb.cursor()
         sql = "DELETE FROM todo where id=%s"
         val = (id,)
-        mycursor.execute(sql,val)
+        mycursor.execute(sql, val)
         mydb.commit()
         return mycursor.rowcount
-    except:print("Something went wrong with delete_todo_by_id")
+    except:
+        print("Something went wrong with delete_todo_by_id")
 
 
 def update_todo_by_id(id, text, done):
@@ -69,4 +73,5 @@ def update_todo_by_id(id, text, done):
         mydb.commit()
         # print(mycursor.rowcount, "record(s) affected")
         return id
-    except:  print("Something went wrong with updata_todo_by_id")
+    except:
+        print("Something went wrong with updata_todo_by_id")
