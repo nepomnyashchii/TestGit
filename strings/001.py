@@ -6,7 +6,7 @@ print("abc"+str(9))
 print("abs{0}".format(9))
 print("nba{:0.3}".format(9.1756))
 print "{} {} {} {} {}".format("hello", "world", 25, [1,1,2,3], (1,2,3))
-print("{} {} {} {} {}".format("tennis", "basketball", "football", "hockey"))
+print("{} {} {} {} {}".format("tennis", "basketball", "football", "hockey", "rugby"))
 print("{} {} {}".format("lake", "lenta", "apples"))
 print("{},{}".format(1,2))
 print("1,2")
@@ -34,6 +34,11 @@ name ="Alec"
 print ("Hello %s, welcome to the computer!" % name)
 text ='" + text + "'
 print(text)
+print("1" + "2")
+print(str(1)+str(2))
+print(1+2)
+print(1+1)
+
 
 
 
