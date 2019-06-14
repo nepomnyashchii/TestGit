@@ -23,26 +23,26 @@ def get_todo():
     all_data = lib.get_all()
     logger.debug("get information from all ids: " + str(all_data))
     print(all_data)
-    return str(all_data)
+    return jsonify(all_collected_data =str(all_data))
 
-# @app.route('/todo/<int:id>')
-# def get_all(id):
-#     logger.debug("Get all information by id")
-#     id_data = lib.get_todo_by_id(id)
-#     logger.debug("Provide all information for asked id: " +str(id_data))
-#     print(id_data)
-#     return str(id_data)
+@app.route('/todo/<int:id>')
+def get_all(id):
+    logger.debug("Get all information by id")
+    id_data = lib.get_todo_by_id(id)
+    logger.debug("Provide all information for asked id: " +str(id_data))
+    print(id_data)
+    return jsonify(data_for_certain_id=str(id_data))
 
-@app.route('/todo', methods = ['POST'])
+@app.route('/todo', methods=['POST'])
 def insert_todo():
     logger.debug("Insert is invoked")
     result = request.json
     print(result)
-    data= result["text"]
+    data = result["text"]
     logger.debug("Information from the body: " + str(data))
     print(data)
     new_id = lib.insert_todo(data)
-    logger.debug("Inserted id: " +str(new_id))
+    logger.debug("Inserted id: " + str(new_id))
     print(new_id)
     return jsonify(new_id=str(new_id))
 
@@ -61,11 +61,11 @@ def update_todo(id):
     print(new_information_id)
     return jsonify(new_information_id= str(new_information_id))
 
-@app.route('/todo/<int:id>')
+@app.route('/todo/<int:id>', methods =['DELETE'])
 def delete_todo(id):
     delete_previousid = lib.delete_todo_by_id(id-1)
     logger.debug("Requested operation to delete the data successfully accomplished")
-    return "data successfully deleted"
+    return jsonify(previous_id="data successfully deleted")
 
 # {
 #     "text":"asdasd",
