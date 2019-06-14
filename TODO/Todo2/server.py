@@ -24,7 +24,7 @@ def get_todo():
     all_data = lib.get_all()
     logger.debug("get information from all ids: " + str(all_data))
     print(all_data)
-    return str(all_data)
+    return jsonify(data_for_all_ids=str(all_data))
 
 
 @app.route('/todo', methods=['POST'])
@@ -59,7 +59,7 @@ def update_todo(id):
     return jsonify(new_information_id=str(new_information_id))
 
 @app.route('/todo/<int:id>')
-def get_all(id):
+def get_all_forid_delete_previous_id(id):
     logger.debug("Get all information by id")
     id_data = lib.get_todo_by_id(id)
     logger.debug("Provide all information for asked id: " + str(id_data))
