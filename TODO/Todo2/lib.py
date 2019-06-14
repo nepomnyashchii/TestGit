@@ -1,7 +1,7 @@
 import mysql.connector
 import logger_module
 import logger_module
-logger = logger_module.setup_logger("todo")
+logger = logger_module.setup_logger("todo-2lib")
 
 
 mydb = mysql.connector.connect(
