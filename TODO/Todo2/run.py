@@ -1,5 +1,6 @@
 import lib
 
+lib.init_db()
 
 new_id = lib.insert_todo("elephant")
 print(new_id)

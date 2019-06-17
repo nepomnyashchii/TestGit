@@ -3,13 +3,14 @@ from flask import Flask, request, jsonify
 import json
 import lib
 import logger_module
+
+
 logger = logger_module.setup_logger("todo")
 logger.debug('Start my super App')
-
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
+print("\n\n\n")
 
-print("\n\n\n\n\n\n\n\n\n\n")
 
 
 @app.route('/')
@@ -77,4 +78,4 @@ def delete_todo(id):
 
 
 
-
+lib.init_db()

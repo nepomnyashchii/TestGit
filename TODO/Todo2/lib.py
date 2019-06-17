@@ -4,12 +4,15 @@ import logger_module
 logger = logger_module.setup_logger("todo-2lib")
 
 
-mydb = mysql.connector.connect(
-    host="db4free.net",
-    user="coolspammail",
-    passwd="coolspammail-pass",
-    database="coolspammail"
-)
+mydb=None
+
+def init_db():
+    mydb = mysql.connector.connect(
+        host="db4free.net",
+        user="coolspammail",
+        passwd="coolspammail-pass",
+        database="coolspammail"
+    )
 
 
 def get_all():
