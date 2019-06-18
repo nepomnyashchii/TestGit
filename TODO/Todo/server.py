@@ -45,9 +45,9 @@ def get_todo():
 
 # # @app.route('/todo', methods = ['POST'])
 # def insert_todo():
-data = lib.insert_todo(text)
-print(data)
-return jsonify(
-data=data,
-    )
+# data = lib.insert_todo(text)
+# print(data)
+# return jsonify(
+# data=data,
+#     )
 
