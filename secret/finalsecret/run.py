@@ -31,7 +31,7 @@ if len(sid) > 0:
     msg = lib.get_secret(sid, pin)
     logger.debug(' get_secret returned msg  = {}'.format(msg))
     if len(msg) > 0:
-        logger.debug('app succesdd')
+        logger.debug('app success')
         print(msg)
     else:
         logger.debug('secret not found or expired')
@@ -42,3 +42,17 @@ else:
 
 
 logger.debug('End my super App')
+
+# if len(sid)>0:
+#     del_id = lib.del_secret(sid,pin)
+#     logger.debug('sid succesfully deleted')
+# else: print("sid does not exist")
+# logger.debug('sid does not exist')
+
+# logger.debug('End my super App')
+
+
+
+
+
+
