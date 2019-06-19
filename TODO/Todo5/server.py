@@ -24,17 +24,18 @@ def get_todo():
     logger.debug('run invoked')
     all_data = lib.get_all()
     # rs = json.dumps(all_data)
-    # respond = json.loads(all_data)
-    logger.debug("get information from all ids: " + str(all_data))
+    respond = json.loads(all_data)
+    logger.debug("get information from all ids: " + str(respond))
     # print(respond)
-    return all_data
+    return jsonify(data= respond)
 
 @app.route('/todo/<int:id>')
 def get_all(id):
     logger.debug("Get all information by id")
     id_data = lib.get_todo_by_id(id)
-    logger.debug("Provide all information for asked id: " + str(id_data))
-    return id_data
+    respond =json.loads(id_data)
+    logger.debug("Provide all information for asked id: " + str(respond))
+    return jsonify(data= respond)
 
 @app.route('/todo', methods=['POST'])
 def insert_todo():
