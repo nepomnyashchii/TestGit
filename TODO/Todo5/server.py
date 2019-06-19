@@ -48,7 +48,7 @@ def insert_todo():
     new_id = lib.insert_todo(data)
     logger.debug("Inserted id: " + str(new_id))
     print(new_id)
-    return jsonify(new_id=str(new_id))
+    return jsonify(id=new_id)
 
 @app.route('/todo/<int:id>', methods = ['PUT'])
 def update_todo(id):
@@ -63,7 +63,7 @@ def update_todo(id):
     new_information_id = lib.update_todo_by_id(id, new_result, new_data)
     logger.debug("updated id: " + str(new_information_id))
     print(new_information_id)
-    return jsonify(new_information_id= str(new_information_id))
+    return jsonify(id= new_information_id)
 
 @app.route('/todo/<int:id>', methods =['DELETE'])
 def delete_todo(id):
