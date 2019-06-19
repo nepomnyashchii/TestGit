@@ -25,9 +25,8 @@ def get_all():
             json_data.append(dict(zip(row_headers,result)))
         return json.dumps(json_data)
 
-        myresult = mycursor.fetchall()
     except: print("Something went wrong in get_all")
-    return json.dumps(myresult)
+    return json_data
 
 
 
@@ -44,9 +43,8 @@ def get_todo_by_id(id):
         for result in rv:
             json_data.append(dict(zip(row_headers,result)))
         return json.dumps(json_data)
-        myresult = mycursor.fetchone()
     except: print("Something went wrong with get_to_do_by_id")
-    return json.dumps(myresult)
+    return json_data
 
 
 def insert_todo(text):
