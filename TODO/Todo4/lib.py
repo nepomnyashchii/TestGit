@@ -33,7 +33,7 @@ def get_todo_by_id(id):
         mycursor.execute(sql, val)
         myresult = mycursor.fetchone()
     except: print("Something went wrong with get_to_do_by_id")
-    return myresult
+    return json.dumps(myresult)
 
 
 def insert_todo(text):
