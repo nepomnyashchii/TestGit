@@ -17,7 +17,7 @@ print("\n\n\n")
 @app.route('/')
 def index():
     return 'Flow Runner :)'
-# get data through todo (not forget to transfer obtained tupple to the string)
+# get data through todo (not forget to transfer obtained tuple to the string)
 
 @app.route('/todo')
 def get_todo():
