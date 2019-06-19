@@ -14,14 +14,13 @@ mydb = mysql.connector.connect(
 
 def get_all():
     """get flowdata from db."""
-    myresult = ''
     try:
         mycursor = mydb.cursor()
         sql = "SELECT * FROM `todo`"
         mycursor.execute(sql)
         myresult = mycursor.fetchall()
     except: print("Something went wrong in get_all")
-    return myresult
+    return json.dumps(myresult)
 
 
 
