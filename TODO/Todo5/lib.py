@@ -38,6 +38,12 @@ def get_todo_by_id(id):
         sql = "SELECT * FROM todo WHERE id = %s;"
         val = (id,)
         mycursor.execute(sql, val)
+        row_headers=[x[0] for x in mycursor.description] #this will extract row headers
+        rv = mycursor.fetchall()
+        json_data=[]
+        for result in rv:
+            json_data.append(dict(zip(row_headers,result)))
+        return json.dumps(json_data)
         myresult = mycursor.fetchone()
     except: print("Something went wrong with get_to_do_by_id")
     return json.dumps(myresult)

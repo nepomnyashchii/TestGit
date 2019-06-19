@@ -29,12 +29,12 @@ def get_todo():
     # print(respond)
     return all_data
 
-# @app.route('/todo/<int:id>')
-# def get_all(id):
-#     logger.debug("Get all information by id")
-#     id_data = lib.get_todo_by_id(id)
-#     logger.debug("Provide all information for asked id: " + str(id_data)
-#     return jsonify(data=id_data)
+@app.route('/todo/<int:id>')
+def get_all(id):
+    logger.debug("Get all information by id")
+    id_data = lib.get_todo_by_id(id)
+    logger.debug("Provide all information for asked id: " + str(id_data))
+    return id_data
 
 @app.route('/todo', methods=['POST'])
 def insert_todo():
