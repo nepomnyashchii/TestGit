@@ -71,6 +71,18 @@ def delete_todo(id):
     logger.debug("Requested operation to delete the data successfully accomplished")
     return jsonify(id="data successfully deleted")
 
+
+@app.errorhandler(404)
+def not_found(error=None):
+    message = {
+            'status': 404,
+            'message': 'URL is wrong: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 404
+
+    return resp
+
 # {
 #     "text":"asdasd",
 #     "done":true
