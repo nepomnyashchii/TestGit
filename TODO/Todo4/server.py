@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 import json
 import lib
 import logger_module
+import json
 
 
 logger = logger_module.setup_logger("todo")
@@ -22,6 +23,7 @@ def index():
 def get_todo():
     logger.debug('run invoked')
     all_data = lib.get_all()
+    # rs = json.dumps(all_data)
     logger.debug("get information from all ids: " + str(all_data))
     print(all_data)
     return jsonify(all_collected_data =str(all_data))
@@ -64,9 +66,9 @@ def update_todo(id):
 
 @app.route('/todo/<int:id>', methods =['DELETE'])
 def delete_todo(id):
-    delete_previousid = lib.delete_todo_by_id(id-1)
+    delete_id = lib.delete_todo_by_id(id)
     logger.debug("Requested operation to delete the data successfully accomplished")
-    return jsonify(previous_id="data successfully deleted")
+    return jsonify(id="data successfully deleted")
 
 # {
 #     "text":"asdasd",
