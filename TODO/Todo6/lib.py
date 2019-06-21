@@ -42,9 +42,11 @@ def get_todo_by_id(id):
         json_data=[]
         for result in rv:
             json_data.append(dict(zip(row_headers,result)))
-        return json.dumps(json_data)
+            return json.dumps(json_data)
     except: print("Something went wrong with get_to_do_by_id")
-    return json_data
+    if "done" == 0 or "done"==1:
+        return json_data
+    else:return ("No real data exists")
 
 
 def insert_todo(text):

@@ -34,13 +34,13 @@ def run(username, flow):
 
     simple_list = []
     for idx, line in enumerate(data):
-        actionline = line[0]
+        movies = line[0]
         # print(actionline)
-        action_data = lib.run_action(actionline)
+        action_data = lib.run_action(movies)
         # print(action_data)
         simple_list.append({
             "action": idx,
-            "type": actionline.split(":")[0],
+            "type": movies.split(":")[0],
             "data": action_data
         })
 
