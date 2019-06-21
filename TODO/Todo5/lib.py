@@ -77,7 +77,9 @@ def update_todo_by_id(id, text, done):
         val = (text, done, id)
         mycursor.execute(sql, val)
         mydb.commit()
-        # print(mycursor.rowcount, "record(s) affected")
-        return id
-    except:  print("Something went wrong with updata_todo_by_id")
+        affected=mycursor.rowcount
+        print(str(affected) + "record(s) affected ura")
+    except:
+        print("Something went wrong with updata_todo_by_id")
+    return affected
 

@@ -13,11 +13,11 @@ app.config['JSON_SORT_KEYS'] = False
 print("\n\n\n")
 
 
-
 @app.route('/')
 def index():
     return 'Flow Runner :)'
 # get data through todo (not forget to transfer obtained tuple to the string)
+
 
 @app.route('/todo')
 def get_todo():
@@ -27,15 +27,20 @@ def get_todo():
     respond = json.loads(all_data)
     logger.debug("get information from all ids: " + str(respond))
     # print(respond)
-    return jsonify(data= respond)
+    return jsonify(data=respond)
+
 
 @app.route('/todo/<int:id>')
 def get_all(id):
     logger.debug("Get all information by id")
     id_data = lib.get_todo_by_id(id)
-    respond =json.loads(id_data)
+    respond = json.loads(id_data)
     logger.debug("Provide all information for asked id: " + str(respond))
-    return jsonify(data= respond)
+    if len(respond) > 0:
+        return jsonify(data=respond)
+    else:
+        return jsonify(error="Not Found"), 404
+
 
 @app.route('/todo', methods=['POST'])
 def insert_todo():
@@ -50,25 +55,28 @@ def insert_todo():
     print(new_id)
     return jsonify(id=new_id)
 
-@app.route('/todo/<int:id>', methods = ['PUT'])
-def update_todo(id):
-    result= request.json
-    logger.debug("Information from the body: " +str(result))
-    print(result)
-    new_result=result["text"]
-    print(new_result)
-    logger.debug("Information for updated text from dictionary: " + str(new_result))
-    new_data=result["done"]
-    logger.debug("Information for true or false from dictonary: " + str(new_data))
-    new_information_id = lib.update_todo_by_id(id, new_result, new_data)
-    logger.debug("updated id: " + str(new_information_id))
-    print(new_information_id)
-    return jsonify(id= new_information_id)
 
-@app.route('/todo/<int:id>', methods =['DELETE'])
+@app.route('/todo/<int:id>', methods=['PUT'])
+def update_todo(id):
+    result = request.json
+    # logger.debug("Information from the body: " + str(result))
+    text = result["text"]
+    logger.debug("Information for updated text from dictionary: " + str(text))
+    done = result["done"]
+    logger.debug("Information for true or false from dictonary: " + str(done))
+    affected = lib.update_todo_by_id(id, text, done)
+    logger.debug("affected rows: " + str(affected))
+    if affected > 0:
+        return jsonify(id=id, desc="Was updated")
+    else:
+        return jsonify(id=id, desc="Was not updated"), 404
+
+
+@app.route('/todo/<int:id>', methods=['DELETE'])
 def delete_todo(id):
     delete_id = lib.delete_todo_by_id(id)
-    logger.debug("Requested operation to delete the data successfully accomplished")
+    logger.debug(
+        "Requested operation to delete the data successfully accomplished")
     return jsonify(id="data successfully deleted")
 
 # {
@@ -77,5 +85,3 @@ def delete_todo(id):
 # }
 
 # {"text":"asdasdasd"}
-
-
