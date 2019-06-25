@@ -237,12 +237,12 @@ print(output)
 #     return ":::" + input("Enter your name:") + ":::"
 # howdy_ho("abraham")
 
-def howdy_ho (name):
-    print ("howdy_ho " + name + "!")
+# def howdy_ho (name):
+#     print ("howdy_ho " + name + "!")
 
-def read_name ():
-    return ':::' + input("Enter your name: ") + ':::'
-howdy_ho(read_name ())
+# def read_name ():
+#     return ':::' + input("Enter your name: ") + ':::'
+# howdy_ho(read_name ())
 
 
 def howdy_ho (name):
@@ -251,6 +251,8 @@ def howdy_ho (name):
 def read_name ():
     return ':::' + input("Enter your name: ") + ':::'
 howdy_ho(read_name)
+
+
 
 
 
