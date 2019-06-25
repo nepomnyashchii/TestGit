@@ -186,15 +186,74 @@ def print_spam ():
     print('spam')
 print_spam()
 
-def max(x,y):
-    if x >y:
-        return x
-    else:
-        return y
-    print('test')
-x = float(input("Enter number 1: "))
-y =float(input("Enter number 2: "))
-print(max(x,y))
+# def max(x,y):
+#     if x >y:
+#         return x
+#     else:
+#         return y
+#     print('test')
+# x = float(input("Enter number 1: "))
+# y =float(input("Enter number 2: "))
+# print(max(x,y))
+
+def howdy_ho ():
+    '''function description'''
+    print('howdy_ho')
+print(howdy_ho.__doc__)
+
+def my_day ():
+    '''today is Sunday'''
+print(my_day.__doc__)
+
+
+def howdy_ho ():
+    print("It is Tuesday")
+var = howdy_ho
+var ()
+
+def my_day ():
+    print("It is Tuesday")
+night = my_day
+night()
+
+def shout(word):
+    return word + "!"
+speak = shout
+output =speak('shout')
+print(output)
+
+# def howdy_ho (name):
+#     print ("howdy_ho " + name + "!")
+
+# def read_name ():
+#     return ":::" + input("Enter your name:") + ":::"
+
+# howdy_ho("abraham")
+
+# def howdy_ho (namer):
+#     print ("howdy_ho " + namer + "!")
+
+# def read_namer (read):
+#     return ":::" + input("Enter your name:") + ":::"
+# howdy_ho("abraham")
+
+def howdy_ho (name):
+    print ("howdy_ho " + name + "!")
+
+def read_name ():
+    return ':::' + input("Enter your name: ") + ':::'
+howdy_ho(read_name ())
+
+
+def howdy_ho (name):
+    print ("howdy_ho " + name () + "!")
+
+def read_name ():
+    return ':::' + input("Enter your name: ") + ':::'
+howdy_ho(read_name)
+
+
+
 
 
 
