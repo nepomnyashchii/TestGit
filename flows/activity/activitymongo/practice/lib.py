@@ -13,15 +13,12 @@ def get_flowdata(user_name, user_flow):
     client = pymongo.MongoClient("mongodb+srv://nepomnyashchii:natasha1977#5@cluster0-6p7nv.mongodb.net/test?retryWrites=true&w=majority")
     db = client["test"]
     mycol = db["flows"]
-    user_name='alex'
-    user_flow='goodmorning'
-    myquery = { "name": user_name}
+    myquery = {"name": user_name}
     mydoc = mycol.find(myquery)
     data = mydoc[0]
     print(data)
     flows=data["flows"]
     print(flows)
-    # myresult = flows["goodmorning"]
     for flow in flows:
         if flow.get (user_flow):
             myresult = flow.get(user_flow)
@@ -30,31 +27,6 @@ def get_flowdata(user_name, user_flow):
     logger.debug("get_flowdata finished with:" + str(myresult))
 
     return myresult
-
-
-#     "name": "alex",
-#     "phone": "234",
-#     "flows": [
-#         {
-#             "goodmorning": [
-#                 "news:3",
-#                 "norris:3",
-#                 "coctail:random",
-#                 "weather:Brooklyn, NY"
-#             ]
-#         },
-#         {
-#             "hi": [
-#                 "news:3",
-#                 "norris:3",
-#                 "coctail:random",
-#                 "weather:Brooklyn, NY"
-#             ]
-#         }
-#     ]
-# }
-
-
 
 def run_action(actionline):
     logger.debug('run_action invoked actionline: ' + actionline)
@@ -104,10 +76,10 @@ def convert_news(news_results, count):
     news_obj = news_results.json()
     source_articles = news_obj["articles"]
     return_articles_list = []
-    for source_lexus in source_articles[:count]:
+    for source_article in source_articles[:count]:
         article = {
-            "title": source_lexus["title"],
-            "description": source_lexus["description"]
+            "title": source_article["title"],
+            "description": source_article["description"]
         }
         return_articles_list.append(article)
     logger.debug("convert_news finished: " + str(return_articles_list))
