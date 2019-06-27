@@ -24,7 +24,9 @@ def get_flowdata(s_name, s_flow):
         mydoc = mycol.find(myquery, {"flows": 1 })
         if mydoc.count() > 0:
             x = mydoc[0]
+            print(x)
             flows=x["flows"]
+            print(flows)
             for flow in flows:
                 if flow.get(s_flow):
                     myresult = flow.get(s_flow)
