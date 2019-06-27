@@ -34,6 +34,29 @@ def get_flowdata(s_name, s_flow):
     return myresult
 
 
+#     "name": "alex",
+#     "phone": "234",
+#     "flows": [
+#         {
+#             "goodmorning": [
+#                 "news:3",
+#                 "norris:3",
+#                 "coctail:random",
+#                 "weather:Brooklyn, NY"
+#             ]
+#         },
+#         {
+#             "hi": [
+#                 "news:3",
+#                 "norris:3",
+#                 "coctail:random",
+#                 "weather:Brooklyn, NY"
+#             ]
+#         }
+#     ]
+# }
+
+
 
 def run_action(actionline):
     logger.debug('run_action invoked actionline: ' + actionline)
