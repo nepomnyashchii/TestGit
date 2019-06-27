@@ -13,7 +13,7 @@ def get_flowdata(user_name, user_flow):
     client = pymongo.MongoClient("mongodb+srv://nepomnyashchii:natasha1977#5@cluster0-6p7nv.mongodb.net/test?retryWrites=true&w=majority")
     db = client["test"]
     mycol = db["flows"]
-    us_name='alex'
+    user_name='alex'
     user_flow='goodmorning'
     myquery = { "name": user_name}
     mydoc = mycol.find(myquery)
