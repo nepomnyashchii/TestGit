@@ -7,26 +7,23 @@ import logger_module
 logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
 
-def get_flowdata(s_name, s_flow):
-    logger.debug("get_flowdata invoked with:" + s_name + " " + s_flow)
+def get_flowdata(user_name, user_flow):
+    logger.debug("get_flowdata invoked with:" + user_name + " " + user_flow)
     """get flowdata from db."""
     client = pymongo.MongoClient("mongodb+srv://nepomnyashchii:natasha1977#5@cluster0-6p7nv.mongodb.net/test?retryWrites=true&w=majority")
     db = client["test"]
     mycol = db["flows"]
-
-    s_name='alex'
-    s_flow='goodmorning'
-
-    myquery = { "name": s_name }
-    mydoc = mycol.find(myquery, {"flows": 1 })
-    if mydoc.count() > 0:
-        x = mydoc[0]
-        print(x)
-        flows=x["flows"]
-        print(flows)
-        for flow in flows:
-            if flow.get(s_flow):
-                myresult = flow.get(s_flow)
+    us_name='alex'
+    user_flow='goodmorning'
+    myquery = { "name": user_name}
+    mydoc = mycol.find(myquery)
+    x = mydoc[0]
+    print(x)
+    flows=x["flows"]
+    print(flows)
+    for flow in flows:
+        if flow.get(user_flow):
+                myresult = flow.get(user_flow)
                 print(myresult)
         logger.error('An error occured.')
     logger.debug("get_flowdata finished with:" + str(myresult))
