@@ -17,14 +17,15 @@ def get_flowdata(user_name, user_flow):
     user_flow='goodmorning'
     myquery = { "name": user_name}
     mydoc = mycol.find(myquery)
-    x = mydoc[0]
-    print(x)
-    flows=x["flows"]
+    data = mydoc[0]
+    print(data)
+    flows=data["flows"]
     print(flows)
+    # myresult = flows["goodmorning"]
     for flow in flows:
-        if flow.get(user_flow):
-                myresult = flow.get(user_flow)
-                print(myresult)
+        if flow.get (user_flow):
+            myresult = flow.get(user_flow)
+            print(myresult)
         logger.error('An error occured.')
     logger.debug("get_flowdata finished with:" + str(myresult))
 
