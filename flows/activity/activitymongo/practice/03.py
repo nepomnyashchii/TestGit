@@ -12,7 +12,7 @@ result = {
                 "news:3",
                 "norris:3",
                 "coctail:random",
-                "weather:Brooklyn, NY"
+                "weather:Brooklyn"
             ]
         },
         {
