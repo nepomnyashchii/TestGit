@@ -10,7 +10,7 @@ result = {
         {
             "goodmorning": [
                 "news:3",
-                "norris:3",
+                "norris:3:Alexander Yakovis",
                 "coctail:random",
                 "weather:Brooklyn"
             ]
@@ -20,7 +20,7 @@ result = {
                 "news:3",
                 "norris:3",
                 "coctail:random",
-                "weather:Brooklyn, NY"
+                "weather:Brooklyn"
             ]
         }
     ]
