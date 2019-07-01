@@ -54,7 +54,7 @@ def get_todo_by_id(id):
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
-            close_db(mydb)
+        close_db(mydb)
     except:
         print("Something went wrong with get_to_do_by_id")
     if "done" == 0 or "done" == 1:
