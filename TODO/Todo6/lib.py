@@ -13,11 +13,6 @@ def open_db():
     )
     return mydb
 
-
-def close_db(mydb):
-    mydb.close()
-
-
 def get_all():
     """get flowdata from db."""
 
@@ -32,7 +27,7 @@ def get_all():
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
-        close_db(mydb)
+        mydb.close()
         return json.dumps(json_data)
 
     except:
@@ -54,7 +49,7 @@ def get_todo_by_id(id):
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
-        close_db(mydb)
+        mydb.close()
     except:
         print("Something went wrong with get_to_do_by_id")
     if "done" == 0 or "done" == 1:
@@ -72,7 +67,7 @@ def insert_todo(text):
         val = (text, 0)
         mycursor.execute(sql, val)
         mydb.commit()
-        close_db(mydb)
+        mydb.close()
         return mycursor.lastrowid
     except:
         print("Something went wrong with insert_todo")
@@ -86,7 +81,7 @@ def delete_todo_by_id(id):
         val = (id,)
         mycursor.execute(sql, val)
         mydb.commit()
-        close_db(mydb)
+        mydb.close()
         return mycursor.rowcount
     except:
         print("Something went wrong with delete_todo_by_id")
@@ -100,7 +95,7 @@ def update_todo_by_id(id, text, done):
         val = (text, done, id)
         mycursor.execute(sql, val)
         mydb.commit()
-        close_db(mydb)
+        mydb.close()
         # print(mycursor.rowcount, "record(s) affected")
         return id
     except:
