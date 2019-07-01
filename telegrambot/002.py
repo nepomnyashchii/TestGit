@@ -15,6 +15,11 @@ def send_echo(message):
     temperature = w.get_temperature('celsius')['temp']
     answer = "In " + message.text + " temperature now is: " + str(temperature) + " degrees celcius" + "\n"
     answer +="In our city " + w.get_detailed_status()
-    bot.send_message(message.chat.id, answer)
+    apple = "no such city"
+    if len(message.text)>0:
+        return bot.send_message(message.chat.id, answer)
+    else:
+        return "No such city"
+
 
 bot.polling (none_stop = True)
