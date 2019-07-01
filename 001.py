@@ -6,10 +6,11 @@
 #     return name
 # my_cubef(3)
 
+
 experiment = "cube"
 
 def my_day(jane):
-    elephant  = name = "my lab " + jane
+    elephant  = "my lab " + jane
     if len(my_cube(experiment)) >0:
         print(elephant)
         print ("world is great")

@@ -35,7 +35,7 @@ def run(username, flow):
     simple_list = []
     for idx, line in enumerate(data):
         actionline = line[0]
-        # print(actionline)
+        print(actionline)
         action_data = lib.run_action(actionline)
         # print(action_data)
         simple_list.append({
@@ -43,6 +43,7 @@ def run(username, flow):
             "type": actionline.split(":")[0],
             "data": action_data
         })
+    # print(simple_list)
 
     # simpleList = []
     # for line in data:
