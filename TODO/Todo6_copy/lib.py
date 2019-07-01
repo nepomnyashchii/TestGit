@@ -13,16 +13,15 @@ def db_open():
         return mydb
     except: "There is no connection"
 
-def db_close():
+def db_close(mydb):
     try:
-        mydb_cl = mydb.close()
-        return mydb_cl
+        return mydb.close(mydb)
     except: "Connection is broken"
 
 def get_all():
     """get flowdata from db."""
     try:
-        mydb
+        mydb = db_open()
         mycursor = mydb.cursor()
         sql = "SELECT * FROM `todo`"
         mycursor.execute(sql)
@@ -35,14 +34,15 @@ def get_all():
 
     except: print("Something went wrong in get_all")
     return json_data
-mydb_cl
+db_close(mydb)
+
 
 
 
 def get_todo_by_id(id):
     # myresult = ''
     try:
-        mydb
+        mydb = db_open()
         mycursor = mydb.cursor()
         sql = "SELECT * FROM todo WHERE id = %s;"
         val = (id,)
@@ -57,12 +57,12 @@ def get_todo_by_id(id):
     if "done" == 0 or "done"==1:
         return json_data
     else:return ("No real data exists")
-    mydb_cl
+
 
 
 def insert_todo(text):
     try:
-        mydb
+        mydb = db_open()
         mycursor = mydb.cursor()
         sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
         val = (text, 0)
@@ -70,13 +70,13 @@ def insert_todo(text):
         mydb.commit()
         return mycursor.lastrowid
     except: print("Something went wrong with insert_todo")
-    mydb_cl
+
 
 
 
 def delete_todo_by_id(id):
     try:
-        mydb
+        mydb = db_open()
         mycursor = mydb.cursor()
         sql = "DELETE FROM todo where id=%s"
         val = (id,)
@@ -84,12 +84,12 @@ def delete_todo_by_id(id):
         mydb.commit()
         return mycursor.rowcount
     except:print("Something went wrong with delete_todo_by_id")
-    mydb_cl
+
 
 
 def update_todo_by_id(id, text, done):
     try:
-        mydb
+        mydb = db_open()
         mycursor = mydb.cursor()
         sql = "UPDATE todo SET `text` = %s, `done` = %s  WHERE id=%s"
         val = (text, done, id)
@@ -98,5 +98,5 @@ def update_todo_by_id(id, text, done):
         # print(mycursor.rowcount, "record(s) affected")
         return id
     except:  print("Something went wrong with updata_todo_by_id")
-    mydb_cl
+
 
