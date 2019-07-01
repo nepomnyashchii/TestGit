@@ -22,14 +22,13 @@ def index():
 @app.route('/todo')
 def get_todo():
     logger.debug('run invoked')
-    lib.db_open()
     all_data = lib.get_all()
     # rs = json.dumps(all_data)
     respond = json.loads(all_data)
     logger.debug("get information from all ids: " + str(respond))
     # print(respond)
     return jsonify(data= respond)
-lib.db_close()
+
 @app.route('/todo/<int:id>')
 def get_all(id):
     logger.debug("Get all information by id")
