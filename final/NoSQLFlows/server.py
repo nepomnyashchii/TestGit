@@ -39,3 +39,27 @@ def run(username, flow):
         time=datetime.datetime.now(),
         data=simple_list
     )
+
+
+# {
+#     "name": "alex",
+#     "phone": "234",
+#     "flows": [
+#         {
+#             "goodmorning": [
+#                 "news:3",
+#                 "norris:3",
+#                 "coctail:random",
+#                 "weather:Brooklyn, NY"
+#             ]
+#         },
+#         {
+#             "hi": [
+#                 "news:3",
+#                 "norris:3",
+#                 "coctail:random",
+#                 "weather:Brooklyn, NY"
+#             ]
+#         }
+#     ]
+# }
