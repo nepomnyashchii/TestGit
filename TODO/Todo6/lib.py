@@ -45,34 +45,38 @@ def get_todo_by_id(id):
     try:
         logger.debug('Invoke def open_db()')
         mydb = open_db()
+        logger.debug("Start collecting data from the db")
         mycursor = mydb.cursor()
         sql = "SELECT * FROM todo WHERE id = %s;"
         val = (id,)
         mycursor.execute(sql, val)
         # this will extract row headers
-        row_headers = [x[0] for x in mycursor.description]
         rv = mycursor.fetchall()
+        logger.debug("All obtained data from database" +str(rv))
+        row_headers = [x[0] for x in mycursor.description]
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
+        logger.debug("Extract row_headers" +str(json_data))
+        logger.debug("Close the database")
         mydb.close()
+        return json.dumps(json_data)
     except:
         print("Something went wrong with get_to_do_by_id")
-    if "done" == 0 or "done" == 1:
-        return json.dumps(json_data)
-        return json_data
-    else:
-        return ("No real data exists")
 
 
 def insert_todo(text):
     try:
+        logger.debug('Invoke def open_db()')
         mydb = open_db()
+        logger.debug("Start collecting data from the db")
         mycursor = mydb.cursor()
         sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
         val = (text, 0)
         mycursor.execute(sql, val)
+        logger.debug("Commit changes to the database")
         mydb.commit()
+        logger.debug("Close the database")
         mydb.close()
         return mycursor.lastrowid
     except:
