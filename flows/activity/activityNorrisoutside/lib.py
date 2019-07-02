@@ -93,16 +93,16 @@ def apinews_data(actionline):
 
 
 def apinorris_data(actionline):
-    logger.debug("Invoke ApiNorris")
+    logger.debug("Invoke apinorris")
     splited = actionline.split(":")
-    logger.debug("ApiNorris: " + str(splited))
+    logger.debug("Apinorris: " + str(splited))
     count = int(splited[1])
-    logger.debug("Amount of ApiNorris: " + str(count))
+    logger.debug("Amount of apinorris: " + str(count))
     url = 'http://api.icndb.com/jokes/random/' + str(count)
     response = requests.get(url)
-    logger.debug("ApiNorris: " + str(url))
+    logger.debug("Apinorris: " + str(url))
     jokes = convert_norris(response, actionline)
-    logger.debug("ApiNorris_collected: " + str(jokes))
+    logger.debug("Apinorris_collected: " + str(jokes))
     return jokes
 
 
@@ -124,18 +124,21 @@ def convert_news(news_results, count):
 
 
 def convert_norris(norris_results, actionline):
+    logger.debug("Invoke convert_norris,apinorris json conversion")
     obj = norris_results.json()
+    logger.debug("Convert_norris_apinorris: " + str(obj))
     source_list = obj["value"]
+    logger.debug("Convert_norris, apinorris: " + str(source_list))
     splited = actionline.split(":")
+    logger.debug("Convert_norris, apinorris for change of name: " +str(splited))
     name_change = splited[2]
-    logger.debug("Norris to Alexander Yakovis name change: " + str(name_change))
+    logger.debug("Convert_norris, apinorris new name: " + str(name_change))
     return_list = []
     for source_item in source_list:
         changed_joke = source_item["joke"].replace("Chuck Norris", name_change)
         return_list.append(changed_joke)
         return_list.append(source_item["joke"])
-
-    logger.debug("convert norris finished: " + str(return_list))
+    logger.debug("Collect all data and name change" + str(return_list))
     return return_list
 
 
@@ -143,23 +146,24 @@ def cocktail_data(actionline):
     response = requests.get(
         'https://www.thecocktaildb.com/api/json/v1/1/random.php')
 
-    logger.debug(response)
+    logger.debug("Cocktail_data: " + str(response))
     return response.json()
 
 
 def weather_data(actionline):
-    logger.debug('weather_data invoked' + actionline)
+    logger.debug('Weather_data invoked' + actionline)
     splited = actionline.split(":")
+    logger.debug("Action" + str(splited))
     location = splited[1]
-    logger.debug('weather_data location=' + location)
+    logger.debug("Location: " + str(location))
     # url = 'https://samples.openweathermap.org/data/2.5/weather?q=' + \
     #     location + '&appid=1bdcae6b7d23f180361c8878a965c9f8'
     appid = '1bdcae6b7d23f180361c8878a965c9f8'
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
         location, appid)
-    logger.debug('weather_data url=' + url)
+    logger.debug('weather_data url=' + str(url))
     response = requests.get(url)
     if response.status_code != 200:
         return {"error": response.json()}
-    logger.debug(response)
+    logger.debug("Weather_data added: " + str(response))
     return response.json()
