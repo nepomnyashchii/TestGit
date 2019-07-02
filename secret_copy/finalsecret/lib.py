@@ -72,38 +72,20 @@ def get_secret(sid, pin):
         if is_not_expired(dbtime, exp):
             return_value = msg
 
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except ImportError:
+        logger.error("NO module found")
+    except EOFError:
+        logger.error('Why did you do an EOF on me?')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
     except:
-        print("Record not found")
-
-    # print(return_value)
+        logger.debug('An error occured.')
 
     return return_value
 
 
-def del_secret(sid, pin):
-    """del secret from db."""
-    print(sid, pin)
 
-    print("Please wait...")
-    return_value = ''
-    try:
-        mydb = mysql.connector.connect(
-            host="db4free.net",
-            user="coolspammail",
-            passwd="coolspammail-pass",
-            database="coolspammail"
-        )
-        mycursor = mydb.cursor()
-
-        # DELETE FROM secret WHERE id = '5d025a4c-5991-457d-a8f9-3e27de288b19' AND pin = 1234
-
-        sql = "DELETE FROM secret WHERE id =  %s AND pin = %s"
-        params = (sid, int(pin))
-        mycursor.execute(sql, params)
-        myresult = mycursor.fetchone()
-        print(myresult)
-        return_value = myresult[0]
-    except:
-        print("Record not found")
-
-    return return_value
