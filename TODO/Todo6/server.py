@@ -62,7 +62,7 @@ def delete_todo(id):
     logger.debug("Run invoked to delete data for certain id from the database")
     delete_id = lib.delete_todo_by_id(id)
     logger.debug("Requested operation to delete the data successfully accomplished")
-    return jsonify(id="data successfully deleted")
+    return jsonify(id="Data successfully deleted")
 
 
 @app.errorhandler(404)
