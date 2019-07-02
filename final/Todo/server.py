@@ -19,14 +19,14 @@ def index():
     return 'Flow Runner :)'
 # get data through todo (not forget to transfer obtained tuple to the string)
 
-@app.route('/todo')
+@app.route('/todo', methods = ['GET'])
 def get_todo():
     logger.debug('Run invoked to obtain data for all ids')
     all_data = lib.get_all()
     logger.debug("Data for all ids" +str(all_data))
     return jsonify(data= all_data)
 
-@app.route('/todo/<int:id>')
+@app.route('/todo/<int:id>', methods = ['GET'])
 def get_all(id):
     logger.debug("Run invoked to obtain data by id")
     id_data = lib.get_todo_by_id(id)

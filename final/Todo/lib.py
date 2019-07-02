@@ -13,6 +13,10 @@ def open_db():
     )
     return mydb
 
+def close_db(mydb):
+    mydb.close()
+
+
 def get_all():
     """get flowdata from db."""
 
@@ -33,8 +37,8 @@ def get_all():
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
         logger.debug("Create dictionary with inserted row_headers from tuple" +str(json_data))
-        logger.debug("Close the database")
-        mydb.close()
+        logger.debug("Invoke def close_db(mydb)")
+        close_db(mydb)
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
@@ -69,8 +73,8 @@ def get_todo_by_id(id):
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
         logger.debug("Create dictionary with inserted row_headers from tuples" +str(json_data))
-        logger.debug("Close the database")
-        mydb.close()
+        logger.debug("Invoke def close_db(mydb)")
+        close_db(mydb)
         return json_data
     except IOError:
         logger.error('An error occured trying to read the file.')
@@ -97,8 +101,8 @@ def insert_todo(text):
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
         mydb.commit()
-        logger.debug("Close the database")
-        mydb.close()
+        logger.debug("Invoke def close_db(mydb)")
+        close_db(mydb)
         return mycursor.lastrowid
     except IOError:
         logger.error('An error occured trying to read the file.')
@@ -124,8 +128,8 @@ def delete_todo_by_id(id):
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
         mydb.commit()
-        logger.debug("Close the database")
-        mydb.close()
+        logger.debug("Invoke def close_db(mydb)")
+        close_db(mydb)
         return mycursor.rowcount
     except IOError:
         logger.error('An error occured trying to read the file.')
@@ -151,8 +155,8 @@ def update_todo_by_id(id, text, done):
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
         mydb.commit()
-        logger.debug("Close the database")
-        mydb.close()
+        logger.debug("Invoke def close_db(mydb)")
+        close_db(mydb)
         # print(mycursor.rowcount, "record(s) affected")
         return id
     except IOError:
