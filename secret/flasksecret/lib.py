@@ -38,11 +38,10 @@ def is_not_expired(created, exp):
 
 def put_secret(msg, pin, exp):
     """put secret into db table."""
-
-    sid = str(uuid.uuid4())
-    created = time.strftime('%Y-%m-%d %H:%M:%S')
-    return_value = ''
     try:
+        sid = str(uuid.uuid4())
+        created = time.strftime('%Y-%m-%d %H:%M:%S')
+        return_value = ''
         mydb = open_db()
         mycursor = mydb.cursor()
         sql = "INSERT INTO secret (id, msg, pin, exp, created) VALUES (%s, %s, %s, %s, %s)"
@@ -50,9 +49,7 @@ def put_secret(msg, pin, exp):
         mycursor.execute(sql, val)
         mydb.commit()
         mydb.close()
-        print("1 record inserted, ID:", mycursor)
         return_value = sid
-
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
@@ -71,19 +68,12 @@ def put_secret(msg, pin, exp):
 
 def get_secret(sid, pin):
     """get secret from db."""
-    print(sid, pin)
-
-    print("Please wait...")
-    return_value = ''
     try:
-        mydb = mysql.connector.connect(
-            host="db4free.net",
-            user="coolspammail",
-            passwd="coolspammail-pass",
-            database="coolspammail"
-        )
+        print(sid, pin)
+        print("Please wait...")
+        return_value = ''
+        mydb = open_db()
         mycursor = mydb.cursor()
-
         sql = "SELECT msg, created, exp FROM secret WHERE id =  %s AND pin = %s"
         params = (sid, int(pin))
         mycursor.execute(sql, params)
@@ -94,7 +84,10 @@ def get_secret(sid, pin):
 
         if is_not_expired(dbtime, exp):
             return_value = msg
-
+        else:
+            return_value = "No such data"
+        mydb.close()
+        
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
