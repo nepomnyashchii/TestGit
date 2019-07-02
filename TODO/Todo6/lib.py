@@ -25,7 +25,7 @@ def get_all():
         sql = "SELECT * FROM `todo`"
         mycursor.execute(sql)
         # this will extract row headers
-        logger.debug("Start collecting list of dictionaries from the tuple in the list")
+        logger.debug("Start collecting list of dictionaries from the list of tuples")
         rv = mycursor.fetchall()
         logger.debug("All obtained data from database" +str(rv))
         row_headers = [x[0] for x in mycursor.description]
