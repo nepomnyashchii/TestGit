@@ -107,11 +107,11 @@ def apinorris_data(actionline):
 
 
 def convert_news(news_results, count):
-    logger.debug("Invoke Apinews json conversion")
+    logger.debug("Invoke convert_news,apinews json conversion")
     news_obj = news_results.json()
-    logger.debug("Apinews: " + str(news_obj))
+    logger.debug("Convert_news, apinews: " + str(news_obj))
     source_articles = news_obj["articles"]
-    logger.debug("Apinews: " + str(source_articles))
+    logger.debug("Convert_news, Apinews: " + str(source_articles))
     return_articles_list = []
     for source_article in source_articles[:count]:
         article = {
