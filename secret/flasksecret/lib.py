@@ -15,6 +15,10 @@ def open_db():
     )
     return mydb
 
+def close_db(mydb):
+    mydb.close()
+
+
 def is_not_expired(created, exp):
     try:
         logger.debug("Time function to control expiration time of the msg invoked")
@@ -57,8 +61,8 @@ def put_secret(msg, pin, exp):
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
         mydb.commit()
-        logger.debug("Close the database")
-        mydb.close()
+        logger.debug("Invoke def close_db(mydb)")
+        close_db(mydb)
         return_value = sid
         logger.debug("sid added to the database: " + str(sid))
     except IOError:
@@ -104,8 +108,8 @@ def get_secret(sid, pin):
             logger.debug("Return message: " + msg)
         else:
             return_value = "No such data"
-        logger.debug("Close the database")
-        mydb.close()
+        logger.debug("Invoke def close_db(mydb)")
+        close_db(mydb)
 
     except IOError:
         logger.error('An error occured trying to read the file.')
@@ -137,8 +141,9 @@ def del_secret(sid, pin):
         mycursor.execute(sql, params)
         myresult = mycursor.fetchone()
         logger.debug("Data deleted")
-        mydb.close()
-
+        logger.debug("Invoke def close_db(mydb):")
+        close_db(mydb)
+        
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
