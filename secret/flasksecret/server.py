@@ -18,12 +18,15 @@ def index():
 
 @app.route('/put/<msg>/<int:pin>/<int:exp>')
 def put(msg, pin, exp):
+    logger.debug("Start app to put data into the database")
     return lib.put_secret(msg, pin, exp)
 
 
 @app.route('/get/<sid>/<int:pin>')
 def get(sid, pin):
+    logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
+    logger.debug("Message obtained" + msg)
     if len(msg) > 0:
         return '{ "msg": "' + msg + '"}'
     else:
