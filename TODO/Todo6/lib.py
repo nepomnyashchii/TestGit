@@ -17,27 +17,33 @@ def get_all():
     """get flowdata from db."""
 
     try:
+        logger.debug('Invoke def open_db()')
         mydb = open_db()
+        logger.debug("Start collecting data from the db")
         mycursor = mydb.cursor()
+        logger.debug("Start executing action for db")
         sql = "SELECT * FROM `todo`"
         mycursor.execute(sql)
         # this will extract row headers
-        row_headers = [x[0] for x in mycursor.description]
+        logger.debug("Start collecting list of dictionaries from the tuple in the list")
         rv = mycursor.fetchall()
+        logger.debug("All obtained data from database" +str(rv))
+        row_headers = [x[0] for x in mycursor.description]
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
+        logger.debug("Extract row_headers" +str(json_data))
+        logger.debug("Close the database")
         mydb.close()
-        return json.dumps(json_data)
-
     except:
         print("Something went wrong in get_all")
-    return json_data
+    return json.dumps(json_data)
 
 
 def get_todo_by_id(id):
     # myresult = ''
     try:
+        logger.debug('Invoke def open_db()')
         mydb = open_db()
         mycursor = mydb.cursor()
         sql = "SELECT * FROM todo WHERE id = %s;"
