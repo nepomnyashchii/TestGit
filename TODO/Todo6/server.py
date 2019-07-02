@@ -13,56 +13,53 @@ app.config['JSON_SORT_KEYS'] = False
 print("\n\n\n")
 
 
-
 @app.route('/')
 def index():
+    logger.debug("Request for testing connection invoked")
     return 'Flow Runner :)'
 # get data through todo (not forget to transfer obtained tuple to the string)
 
 @app.route('/todo')
 def get_todo():
-    logger.debug('run invoked')
+    logger.debug('Run invoked to obtain data for all ids')
     all_data = lib.get_all()
-    logger.debug("Get all inforamation" +str(all_data))
+    logger.debug("Data for all ids" +str(all_data))
     return jsonify(data= all_data)
 
 @app.route('/todo/<int:id>')
 def get_all(id):
-    logger.debug("Get all information by id")
+    logger.debug("Run invoked to obtain data by id")
     id_data = lib.get_todo_by_id(id)
-    logger.debug("Obtain all information for asked id: " + str(id_data))
+    logger.debug("Data for asked id: " + str(id_data))
     return jsonify(data= id_data)
 
 @app.route('/todo', methods=['POST'])
 def insert_todo():
-    logger.debug("Insert is invoked")
+    logger.debug("Run invoked to insert data with new id to the database")
     result = request.json
-    print(result)
+    logger.debug("Json new_data from the dictionary in the body" + str(result))
     data = result["text"]
-    logger.debug("Information from the body: " + str(data))
-    print(data)
+    logger.debug("Data from the body: " + str(data))
     new_id = lib.insert_todo(data)
     logger.debug("Inserted id: " + str(new_id))
-    print(new_id)
     return jsonify(id=new_id)
 
 @app.route('/todo/<int:id>', methods = ['PUT'])
 def update_todo(id):
+    logger.debug("Run invoked to update data with new id to the database")
     result= request.json
-    logger.debug("Information from the body: " +str(result))
-    print(result)
+    logger.debug("Data from the body: " +str(result))
     new_result=result["text"]
-    print(new_result)
-    logger.debug("Information for updated text from dictionary: " + str(new_result))
+    logger.debug("Data for updated text from dictionary: " + str(new_result))
     new_data=result["done"]
-    logger.debug("Information for true or false from dictonary: " + str(new_data))
+    logger.debug("Data for true or false from dictonary: " + str(new_data))
     new_information_id = lib.update_todo_by_id(id, new_result, new_data)
-    logger.debug("updated id: " + str(new_information_id))
-    print(new_information_id)
+    logger.debug("Updated id: " + str(new_information_id))
     return jsonify(id= new_information_id)
 
 @app.route('/todo/<int:id>', methods =['DELETE'])
 def delete_todo(id):
+    logger.debug("Run invoked to delete data for certain id from the database")
     delete_id = lib.delete_todo_by_id(id)
     logger.debug("Requested operation to delete the data successfully accomplished")
     return jsonify(id="data successfully deleted")
@@ -70,6 +67,7 @@ def delete_todo(id):
 
 @app.errorhandler(404)
 def not_found(error=None):
+    logger.debug("Start app.errorhandler to confirm status 404")
     message = {
             'status': 404,
             'message': 'URL is wrong: ' + request.url,
