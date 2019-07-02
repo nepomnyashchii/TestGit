@@ -8,35 +8,25 @@ logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
 
 def get_flowdata(user_name, user_flow):
-    try:
-        logger.debug("get_flowdata invoked with:" + user_name + " " + user_flow)
-        """get flowdata from db."""
-        client = pymongo.MongoClient("mongodb+srv://nepomnyashchii:natasha1977#5@cluster0-6p7nv.mongodb.net/test?retryWrites=true&w=majority")
-        db = client["test"]
-        mycol = db["flows"]
-        myquery = {"name": user_name}
-        mydoc = mycol.find(myquery)
-        data = mydoc[0]
-        flows=data["flows"]
-        for flow in flows:
-            if flow.get (user_flow):
-                myresult = flow.get(user_flow)
-        logger.debug("get_flowdata finished with:" + str(myresult))
+    logger.debug("get_flowdata invoked with:" + user_name + " " + user_flow)
+    """get flowdata from db."""
+    client = pymongo.MongoClient("mongodb+srv://nepomnyashchii:natasha1977#5@cluster0-6p7nv.mongodb.net/test?retryWrites=true&w=majority")
+    db = client["test"]
+    mycol = db["flows"]
+    myquery = {"name": user_name}
+    mydoc = mycol.find(myquery)
+    data = mydoc[0]
+    print(data)
+    flows=data["flows"]
+    print(flows)
+    for flow in flows:
+        if flow.get (user_flow):
+            myresult = flow.get(user_flow)
+            print(myresult)
+        logger.error('An error occured.')
+    logger.debug("get_flowdata finished with:" + str(myresult))
 
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
-        return myresult
-
+    return myresult
 
 def run_action(actionline):
     logger.debug('run_action invoked actionline: ' + actionline)
