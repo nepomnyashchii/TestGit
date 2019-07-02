@@ -111,7 +111,7 @@ def convert_news(news_results, count):
     news_obj = news_results.json()
     logger.debug("Convert_news, apinews: " + str(news_obj))
     source_articles = news_obj["articles"]
-    logger.debug("Convert_news, Apinews: " + str(source_articles))
+    logger.debug("Convert_news, apinews: " + str(source_articles))
     return_articles_list = []
     for source_article in source_articles[:count]:
         article = {
@@ -119,7 +119,7 @@ def convert_news(news_results, count):
             "description": source_article["description"]
         }
         return_articles_list.append(article)
-    logger.debug("Apinews finished: " + str(return_articles_list))
+    logger.debug("Convert_news, apinews finished: " + str(return_articles_list))
     return return_articles_list
 
 
