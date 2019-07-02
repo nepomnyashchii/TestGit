@@ -31,3 +31,15 @@ def get(sid, pin):
         return '{ "msg": "' + msg + '"}'
     else:
         return '{"error":"not found"}'
+
+@app.route('/del/<sid>/<int:pin>')
+
+def dels(sid, pin):
+    if len(sid)>0:
+        del_id = lib.del_secret(sid, pin)
+        logger.debug("Sid succesfully deleted: " + str(del_id))
+    else: print("Sid does not exist")
+    logger.debug('sid does not exist')
+    return "id succesfully deleted"
+logger.debug('End my super App')
+

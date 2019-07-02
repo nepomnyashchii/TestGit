@@ -122,4 +122,34 @@ def get_secret(sid, pin):
 
     return return_value
 
+def del_secret(sid, pin):
+    """del secret from db."""
+    print(sid, pin)
 
+    print("Please wait...")
+    return_value = ''
+    try:
+        mydb = open_db()
+        logger.debug("Start db")
+        mycursor = mydb.cursor()
+        sql = "DELETE FROM secret WHERE id =  %s AND pin = %s"
+        params = (sid, int(pin))
+        mycursor.execute(sql, params)
+        myresult = mycursor.fetchone()
+        logger.debug("Data deleted")
+        mydb.close()
+
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except ImportError:
+        logger.error("NO module found")
+    except EOFError:
+        logger.error('Why did you do an EOF on me?')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
+    except:
+        logger.debug('An error occured.')
+
+    return return_value
