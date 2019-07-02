@@ -19,7 +19,7 @@ def get_all():
     try:
         logger.debug('Invoke def open_db()')
         mydb = open_db()
-        logger.debug("Start collecting data from the db")
+        logger.debug("Start db")
         mycursor = mydb.cursor()
         logger.debug("Start executing action for db")
         sql = "SELECT * FROM `todo`"
@@ -45,7 +45,7 @@ def get_todo_by_id(id):
     try:
         logger.debug('Invoke def open_db()')
         mydb = open_db()
-        logger.debug("Start collecting data from the db")
+        logger.debug("Start db")
         mycursor = mydb.cursor()
         sql = "SELECT * FROM todo WHERE id = %s;"
         val = (id,)
@@ -69,7 +69,7 @@ def insert_todo(text):
     try:
         logger.debug('Invoke def open_db()')
         mydb = open_db()
-        logger.debug("Start collecting data from the db")
+        logger.debug("Start db")
         mycursor = mydb.cursor()
         sql = "INSERT INTO `todo` (`text`,`done`) VALUES (%s,%s)"
         val = (text, 0)
@@ -85,12 +85,16 @@ def insert_todo(text):
 
 def delete_todo_by_id(id):
     try:
+        logger.debug('Invoke def open_db()')
         mydb = open_db()
+        logger.debug("Start db")
         mycursor = mydb.cursor()
         sql = "DELETE FROM todo where id=%s"
         val = (id,)
         mycursor.execute(sql, val)
+        logger.debug("Commit changes to the database")
         mydb.commit()
+        logger.debug("Close the database")
         mydb.close()
         return mycursor.rowcount
     except:
@@ -99,12 +103,16 @@ def delete_todo_by_id(id):
 
 def update_todo_by_id(id, text, done):
     try:
+        logger.debug('Invoke def open_db()')
         mydb = open_db()
+        logger.debug("Start db")
         mycursor = mydb.cursor()
         sql = "UPDATE todo SET `text` = %s, `done` = %s  WHERE id=%s"
         val = (text, done, id)
         mycursor.execute(sql, val)
+        logger.debug("Commit changes to the database")
         mydb.commit()
+        logger.debug("Close the database")
         mydb.close()
         # print(mycursor.rowcount, "record(s) affected")
         return id
