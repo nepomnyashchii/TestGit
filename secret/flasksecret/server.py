@@ -26,7 +26,7 @@ def put(msg, pin, exp):
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
-    logger.debug("Message obtained" + msg)
+    logger.debug("Message obtained: " + msg)
     if len(msg) > 0:
         return '{ "msg": "' + msg + '"}'
     else:

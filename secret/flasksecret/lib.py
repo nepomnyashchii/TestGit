@@ -17,8 +17,11 @@ def open_db():
 
 def is_not_expired(created, exp):
     try:
+        logger.debug("Time function to control expiration time of the msg invoked")
         my_time = created + datetime.timedelta(0, exp)
+        logger.debug("Time before expiration: " + str(my_time))
         current_time = datetime.datetime.utcnow()
+        logger.debug("Current time: " + str(current_time))
         if my_time > current_time:
             return True
         else:
@@ -41,9 +44,9 @@ def put_secret(msg, pin, exp):
     try:
         logger.debug("Invoke put_secret")
         sid = str(uuid.uuid4())
-        logger.debug("sid " + str(sid))
+        logger.debug("sid: " + str(sid))
         created = time.strftime('%Y-%m-%d %H:%M:%S')
-        logger.debug("time created " + created)
+        logger.debug("time created: " + str(created))
         return_value = ''
         logger.debug('Invoke def open_db()')
         mydb = open_db()
@@ -57,7 +60,7 @@ def put_secret(msg, pin, exp):
         logger.debug("Close the database")
         mydb.close()
         return_value = sid
-        logger.debug("sid added to the database " + str(sid))
+        logger.debug("sid added to the database: " + str(sid))
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
@@ -73,11 +76,10 @@ def put_secret(msg, pin, exp):
 
     return return_value
 
-
 def get_secret(sid, pin):
     """get secret from db."""
     try:
-        logger.debug("sid, pin " +str(sid) + " " + str(pin))
+        logger.debug("sid, pin: " +str(sid) + " " + str(pin))
         print(sid, pin)
         print("Please wait...")
         return_value = ''
@@ -89,17 +91,17 @@ def get_secret(sid, pin):
         params = (sid, int(pin))
         mycursor.execute(sql, params)
         myresult = mycursor.fetchone()
-        logger.debug("Raw data from db " + " " + str(myresult))
+        logger.debug("Raw data from db: " + " " + str(myresult))
         msg = myresult[0]
         logger.debug("Message " + msg)
         dbtime = myresult[1]
-        logger.debug("Start dbtime " + str(dbtime))
+        logger.debug("Start dbtime: " + str(dbtime))
         exp = myresult[2]
-        logger.debug("Expiration time " + str(exp))
+        logger.debug("Expiration time in seconds: " + str(exp))
 
         if is_not_expired(dbtime, exp):
             return_value = msg
-            logger.debug("Return message " +msg)
+            logger.debug("Return message: " + msg)
         else:
             return_value = "No such data"
         logger.debug("Close the database")
