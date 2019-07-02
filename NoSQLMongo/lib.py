@@ -92,6 +92,7 @@ def convert_news(news_results, count):
 
 def convert_norris(norris_results):
     obj = norris_results.json()
+    logger.debug("Convert_norris, norris_results: " + str(obj))
     source_list = obj["value"]
     return_list = []
     for source_item in source_list:
@@ -103,14 +104,15 @@ def convert_norris(norris_results):
 def cocktail_data(actionline):
     response = requests.get(
         'https://www.thecocktaildb.com/api/json/v1/1/random.php')
-    logger.debug(response)
+    logger.debug("Cocktail_data" + str(response))
     return response.json()
 
 def weather_data(actionline):
-    logger.debug('weather_data invoked' + actionline)
+    logger.debug('Weather_data invoked' + actionline)
     splited = actionline.split(":")
+    logger.debug("Weather_data" + str(splited))
     location = splited[1]
-    logger.debug('weather_data location=' + location)
+    logger.debug('Weather_data location=' + location)
     appid = '1bdcae6b7d23f180361c8878a965c9f8'
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
         location, appid)
@@ -118,12 +120,14 @@ def weather_data(actionline):
     response = requests.get(url)
     if response.status_code != 200:
         return {"error": response.json()}
-    logger.debug(response)
+    logger.debug("Weather_data: " + str(response))
     return convert_weather(response)
 
-def convert_weather (weather_results):
-    weather = weather_results.json()
+def convert_weather (weather_data):
+    weather = weather_data.json()
+    logger.debug("weather_data" + str(weather))
     return_data = {"temperature": weather["main"]["temp"],
     "pressure": weather["main"]["pressure"],
     "city name": weather["name"]}
+    logger.debug("weather data" + str(return_data))
     return return_data
