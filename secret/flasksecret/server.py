@@ -41,6 +41,6 @@ def dels(sid, pin):
     else: print("Sid does not exist")
     logger.debug('id successfully deleted')
     logger.debug('End my super App')
-    return jsonify "id succesfully deleted"
+    return {sid "id succesfully deleted")
 
 
