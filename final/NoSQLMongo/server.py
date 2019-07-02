@@ -25,22 +25,14 @@ def run(username, flow):
     simple_list = []
     for idx, line in enumerate(data):
         actionline = line
-        # print(actionline)
         action_data = lib.run_action(actionline)
-        # print(action_data)
+
         simple_list.append({
             "action": idx,
             "type": actionline.split(":")[0],
             "data": action_data
         })
-
-    # simpleList = []
-    # for line in data:
-    #     actionline = line[0]
-    #     action_data = lib.run_action(actionline)
-    #     simple_list.append(action_data)
-    # weather_data =lib.run_weather(action)
-    # logger.debug("action data" + str(action_data))
+    logger.debug("Action_data: " + str(action_data))
     return jsonify(
         username=username,
         flow=flow,
