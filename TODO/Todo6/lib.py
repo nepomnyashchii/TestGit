@@ -32,7 +32,7 @@ def get_all():
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
-        logger.debug("Extract row_headers" +str(json_data))
+        logger.debug("Create dictionary from tuple" +str(json_data))
         logger.debug("Close the database")
         mydb.close()
     except:
@@ -58,7 +58,7 @@ def get_todo_by_id(id):
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
-        logger.debug("Extract row_headers" +str(json_data))
+        logger.debug("Create dictionary from tuples" +str(json_data))
         logger.debug("Close the database")
         mydb.close()
         return json_data

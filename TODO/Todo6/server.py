@@ -30,7 +30,7 @@ def get_todo():
 def get_all(id):
     logger.debug("Get all information by id")
     id_data = lib.get_todo_by_id(id)
-    logger.debug("Provide all information for asked id: " + str(id_data))
+    logger.debug("Obtain all information for asked id: " + str(id_data))
     return jsonify(data= id_data)
 
 @app.route('/todo', methods=['POST'])
