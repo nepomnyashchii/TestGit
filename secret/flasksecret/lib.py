@@ -3,6 +3,7 @@ import mysql.connector
 import datetime
 import time
 import logger_module
+import json
 
 logger = logger_module.setup_logger("secret-2lib")
 
@@ -143,7 +144,7 @@ def del_secret(sid, pin):
         logger.debug("Data deleted")
         logger.debug("Invoke def close_db(mydb):")
         close_db(mydb)
-        
+
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
@@ -158,3 +159,4 @@ def del_secret(sid, pin):
         logger.debug('An error occured.')
 
     return return_value
+    
