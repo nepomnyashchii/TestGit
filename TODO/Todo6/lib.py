@@ -72,8 +72,18 @@ def get_todo_by_id(id):
         logger.debug("Close the database")
         mydb.close()
         return json_data
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except ImportError:
+        logger.error("NO module found")
+    except EOFError:
+        logger.error('Why did you do an EOF on me?')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
     except:
-        print("Something went wrong with get_to_do_by_id")
+        logger.debug('An error occured.')
 
 
 def insert_todo(text):
@@ -90,9 +100,18 @@ def insert_todo(text):
         logger.debug("Close the database")
         mydb.close()
         return mycursor.lastrowid
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except ImportError:
+        logger.error("NO module found")
+    except EOFError:
+        logger.error('Why did you do an EOF on me?')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
     except:
-        print("Something went wrong with insert_todo")
-
+        logger.debug('An error occured.')
 
 def delete_todo_by_id(id):
     try:
@@ -108,9 +127,18 @@ def delete_todo_by_id(id):
         logger.debug("Close the database")
         mydb.close()
         return mycursor.rowcount
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except ImportError:
+        logger.error("NO module found")
+    except EOFError:
+        logger.error('Why did you do an EOF on me?')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
     except:
-        print("Something went wrong with delete_todo_by_id")
-
+        logger.debug('An error occured.')
 
 def update_todo_by_id(id, text, done):
     try:
@@ -127,5 +155,15 @@ def update_todo_by_id(id, text, done):
         mydb.close()
         # print(mycursor.rowcount, "record(s) affected")
         return id
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except ImportError:
+        logger.error("NO module found")
+    except EOFError:
+        logger.error('Why did you do an EOF on me?')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
     except:
-        print("Something went wrong with updata_todo_by_id")
+        logger.debug('An error occured.')
