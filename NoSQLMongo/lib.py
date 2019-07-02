@@ -10,26 +10,26 @@ logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 def get_flowdata(user_name, user_flow):
     logger.debug("get_flowdata invoked with:" + user_name + " " + user_flow)
     """get flowdata from db."""
+    logger.debug("Mongodb invoked")
     client = pymongo.MongoClient("mongodb+srv://nepomnyashchii:natasha1977#5@cluster0-6p7nv.mongodb.net/test?retryWrites=true&w=majority")
     db = client["test"]
+    logger.debug("Connection with required collection invoked")
     mycol = db["flows"]
     myquery = {"name": user_name}
     mydoc = mycol.find(myquery)
     data = mydoc[0]
-    print(data)
+    logger.debug("Query data from the database: " + str(data))
     flows=data["flows"]
-    print(flows)
+    logger.debug("Queery data for flows" + str(flows))
     for flow in flows:
         if flow.get (user_flow):
             myresult = flow.get(user_flow)
-            print(myresult)
         logger.error('An error occured.')
     logger.debug("get_flowdata finished with:" + str(myresult))
-
     return myresult
 
 def run_action(actionline):
-    logger.debug('run_action invoked actionline: ' + actionline)
+    logger.debug('Run_action invoked actionline: ' + str(actionline))
     splited = actionline.split(":")
     action = splited[0]
     if action == "news":
@@ -40,7 +40,7 @@ def run_action(actionline):
         return cocktail_data(actionline)
     if action == "weather":
         return weather_data(actionline)
-    logger.error('action not implemented' + action)
+    logger.error('Action is not implemented' + action)
     return {
         "action": action,
     }
@@ -48,33 +48,37 @@ def run_action(actionline):
 
 def apinews_data(actionline):
     splited = actionline.split(":")
+    logger.debug("Apinews_data: " + str(splited))
     count = int(splited[1])
-    logger.debug("apinews_data invoked: " + str(count))
+    logger.debug("Apinews_data: " + str(count))
     response = requests.get(
         "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
 
     if response.status_code != 200:
         return {"error": response.json()}
 
-    logger.debug("apinews_data news_results: " + str(response))
     return_articles_list = convert_news(response, count)
-    logger.debug("apinews_data finished: " + str(return_articles_list))
+    logger.debug("apinews_data result: " + str(return_articles_list))
     return return_articles_list
 
 
 def apinorris_data(actionline):
     splited = actionline.split(":")
+    logger.debug("Apinorris_data: " + str(splited))
     count = int(splited[1])
+    logger.debug("Apinorris_data: " + str(count))
     response = requests.get(
         'http://api.icndb.com/jokes/random/' + str(count))
     jokes = convert_norris(response)
-    logger.debug("apinorris_data invoked: " + str(jokes))
+    logger.debug("apinorris_data_results: " + str(jokes))
     return jokes
 
 
 def convert_news(news_results, count):
     news_obj = news_results.json()
+    logger.debug("Convert_news, apinews: " + str(news_obj))
     source_articles = news_obj["articles"]
+    logger.debug("Convert_news, api_news: " + str(source_articles))
     return_articles_list = []
     for source_article in source_articles[:count]:
         article = {
@@ -82,7 +86,7 @@ def convert_news(news_results, count):
             "description": source_article["description"]
         }
         return_articles_list.append(article)
-    logger.debug("convert_news finished: " + str(return_articles_list))
+    logger.debug("Convert_news, apinews results: " + str(return_articles_list))
     return return_articles_list
 
 
@@ -97,10 +101,8 @@ def convert_norris(norris_results):
 
 
 def cocktail_data(actionline):
-
     response = requests.get(
         'https://www.thecocktaildb.com/api/json/v1/1/random.php')
-
     logger.debug(response)
     return response.json()
 
