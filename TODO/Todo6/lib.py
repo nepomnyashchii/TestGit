@@ -35,8 +35,18 @@ def get_all():
         logger.debug("Create dictionary with inserted row_headers from tuple" +str(json_data))
         logger.debug("Close the database")
         mydb.close()
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except ImportError:
+        logger.error("NO module found")
+    except EOFError:
+        logger.error('Why did you do an EOF on me?')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
     except:
-        print("Something went wrong in get_all")
+        logger.debug('An error occured.')
     return json_data
 
 
