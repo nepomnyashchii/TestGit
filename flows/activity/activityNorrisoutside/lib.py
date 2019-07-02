@@ -5,20 +5,28 @@ import logger_module
 
 logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
+def open_db():
+    mydb = mysql.connector.connect(
+        host="db4free.net",
+        user="coolspammail",
+        passwd="coolspammail-pass",
+        database="coolspammail"
+    )
+    return mydb
+
+def close_db(mydb):
+    mydb.close()
+
 
 def get_flowdata(username, flow):
     logger.debug("get_flowdata invoked with:" + username + " " + flow)
     """get flowdata from db."""
     myresult = ''
     try:
-        mydb = mysql.connector.connect(
-            host="db4free.net",
-            user="coolspammail",
-            passwd="coolspammail-pass",
-            database="coolspammail"
-        )
-
+        logger.debug('Invoke def open_db()')
+        mydb = open_db()
         mycursor = mydb.cursor()
+        logger.debug("Start executing action for db")
         sql = """
             SELECT action
             FROM `flows` INNER JOIN users ON flows.user_id = users.id
@@ -28,6 +36,10 @@ def get_flowdata(username, flow):
         val = (username, flow)
         mycursor.execute(sql, val)
         myresult = mycursor.fetchall()
+        logger.debug("All obtained data: " + str(myresult))
+        logger.debug("Invoke def close_db(mydb)")
+        close_db(mydb)
+
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
@@ -40,14 +52,16 @@ def get_flowdata(username, flow):
         logger.error('You cancelled the operation.')
     except:
         logger.error('An error occured.')
-    logger.debug("get_flowdata finished with:" + str(myresult))
+    logger.debug("get_flowdata finished with: " + str(myresult))
     return myresult
 
 
 def run_action(actionline):
-    logger.debug('run_action invoked actionline: ' + actionline)
+    logger.debug("Invoke actionline: " + actionline)
     splited = actionline.split(":")
+    logger.debug("Action: " + str(splited))
     action = splited[0]
+    logger.debug("Single action: " + str(action))
     if action == "news":
         return apinews_data(actionline)
     if action == "norris":
@@ -63,34 +77,41 @@ def run_action(actionline):
 
 
 def apinews_data(actionline):
+    logger.debug("Invoke Apinews")
     splited = actionline.split(":")
+    logger.debug("Apinews: " + str(splited))
     count = int(splited[1])
-    logger.debug("apinews_data invoked: " + str(count))
+    logger.debug("Amount of news: " + str(count))
     response = requests.get(
         "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
-
     if response.status_code != 200:
         return {"error": response.json()}
-
-    logger.debug("apinews_data news_results: " + str(response))
+    logger.debug("Apinews: " + str(response))
     return_articles_list = convert_news(response, count)
-    logger.debug("apinews_data finished: " + str(return_articles_list))
+    logger.debug("Apinews_collected: " + str(return_articles_list))
     return return_articles_list
 
 
 def apinorris_data(actionline):
+    logger.debug("Invoke ApiNorris")
     splited = actionline.split(":")
+    logger.debug("ApiNorris: " + str(splited))
     count = int(splited[1])
+    logger.debug("Amount of ApiNorris: " + str(count))
     url = 'http://api.icndb.com/jokes/random/' + str(count)
     response = requests.get(url)
+    logger.debug("ApiNorris: " + str(url))
     jokes = convert_norris(response, actionline)
-    logger.debug("apinorris_data invoked: " + str(jokes))
+    logger.debug("ApiNorris_collected: " + str(jokes))
     return jokes
 
 
 def convert_news(news_results, count):
+    logger.debug("Invoke Apinews json conversion")
     news_obj = news_results.json()
+    logger.debug("Apinews: " + str(news_obj))
     source_articles = news_obj["articles"]
+    logger.debug("Apinews: " + str(source_articles))
     return_articles_list = []
     for source_article in source_articles[:count]:
         article = {
@@ -98,7 +119,7 @@ def convert_news(news_results, count):
             "description": source_article["description"]
         }
         return_articles_list.append(article)
-    logger.debug("convert_news finished: " + str(return_articles_list))
+    logger.debug("Apinews finished: " + str(return_articles_list))
     return return_articles_list
 
 
