@@ -17,6 +17,7 @@ def get_flowdata(user_name, user_flow):
     mycol = db["flows"]
     myquery = {"name": user_name}
     mydoc = mycol.find(myquery)
+    logger.debug("My query" + str(mydoc))
     data = mydoc[0]
     logger.debug("Query data from the database: " + str(data))
     flows=data["flows"]
