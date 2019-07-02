@@ -25,7 +25,7 @@ def get_all():
         sql = "SELECT * FROM `todo`"
         mycursor.execute(sql)
         # this will extract row headers
-        logger.debug("Start collecting list of dictionaries from the list of tuples")
+        logger.debug("Collect list of tuples for all ids")
         rv = mycursor.fetchall()
         logger.debug("All obtained data from database" +str(rv))
         row_headers = [x[0] for x in mycursor.description]
@@ -37,7 +37,7 @@ def get_all():
         mydb.close()
     except:
         print("Something went wrong in get_all")
-    return json.dumps(json_data)
+    return json_data
 
 
 def get_todo_by_id(id):
@@ -51,6 +51,7 @@ def get_todo_by_id(id):
         val = (id,)
         mycursor.execute(sql, val)
         # this will extract row headers
+        logger.debug("Collect list of tuples for all ids")
         rv = mycursor.fetchall()
         logger.debug("All obtained data from database" +str(rv))
         row_headers = [x[0] for x in mycursor.description]
@@ -60,7 +61,7 @@ def get_todo_by_id(id):
         logger.debug("Extract row_headers" +str(json_data))
         logger.debug("Close the database")
         mydb.close()
-        return json.dumps(json_data)
+        return json_data
     except:
         print("Something went wrong with get_to_do_by_id")
 

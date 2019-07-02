@@ -23,19 +23,15 @@ def index():
 def get_todo():
     logger.debug('run invoked')
     all_data = lib.get_all()
-    # rs = json.dumps(all_data)
-    respond = json.loads(all_data)
-    logger.debug("get information from all ids: " + str(respond))
-    # print(respond)
-    return jsonify(data= respond)
+    logger.debug("Get all inforamation" +str(all_data))
+    return jsonify(data= all_data)
 
 @app.route('/todo/<int:id>')
 def get_all(id):
     logger.debug("Get all information by id")
     id_data = lib.get_todo_by_id(id)
-    respond =json.loads(id_data)
-    logger.debug("Provide all information for asked id: " + str(respond))
-    return jsonify(data= respond)
+    logger.debug("Provide all information for asked id: " + str(id_data))
+    return jsonify(data= id_data)
 
 @app.route('/todo', methods=['POST'])
 def insert_todo():
