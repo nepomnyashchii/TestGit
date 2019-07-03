@@ -37,8 +37,5 @@ def main():
 
 #answer back from the telegram
 
-
-
-
 if __name__ =='__main__':
     main()
