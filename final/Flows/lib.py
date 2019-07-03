@@ -137,12 +137,12 @@ def convert_norris(norris_results, actionline):
     for source_item in source_list:
         changed_joke = source_item["joke"].replace("Chuck Norris", name_change)
         return_list.append(changed_joke)
-        return_list.append(source_item["joke"])
     logger.debug("Collect all data and name change" + str(return_list))
     return return_list
 
 
 def cocktail_data(actionline):
+    logger.debug("Invoke Cocktail_data")
     response = requests.get(
         'https://www.thecocktaildb.com/api/json/v1/1/random.php')
 
@@ -150,26 +150,28 @@ def cocktail_data(actionline):
     return response.json()
 
 def weather_data(actionline):
-    logger.debug('weather_data invoked' + actionline)
+    logger.debug('Invoke weather_data' + actionline)
     splited = actionline.split(":")
+    logger.debug("Weather_data: " + str(splited))
     location = splited[1]
-    logger.debug('weather_data location=' + location)
+    logger.debug("Weather_data: " + str(location))
     # url = 'https://samples.openweathermap.org/data/2.5/weather?q=' + \
     #     location + '&appid=1bdcae6b7d23f180361c8878a965c9f8'
     appid = '1bdcae6b7d23f180361c8878a965c9f8'
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
         location, appid)
-    logger.debug('weather_data url=' + url)
+    logger.debug('Weather_data url= ' + str(url))
     response = requests.get(url)
     if response.status_code != 200:
         return {"error": response.json()}
-    logger.debug(response)
+    logger.debug("Weather data: " + str(response))
     return convert_weather(response)
 
 def convert_weather (weather_results):
+    logger.debug("Invoke convert weather_results")
     weather = weather_results.json()
-    # source_data = weather["main"]
     return_data = {"temperature": weather["main"]["temp"],
     "pressure": weather["main"]["pressure"],
     "city name": weather["name"]}
+    logger.debug("Weather results" + str(return_data))
     return return_data
