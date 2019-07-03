@@ -1,9 +1,20 @@
 from tokens import cmc_token
 import requests
 import json
+from flask import Flask, request, Response
 
 token = "873802609:AAGrF4tID-CD4lufzgMjqNEnqLxhCaEweLM"
 
+app = Flask(__name__)
+
+@app.route('/', methods = ['POST', 'GET'])
+def index():
+    if request.method == 'POST':
+        msg = request.get_json()
+        write_json(msg, 'telegram_request.json')
+        return(Response('ok', status =200))
+    else:
+        return '<h1>CoinMarketCap bot>/h1>'
 
 def write_json(data, filename = 'response.json'):
     with open (filename, "w") as f:
@@ -37,5 +48,14 @@ def main():
 
 #answer back from the telegram
 
+
+# https://api.telegram.org/bot873802609:AAGrF4tID-CD4lufzgMjqNEnqLxhCaEweLM/setWebhook?url=
+
 if __name__ =='__main__':
     main()
+
+
+if __name__ =='__main__':
+    app.run(debug=True)
+
+

@@ -29,7 +29,8 @@ def get_all():
     for result in rv:
         json_data.append(dict(zip(row_headers, result)))
     close_db(mydb)
-    return json_data
+    json_data = message.txt
+    return message.txt
 
 
 # def get_todo_by_id(id):
