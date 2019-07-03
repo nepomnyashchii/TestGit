@@ -7,10 +7,17 @@ def get_nice_text_from_flows(data):
     text = ''
     for idx, line in enumerate(data):
         actionline = line[0]
-        action_data = run_action(actionline)
         actionTitle = actionline.split(":")[0]
-        text += "=====" + actionTitle + "=====\n\n" + \
-            json.dumps(action_data) + "\n\n\n\n"
+        action_data = run_action(actionline)
+        if actionTitle == "norris":
+            text += '==== Jokes ====\n\n\n'
+            for joke in action_data:
+                text += joke + '\n\n'
+            text += '\n\n\n\n'
+        else:
+            pass
+            # text += "=====" + actionTitle + "=====\n\n" + \
+            # json.dumps(action_data) + "\n\n\n\n"
     return text
 
 
