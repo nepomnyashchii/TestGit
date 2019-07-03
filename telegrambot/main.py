@@ -49,7 +49,11 @@ def main():
 #answer back from the telegram
 
 
-# https://api.telegram.org/bot873802609:AAGrF4tID-CD4lufzgMjqNEnqLxhCaEweLM/setWebhook?url=
+# https://api.telegram.org/bot873802609:AAGrF4tID-CD4lufzgMjqNEnqLxhCaEweLM/setWebhook?url=https://rutum.serveo.net
+# https://api.telegram.org/bot873802609:AAGrF4tID-CD4lufzgMjqNEnqLxhCaEweLM/deleteWebhook?url=https://rutum.serveo.net
+
+
+
 
 if __name__ =='__main__':
     main()

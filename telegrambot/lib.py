@@ -1,5 +1,7 @@
 import json
 import mysql.connector
+import telebot
+
 
 
 
@@ -29,8 +31,7 @@ def get_all():
     for result in rv:
         json_data.append(dict(zip(row_headers, result)))
     close_db(mydb)
-    json_data = message.txt
-    return message.txt
+    return json_data
 
 
 # def get_todo_by_id(id):
