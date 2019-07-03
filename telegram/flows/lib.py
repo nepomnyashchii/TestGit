@@ -14,10 +14,28 @@ def get_nice_text_from_flows(data):
             for joke in action_data:
                 text += joke + '\n\n'
             text += '\n\n\n\n'
+
+        if actionTitle == "news":
+            text += '==== News ====\n\n\n'
+            for news in action_data:
+                text += str(news) + '\n\n'
+            text += '\n\n\n\n'
+
+        if actionTitle == "thecocktail":
+            text += '==== theCocktail ====\n\n\n'
+            text += json.dumps(action_data)
+            text += '\n\n\n\n'
+
+        if actionTitle == "weather":
+            text += '==== Weather ====\n\n\n'
+            text += json.dumps(action_data)
+            text += '\n\n\n\n'
+
+
         else:
             pass
-            # text += "=====" + actionTitle + "=====\n\n" + \
-            # json.dumps(action_data) + "\n\n\n\n"
+        # text += "=====" + actionTitle + "=====\n\n" + \
+        # json.dumps(action_data) + "\n\n\n\n"
     return text
 
 
@@ -114,7 +132,6 @@ def convert_norris(norris_results, actionline):
     for source_item in source_list:
         changed_joke = source_item["joke"].replace("Chuck Norris", name_change)
         return_list.append(changed_joke)
-        return_list.append(source_item["joke"])
     return return_list
 
 
@@ -136,4 +153,12 @@ def weather_data(actionline):
     response = requests.get(url)
     if response.status_code != 200:
         return {"error": response.json()}
-    return response.json()
+    return convert_weather(response)
+
+def convert_weather (weather_results):
+    weather = weather_results.json()
+    # source_data = weather["main"]
+    return_data = {"temperature": weather["main"]["temp"],
+    "pressure": weather["main"]["pressure"],
+    "city name": weather["name"]}
+    return return_data
