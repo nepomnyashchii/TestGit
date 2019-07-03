@@ -2,6 +2,18 @@ import mysql.connector
 import requests
 import json
 
+
+def get_nice_text_from_flows(data):
+    text = ''
+    for idx, line in enumerate(data):
+        actionline = line[0]
+        action_data = run_action(actionline)
+        actionTitle = actionline.split(":")[0]
+        text += "=====" + actionTitle + "=====\n\n" + \
+            json.dumps(action_data) + "\n\n\n\n"
+    return text
+
+
 def open_db():
     mydb = mysql.connector.connect(
         host="db4free.net",
@@ -10,6 +22,7 @@ def open_db():
         database="coolspammail"
     )
     return mydb
+
 
 def close_db(mydb):
     mydb.close()
@@ -31,7 +44,8 @@ def get_flowdata(person, flow):
         mycursor.execute(sql, val)
         myresult = mycursor.fetchall()
         close_db(mydb)
-    except: "We are the champions"
+    except:
+        "We are the champions"
     return myresult
 
 
