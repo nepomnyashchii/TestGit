@@ -63,6 +63,7 @@ print(data)
 
 """ Obtain from the list of tuples: two different parameters"""
 data = [(0,2,3) ,(3,4,5)]
+new_list = []
 for element in data:
     data1 =element
     # print(data1)
@@ -71,6 +72,8 @@ for element in data:
     for element in data:
         data1 = element
         print(data1)
+        new_list.append(data1)
+        print(new_list)
 
 
 
