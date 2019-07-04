@@ -17,6 +17,7 @@ def send_echo(message):
         person = "Alex"
         data = lib.get_flowdata(person, message.text.lower())
         content = lib.get_nice_text_from_flows(data)
+        print(content)
         bot.send_message(message.chat.id, content)
 
     elif (message.text.lower() == 'good morning'):

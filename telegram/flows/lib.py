@@ -9,6 +9,7 @@ def get_nice_text_from_flows(data):
         actionline = line[0]
         actionTitle = actionline.split(":")[0]
         action_data = run_action(actionline)
+        print(action_data)
         if actionTitle == "norris":
             text += '==== Jokes ====\n\n\n'
             for joke in action_data:
@@ -23,12 +24,18 @@ def get_nice_text_from_flows(data):
 
         if actionTitle == "thecocktail":
             text += '==== theCocktail ====\n\n\n'
-            text += json.dumps(action_data)
+            result = action_data["drinks"]
+            for cocktail in result:
+                result1=cocktail
+            result2 = result1["strDrinkThumb"]
+            text += json.dumps(result2)
             text += '\n\n\n\n'
 
         if actionTitle == "weather":
             text += '==== Weather ====\n\n\n'
-            text += json.dumps(action_data)
+            result = action_data["temperature"]
+            result1 = "Temperature: " + str(result) + " K"
+            text += json.dumps(result1)
             text += '\n\n\n\n'
 
 
