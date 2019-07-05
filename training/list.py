@@ -103,19 +103,12 @@ print(dictofWords)
 print(dictofWords1)
 
 """Choose the result from the dictionary """
+# result = dictofWords[3]
+# print(result)
 
-result = dictofWords[3]
-print(result)
-list5 = []
 list4 = [("apple", "orange"), ("green" , "yellow")]
-for element in list4:
-    # print(element)
-    data = list(element)
-    for element in data:
-        print(element)
-        data =element
-        result =list5.append(data)
-        print(result)
+dicte = dict(list4)
+print(dicte)
 
 
 
