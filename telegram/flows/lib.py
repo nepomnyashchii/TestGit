@@ -34,7 +34,8 @@ def get_nice_text_from_flows(data):
         if actionTitle == "weather":
             text += '==== Weather ====\n\n\n'
             result = action_data["temperature"]
-            result1 = "Temperature: " + str(result) + " K"
+            result1 = result-273
+            result2 = "Temperature: " + str(result) + " K"
             text += json.dumps(result1)
             text += '\n\n\n\n'
 
