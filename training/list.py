@@ -110,6 +110,13 @@ list4 = [("apple", "orange"), ("green" , "yellow")]
 dicte = dict(list4)
 print(dicte)
 
+list5 = ["Mike", "Jerry", "John", "William"]
+for element in list5:
+    if element=="Mike":
+        news=element
+        print(element)
+
+
 
 
 
