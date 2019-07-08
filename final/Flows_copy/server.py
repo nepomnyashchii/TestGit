@@ -24,7 +24,7 @@ def run(username, flow):
     data = lib.get_flowdata(username, flow)
     print(data)
     # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
-    logger.debug("data from DB(actionline):" + str(data))
+    logger.debug("Data from DB(actionline):" + str(data))
     if not data:  # len(data) == 0:
         return jsonify(
             error="no data for this user and flow",
