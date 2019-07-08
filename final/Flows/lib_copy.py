@@ -71,7 +71,7 @@ def run_action(actionline):
     if action == "thecocktail":
         return cocktail_data(actionline)
     if action == "weather":
-        return weather_data(actionline)
+        return weather_data(actionline), weather(actionline)
     logger.error('action not implemented' + action)
     return {
         "action": action,
@@ -178,7 +178,10 @@ def convert_weather (weather_results):
     logger.debug("Weather results" + str(return_data))
     return return_data
 
-def weather(location):
+def weather(actionline):
+    splited = actionline.split(":")
+    logger.debug("Weather_data: " + str(splited))
+    location = splited[1]
     API_key = '1bdcae6b7d23f180361c8878a965c9f8'
     owm = pyowm.OWM(API_key)
     observation = owm.weather_at_place(location)
