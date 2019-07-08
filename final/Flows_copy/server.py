@@ -36,7 +36,7 @@ def run(username, flow):
     simple_list = []
     for idx, line in enumerate(data):
         actionline = line[0]
-        logger.debug("Actionline" + str(actionline))
+        logger.debug("Actionline: " + str(actionline))
         action_data = lib.run_action(actionline)
         simple_list.append({
             "action": idx,
