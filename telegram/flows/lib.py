@@ -36,6 +36,7 @@ def get_nice_text_from_flows(data):
             print(result1)
             result2 = round(result1)
             result3 = "Temperature: " + str(result2) + " degrees Celcius"
+            text +=result3
             text += '\n\n\n\n'
 
 
