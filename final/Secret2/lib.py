@@ -159,4 +159,3 @@ def del_secret(sid, pin):
         logger.debug('An error occured.')
 
     return return_value
-    

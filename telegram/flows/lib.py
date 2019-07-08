@@ -9,11 +9,14 @@ def get_nice_text_from_flows(data):
         actionline = line[0]
         actionTitle = actionline.split(":")[0]
         action_data = run_action(actionline)
-        print(action_data)
+        # print(action_data)
         if actionTitle == "norris":
-            text += '==== Jokes ====\n\n\n'
+            text = '==== poker ====\n\n\n'
             for joke in action_data:
-                text += joke + '\n\n'
+                text+= joke + '\n\n'
+                print(joke)
+                print(text)
+                # print(text)
             text += '\n\n\n\n'
 
         if actionTitle == "news":
@@ -33,7 +36,7 @@ def get_nice_text_from_flows(data):
             text += '==== Weather ====\n\n\n'
             result = action_data["temperature"]
             result1 = result-273.00
-            print(result1)
+            # print(result1)
             result2 = round(result1)
             result3 = "Temperature: " + str(result2) + " degrees Celcius"
             text +=result3

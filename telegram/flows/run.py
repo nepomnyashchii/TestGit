@@ -11,13 +11,13 @@ def send_echo(message):
     user_name = user.username
     user_id = user.id
     user_fullname = user.first_name + ' ' + user.last_name
-    print(user_name, user_id, user_fullname, message.text)
+    # print(user_name, user_id, user_fullname, message.text)
 
     if (message.text.lower() == 'goodmorning'):
         person = "Alex"
         data = lib.get_flowdata(person, message.text.lower())
         content = lib.get_nice_text_from_flows(data)
-        print(content)
+        # print(content)
         bot.send_message(message.chat.id, content)
 
     elif (message.text.lower() == 'good morning'):
