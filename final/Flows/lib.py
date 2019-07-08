@@ -61,6 +61,7 @@ def run_action(actionline):
     splited = actionline.split(":")
     logger.debug("Action: " + str(splited))
     action = splited[0]
+    # print(action)
     logger.debug("Single action: " + str(action))
     if action == "news":
         return apinews_data(actionline)

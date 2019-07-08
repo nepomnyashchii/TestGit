@@ -112,9 +112,19 @@ print(dicte)
 
 list5 = ["Mike", "Jerry", "John", "William"]
 for element in list5:
-    if element=="Mike":
-        news=element
-        print(element)
+    # print(element)
+    if element == "Jerry":
+        print("Noel")
+
+list6 = ["apple", "peach", "grapes"]
+for element in list6:
+    print(element)
+    if element=="apple":
+        print("my day is great")
+
+
+
+
 
 
 

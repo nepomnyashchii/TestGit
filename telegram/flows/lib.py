@@ -28,15 +28,15 @@ def get_nice_text_from_flows(data):
             for cocktail in result:
                 result1=cocktail
             result2 = result1["strDrinkThumb"]
-            text += json.dumps(result2)
             text += '\n\n\n\n'
 
         if actionTitle == "weather":
             text += '==== Weather ====\n\n\n'
             result = action_data["temperature"]
             result1 = result-273.00
-            result2 = "Temperature: " + str(result) + " K"
-            text += json.dumps(result1)
+            print(result1)
+            result2 = round(result1)
+            result3 = "Temperature: " + str(result2) + " degrees Celcius"
             text += '\n\n\n\n'
 
 
