@@ -26,8 +26,7 @@ def get_nice_text_from_flows(data):
             text += '==== theCocktail ====\n\n\n'
             result = action_data["drinks"]
             for cocktail in result:
-                result1=cocktail
-            result2 = result1["strDrinkThumb"]
+                text += cocktail["strDrinkThumb"]
             text += '\n\n\n\n'
 
         if actionTitle == "weather":
