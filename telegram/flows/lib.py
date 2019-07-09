@@ -16,7 +16,6 @@ def get_nice_text_from_flows(data):
                 text+= joke + '\n\n'
                 print(joke)
                 print(text)
-                # print(text)
             text += '\n\n\n\n'
 
         if actionTitle == "news":
