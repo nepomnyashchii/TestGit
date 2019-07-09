@@ -22,9 +22,9 @@ def put(msg, pin, exp):
     key ='IscdSPJ0zku3uRTU9vqVvjQ3ekbg4_xfDbxcK8VvQAg='
     data = Fernet(key)
     msgn =bytes(msg)
-    encrypted_data = data.encrypt(msgn)
+    encrypted_msg = data.encrypt(msgn)
     # print(type(token))
-    sid = lib.put_secret(encrypted_data, pin, exp)
+    sid = lib.put_secret(encrypted_msg, pin, exp)
     return jsonify(sid = sid)
 
 
@@ -35,11 +35,11 @@ def get(sid, pin):
     key = 'IscdSPJ0zku3uRTU9vqVvjQ3ekbg4_xfDbxcK8VvQAg='
     data = Fernet(key)
     msgn = bytes(msg)
-    decrypted_data = data.decrypt(msgn)
+    decrypted_msg = data.decrypt(msgn)
     logger.debug("Message obtained: " + msg)
     if len(msg) > 0:
         logger.debug("End my super App")
-        return jsonify(msg = decrypted_data)
+        return jsonify(msg = decrypted_msg)
     else:
         return '{"error":"not found"}'
 
