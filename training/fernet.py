@@ -5,13 +5,25 @@ def encrypt ():
     f = Fernet(key)
     apple = "success"
     result =bytes(apple)
-    token = f.encrypt(apple)
-    return decrypt(token)
+    token = f.encrypt(result)
+    return token
 
-result=encrypt()
+result = encrypt()
 print(result)
 
-def decrypt (token):
-    result2 =f.decrypt(token)
-    print(result2)
+
+
+# result=encrypt()
+# print(result)
+# print(result)
+
+def decryptencryp ():
+    key = Fernet.generate_key()
+    f = Fernet(key)
+    apple = "lake"
+    result =bytes(apple)
+    token = f.encrypt(result)
+    result2 = f.decrypt(token)
     return result2
+print(decryptencryp())
+
