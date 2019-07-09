@@ -18,8 +18,7 @@ def index():
 @app.route('/put/<msg>/<int:pin>/<int:exp>', methods =['GET'])
 def put(msg, pin, exp):
     logger.debug("Start app to put data into the database")
-    key= lib.encrdecr()
-    data = Fernet(key)
+    data =lib.encrdecr()
     msgn =bytes(msg)
     encrypted_msg = data.encrypt(msgn)
     # print(type(token))
@@ -31,8 +30,7 @@ def put(msg, pin, exp):
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
-    key = lib.encrdecr()
-    data = Fernet(key)
+    data = lib.encrdecr()
     msgn = bytes(msg)
     decrypted_msg = data.decrypt(msgn)
     logger.debug("Message obtained: " + msg)

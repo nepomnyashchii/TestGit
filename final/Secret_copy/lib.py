@@ -4,6 +4,7 @@ import datetime
 import time
 import logger_module
 import json
+from cryptography.fernet import Fernet
 
 logger = logger_module.setup_logger("secret-2lib")
 
@@ -12,7 +13,8 @@ def encrdecr():
     with open('1.txt', 'r') as f:
         f_contents = f.read()
     key = f_contents
-    return key
+    data = Fernet(key)
+    return data
 
 def open_db():
     mydb = mysql.connector.connect(
