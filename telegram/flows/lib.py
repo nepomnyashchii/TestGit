@@ -11,7 +11,7 @@ def get_nice_text_from_flows(data):
         action_data = run_action(actionline)
         # print(action_data)
         if actionTitle == "norris":
-            text = '==== poker ====\n\n\n'
+            text+= '==== Jokes ====\n\n\n'
             for joke in action_data:
                 text+= joke + '\n\n'
                 print(joke)
