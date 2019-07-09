@@ -16,13 +16,16 @@ def index():
     logger.debug("Request for testing connection invoked")
     return 'Secret Runner :)'
 
+key =Fernet.generate_key()
+f = Fernet(key)
+
 @app.route('/put/<msg>/<int:pin>/<int:exp>', methods =['GET'])
 def put(msg, pin, exp):
     logger.debug("Start app to put data into the database")
-    key =Fernet.generate_key()
-    f = Fernet(key)
     msgn = bytes(msg)
+    print(type(msgn))
     token = f.encrypt(msgn)
+    # print(type(token))
     sid = lib.put_secret(token, pin, exp)
     return jsonify(sid = sid)
 
@@ -32,11 +35,10 @@ def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
     token = f.decrypt(msg)
-    msgn = str(token)
     logger.debug("Message obtained: " + msg)
     if len(msg) > 0:
         logger.debug("End my super App")
-        return jsonify(msg = msg)
+        return jsonify(msg = token)
     else:
         return '{"error":"not found"}'
 
