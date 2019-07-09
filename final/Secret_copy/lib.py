@@ -52,7 +52,7 @@ def put_secret(msg, pin, exp):
         sid = str(uuid.uuid4())
         logger.debug("sid: " + str(sid))
         created = time.strftime('%Y-%m-%d %H:%M:%S')
-        logger.debug("time created: " + str(created))
+        logger.debug("Time created: " + str(created))
         return_value = ''
         logger.debug('Invoke def open_db()')
         mydb = open_db()
@@ -99,7 +99,7 @@ def get_secret(sid, pin):
         myresult = mycursor.fetchone()
         logger.debug("Raw data from db: " + " " + str(myresult))
         msg = myresult[0]
-        logger.debug("Message " + msg)
+        logger.debug("Message: " + msg)
         dbtime = myresult[1]
         logger.debug("Start dbtime: " + str(dbtime))
         exp = myresult[2]
