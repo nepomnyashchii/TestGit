@@ -1,20 +1,29 @@
 from cryptography.fernet import Fernet
+import logger_module
 
-def read():
+logger = logger_module.setup_logger("secret-3libencryption")
+
+def get_cryptor():
+    logger.debug("Start to write a key to key.txt file")
     with open('key.txt', 'r') as f:
         f_contents = f.read()
     key = f_contents
-    data = Fernet(key)
-    return data
+    logger.debug("Get a key: " + key)
+    cryptography = Fernet(key)
+    return cryptography
 
 def encrypt(msg):
-    encryption =read()
+    logger.debug("Start encryption with a key")
+    encryption = get_cryptor()
     msgn =bytes(msg)
     encrypted_msg = encryption.encrypt(msgn)
+    logger.debug("Encrypted message: " + encrypted_msg)
     return encrypted_msg
 
 def decrypt(msg):
-    decryption = read()
+    logger.debug("Start decryption")
+    decryption = get_cryptor()
     msgn = bytes(msg)
     decrypted_msg = decryption.decrypt(msgn)
+    logger.debug("Decrypted message: " + decrypted_msg)
     return decrypted_msg

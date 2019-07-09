@@ -17,8 +17,10 @@ def index():
 
 @app.route('/put/<msg>/<int:pin>/<int:exp>', methods =['GET'])
 def put(msg, pin, exp):
-    logger.debug("Start app to put data into the database")
+    logger.debug("Start encryption")
     encrypted_msg = libencryption.encrypt(msg)
+    logger.debug("Finished encryption: " + encrypted_msg)
+    logger.debug("Start app to put data into the database")
     sid = lib.put_secret(encrypted_msg, pin, exp)
     return jsonify(sid = sid)
 
@@ -27,8 +29,11 @@ def put(msg, pin, exp):
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
-    decrypted_msg = libencryption.decrypt(msg)
     logger.debug("Message obtained: " + msg)
+    logger.debug("Start decryption")
+    decrypted_msg = libencryption.decrypt(msg)
+    logger.debug("Finished decryption: " + decrypted_msg)
+
     if len(msg) > 0:
         logger.debug("End my super App")
         return jsonify(msg = decrypted_msg)
