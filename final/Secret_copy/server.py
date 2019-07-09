@@ -31,8 +31,8 @@ def put(msg, pin, exp):
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
-    msgn = bytes(msg)
-    token = f.decrypt(msgn)
+    token = f.decrypt(msg)
+    msgn = str(token)
     logger.debug("Message obtained: " + msg)
     if len(msg) > 0:
         logger.debug("End my super App")
