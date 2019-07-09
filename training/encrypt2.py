@@ -1,5 +1,5 @@
 from cryptography.fernet import Fernet
-key = b'DFCr88GbnVuOn4AB2W34UJpzSu6NX14ekxesdg59us0='
-cipher_suite = Fernet(key)
-ciphered_text = cipher_suite.encrypt(b"SuperSecretPassword")   #required to be bytes
-print(ciphered_text)
+key = b'IscdSPJ0zku3uRTU9vqVvjQ3ekbg4_xfDbxcK8VvQAg='
+data = Fernet(key)
+encrypted_text = data.encrypt(b"SuperSecretPassword")   #required to be bytes
+print(encrypted_text)

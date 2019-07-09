@@ -22,3 +22,11 @@
 # """Syntax Error: InvalidSyntax"""
 # lake = int(aplple
 # print(lake)
+
+""" Value Error """
+data = "we are the champions"
+data
+1
+print(data)
+
+"""OSE error: file is not found"""
