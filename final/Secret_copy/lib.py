@@ -7,6 +7,13 @@ import json
 
 logger = logger_module.setup_logger("secret-2lib")
 
+
+def encrdecr():
+    with open('1.txt', 'r') as f:
+        f_contents = f.read()
+    key = f_contents
+    return key
+
 def open_db():
     mydb = mysql.connector.connect(
         host="db4free.net",
@@ -159,4 +166,3 @@ def del_secret(sid, pin):
         logger.debug('An error occured.')
 
     return return_value
-    
