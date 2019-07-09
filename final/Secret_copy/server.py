@@ -19,7 +19,11 @@ def index():
 @app.route('/put/<msg>/<int:pin>/<int:exp>', methods =['GET'])
 def put(msg, pin, exp):
     logger.debug("Start app to put data into the database")
-    key ='IscdSPJ0zku3uRTU9vqVvjQ3ekbg4_xfDbxcK8VvQAg='
+    with open('1.txt', 'r') as f:
+        f_contents = f.read()
+        print(f_contents)
+    key = f_contents
+        # key ='IscdSPJ0zku3uRTU9vqVvjQ3ekbg4_xfDbxcK8VvQAg='
     data = Fernet(key)
     msgn =bytes(msg)
     encrypted_msg = data.encrypt(msgn)
@@ -32,7 +36,10 @@ def put(msg, pin, exp):
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
-    key = 'IscdSPJ0zku3uRTU9vqVvjQ3ekbg4_xfDbxcK8VvQAg='
+    with open('1.txt', 'r') as f:
+        f_contents = f.read()
+        print(f_contents)
+    key = f_contents
     data = Fernet(key)
     msgn = bytes(msg)
     decrypted_msg = data.decrypt(msgn)
