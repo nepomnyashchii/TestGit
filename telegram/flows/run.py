@@ -9,13 +9,17 @@ bot = telebot.TeleBot("873802609:AAGrF4tID-CD4lufzgMjqNEnqLxhCaEweLM")
 
 
 @bot.message_handler(content_types=['text'])
-def send_userinformation(message):
+def send_echo(message):
     """ print(user_name, user_id, user_fullname, message.text"""
     user = message.from_user
+    logger.debug("user: " + str(user))
     user_name = user.username
+    logger.debug("user_name: " + str(user_name))
     user_id = user.id
-    user_fullname = user.first_name + ' ' + user.last_name
-    # logger.debug("user + user_name + user_id +user_fullname ") + user + " " + user_name + " " + user_id + user_fullname
+    logger.debug("user_id: " + str(user_id))
+    user_fullname = user.first_name + ' ' + str(user.last_name)
+    print(user_name, user_id, user_fullname, message.text)
+
 
 
     if (message.text.lower() == 'goodmorning'):
