@@ -48,8 +48,6 @@ def get_nice_text_from_flows(data):
 
         else:
             pass
-        # text += "=====" + actionTitle + "=====\n\n" + \
-        # json.dumps(action_data) + "\n\n\n\n"
     return text
 
 
