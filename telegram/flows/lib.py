@@ -3,6 +3,7 @@ import requests
 import json
 import logger_module
 import pyowm
+
 logger = logger_module.setup_logger("lib2")
 
 
