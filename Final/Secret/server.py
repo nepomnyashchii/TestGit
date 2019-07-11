@@ -46,7 +46,8 @@ def dels(sid, pin):
     if len(sid)>0:
         del_id = lib.del_secret(sid, pin)
         logger.debug("Sid succesfully deleted: " + str(del_id))
-    else: print("Sid does not exist")
+    else:
+        print("Sid does not exist")
     logger.debug('End my super App')
     return jsonify(deleted_sid = sid)
 
