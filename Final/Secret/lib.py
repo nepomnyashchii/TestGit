@@ -48,13 +48,13 @@ def is_not_expired(created, exp):
 def put_secret(msg, pin, exp):
     """put secret into db table."""
     try:
-        logger.debug("Invoke put_secret")
+        logger.debug("Invoke: put_secret")
         sid = str(uuid.uuid4())
         logger.debug("sid: " + str(sid))
         created = time.strftime('%Y-%m-%d %H:%M:%S')
         logger.debug("Time created: " + str(created))
         return_value = ''
-        logger.debug('Invoke def open_db()')
+        logger.debug('Invoke: def open_db()')
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
@@ -63,7 +63,7 @@ def put_secret(msg, pin, exp):
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
         mydb.commit()
-        logger.debug("Invoke def close_db(mydb)")
+        logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
         return_value = sid
         logger.debug("sid added to the database: " + str(sid))
@@ -89,7 +89,7 @@ def get_secret(sid, pin):
         print(sid, pin)
         print("Please wait...")
         return_value = ''
-        logger.debug('Invoke def open_db()')
+        logger.debug('Invoke: def open_db()')
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
