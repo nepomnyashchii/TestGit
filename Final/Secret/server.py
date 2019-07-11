@@ -29,16 +29,17 @@ def put(msg, pin, exp):
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
-    logger.debug("Message obtained: " + msg)
-    logger.debug("Start decryption")
-    decrypted_msg = libencryption.decrypt(msg)
-    logger.debug("Finished decryption: " + decrypted_msg)
-
     if len(msg) > 0:
-        logger.debug("End my super App")
+        logger.debug("Message obtained: " + msg)
+        decrypted_msg = libencryption.decrypt(msg)
         return jsonify(msg = decrypted_msg)
     else:
-        return '{"error":"not found"}'
+        message = {
+            'status': "404: request",
+            'message': 'pin or sid is wrong: ' + request.url,
+    }
+    resp = jsonify(message)
+    return resp
 
 @app.route('/del/<sid>/<int:pin>', methods = ['DELETE'])
 
