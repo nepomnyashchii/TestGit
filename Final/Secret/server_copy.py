@@ -29,17 +29,14 @@ def put(msg, pin, exp):
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = lib.get_secret(sid, pin)
-    logger.debug("Message obtained: " + msg)
-    logger.debug("Start decryption")
-    decrypted_msg = libencryption.decrypt(msg)
-    logger.debug("Finished decryption: " + decrypted_msg)
-
-    if len(msg) > 0:
-        if pin == True:
+    if pin == True:
+        logger.debug("Message obtained: " + msg)
+        logger.debug("Start decryption")
+        decrypted_msg = libencryption.decrypt(msg)
+        logger.debug("Finished decryption: " + decrypted_msg)
+        if len(msg) > 0:
             logger.debug("End my super App")
         return jsonify(msg = decrypted_msg)
-    elif pin == False:
-        return {"error": "pin is wrong"}
     else:
         return '{"error":"not found"}'
 
