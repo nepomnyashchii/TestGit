@@ -97,6 +97,8 @@ def get_secret(sid, pin):
         params = (sid, int(pin))
         mycursor.execute(sql, params)
         myresult = mycursor.fetchone()
+        # if myresult != None:
+
         logger.debug("Raw data from db: " + " " + str(myresult))
         msg = myresult[0]
         logger.debug("Message: " + msg)
