@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, request, jsonify
 import datetime
 import lib
 import logger_module
@@ -51,3 +51,15 @@ def run(username, flow):
         time=datetime.datetime.now(),
         data=simple_list
     )
+
+@app.errorhandler(404)
+def not_found(error=None):
+    logger.debug("Start app.errorhandler to confirm status 404")
+    message = {
+            'status': 404,
+            'message': 'URL is wrong: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 404
+    return resp
+
