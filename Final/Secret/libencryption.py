@@ -8,7 +8,7 @@ def get_cryptor():
     with open('key.txt', 'r') as f:
         f_contents = f.read()
     key = f_contents
-    logger.debug("Get a key: " + key)
+    # logger.debug("Get a key: " + key)
     cryptography = Fernet(key)
     return cryptography
 

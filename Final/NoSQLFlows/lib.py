@@ -41,7 +41,7 @@ def run_action(actionline):
         return cocktail_data(actionline)
     if action == "weather":
         return weather_data(actionline)
-    logger.error('Action is not implemented' + action)
+    logger.error("Action is not implemented: " + action)
     return {
         "action": action,
     }
