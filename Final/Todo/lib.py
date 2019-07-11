@@ -21,7 +21,7 @@ def get_all():
     """get flowdata from db."""
 
     try:
-        logger.debug('Invoke def open_db()')
+        logger.debug('Invoke: def open_db()')
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
@@ -37,7 +37,7 @@ def get_all():
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
         logger.debug("Create dictionary with inserted row_headers from tuple" +str(json_data))
-        logger.debug("Invoke def close_db(mydb)")
+        logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
     except IOError:
         logger.error('An error occured trying to read the file.')
@@ -57,7 +57,7 @@ def get_all():
 def get_todo_by_id(id):
     # myresult = ''
     try:
-        logger.debug('Invoke def open_db()')
+        logger.debug('Invoke: def open_db()')
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
@@ -73,7 +73,7 @@ def get_todo_by_id(id):
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
         logger.debug("Create dictionary with inserted row_headers from tuples" +str(json_data))
-        logger.debug("Invoke def close_db(mydb)")
+        logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
         return json_data
     except IOError:
@@ -92,7 +92,7 @@ def get_todo_by_id(id):
 
 def insert_todo(text):
     try:
-        logger.debug('Invoke def open_db()')
+        logger.debug('Invoke: def open_db()')
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
@@ -101,7 +101,7 @@ def insert_todo(text):
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
         mydb.commit()
-        logger.debug("Invoke def close_db(mydb)")
+        logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
         return mycursor.lastrowid
     except IOError:
@@ -119,7 +119,7 @@ def insert_todo(text):
 
 def delete_todo_by_id(id):
     try:
-        logger.debug('Invoke def open_db()')
+        logger.debug('Invoke: def open_db()')
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
@@ -128,7 +128,7 @@ def delete_todo_by_id(id):
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
         mydb.commit()
-        logger.debug("Invoke def close_db(mydb)")
+        logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
         return mycursor.rowcount
     except IOError:
@@ -146,7 +146,7 @@ def delete_todo_by_id(id):
 
 def update_todo_by_id(id, text, done):
     try:
-        logger.debug('Invoke def open_db()')
+        logger.debug('Invoke: def open_db()')
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
@@ -155,7 +155,7 @@ def update_todo_by_id(id, text, done):
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
         mydb.commit()
-        logger.debug("Invoke def close_db(mydb)")
+        logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
         # print(mycursor.rowcount, "record(s) affected")
         return id
