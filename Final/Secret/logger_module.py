@@ -9,7 +9,7 @@ def createLogFolder():
     try:
         os.mkdir(path)
     except OSError:
-        print("Creation of the directory %s failed" % path)
+        print("Creation of the directory %s failed because it was already created" % path)
     else:
         print("Successfully created the directory %s " % path)
 
