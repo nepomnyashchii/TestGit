@@ -42,7 +42,7 @@ def post_secret():
 
 
 @app.route('/secret/<sid>/<int:pin>', methods=['GET'])
-def get(sid, pin):
+def get_secret(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = dblib.get_secret(sid, pin)
     if len(msg) > 0:
@@ -57,7 +57,7 @@ def get(sid, pin):
 
 
 @app.route('/secret/<sid>/<int:pin>', methods=['DELETE'])
-def dels(sid, pin):
+def del_secret(sid, pin):
     if len(sid) > 0:
         del_id = dblib.del_secret(sid, pin)
         logger.debug("Sid succesfully deleted: " + str(del_id))
