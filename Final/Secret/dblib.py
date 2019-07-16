@@ -6,7 +6,7 @@ import logger_module
 import json
 from cryptography.fernet import Fernet
 
-logger = logger_module.setup_logger("secret-2lib")
+logger = logger_module.setup_logger("dblib")
 
 
 def open_db():
@@ -62,7 +62,6 @@ def put_secret(msg, pin, exp):
         return_value = ''
         logger.debug('Invoke: def open_db()')
         mydb = open_db()
-        logger.debug("Start db")
         mycursor = mydb.cursor()
         sql = "INSERT INTO secret (id, msg, pin, exp, created) VALUES (%s, %s, %s, %s, %s)"
         val = (sid, msg, pin, exp, created)
@@ -91,20 +90,35 @@ def put_secret(msg, pin, exp):
 
 def get_secret_from_db(sid, pin):
     """get secret from db."""
+    logger.debug("get_secret_from_db sid, pin: " + str(sid) + " " + str(pin))
+    try:
+        print("DB wait...")
+        return_value = ''
+        mydb = open_db()
+        mycursor = mydb.cursor()
+        sql = "SELECT msg, created, exp FROM secret WHERE id =  %s AND pin = %s"
+        params = (sid, int(pin))
+        mycursor.execute(sql, params)
+        myresult = mycursor.fetchone()
+        close_db(mydb)
 
-    logger.debug("sid, pin: " + str(sid) + " " + str(pin))
-    print(sid, pin)
-    print("Please wait...")
-    return_value = ''
-    logger.debug('Invoke: def open_db()')
-    mydb = open_db()
-    logger.debug("Start db")
-    mycursor = mydb.cursor()
-    sql = "SELECT msg, created, exp FROM secret WHERE id =  %s AND pin = %s"
-    params = (sid, int(pin))
-    mycursor.execute(sql, params)
-    myresult = mycursor.fetchone()
-    close_db(mydb)
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except ImportError:
+        logger.error("NO module found")
+    except EOFError:
+        logger.error('Why did you do an EOF on me?')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
+    except:
+        logger.debug('An error occured.')
+
+    return myresult
+
+def get_secret(sid, pin):
+    myresult = get_secret_from_db(sid, pin)
     if myresult is not None:
         logger.debug("Raw data from db: " + " " + str(myresult))
         msg = myresult[0]
@@ -121,26 +135,6 @@ def get_secret_from_db(sid, pin):
     else:
         return_value = ""
     return return_value
-
-def get_secret(sid, pin):
-
-    try:
-        get_secret_from_db(sid, pin)
-
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
-
-    return get_secret_from_db (sid,pin)
 
 
 def del_secret(sid, pin):

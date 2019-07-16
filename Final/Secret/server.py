@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import lib
+import dblib
 import logger_module
 import libencryption
 
@@ -8,59 +8,76 @@ logger = logger_module.setup_logger("secret")
 logger.debug('Start my super App')
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
+app.config['APPLICATION_ROOT'] = '/api'
 print("\n\n\n")
+
 
 @app.route('/')
 def index():
     logger.debug("Request for testing connection invoked")
-    return 'Secret Runner :)'
+    return 'Secret API is online :)'
 
-@app.route('/put/<msg>/<int:pin>/<int:exp>', methods =['GET'])
+
+@app.route('/ping')
+def ping():
+    logger.debug("Request for ping")
+    return jsonify(data='pong'), 200
+
+
+@app.route('/secret/put/<msg>/<int:pin>/<int:exp>', methods=['GET'])
 def put(msg, pin, exp):
-    logger.debug("Start encryption")
     encrypted_msg = libencryption.encrypt(msg)
-    logger.debug("Finished encryption: " + encrypted_msg)
-    logger.debug("Start app to put data into the database")
-    sid = lib.put_secret(encrypted_msg, pin, exp)
-    return jsonify(sid = sid)
+    sid = dblib.put_secret(encrypted_msg, pin, exp)
+    return jsonify(sid=sid)
 
 
-@app.route('/get/<sid>/<int:pin>', methods = ['GET'])
+@app.route('/secret', methods=['GET'])
+def get_secret():
+    return jsonify('GET')
+
+@app.route('/secret', methods=['POST'])
+def post_secret():
+    return jsonify('POST')
+
+@app.route('/secret', methods=['DELETE'])
+def delete_secrete():
+    return jsonify('DELETE')
+
+
+@app.route('/secret/get/<sid>/<int:pin>', methods=['GET'])
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
-    msg = lib.get_secret(sid, pin)
+    msg = dblib.get_secret(sid, pin)
     if len(msg) > 0:
         logger.debug("Message obtained: " + msg)
         decrypted_msg = libencryption.decrypt(msg)
-        return jsonify(msg = decrypted_msg)
+        return jsonify(msg=decrypted_msg)
     else:
-        message = {
+        return jsonify({
             'status': "404: request",
             'message': 'pin or sid is wrong: ' + request.url,
-    }
-    resp = jsonify(message)
-    return resp
+        })
 
-@app.route('/del/<sid>/<int:pin>', methods = ['DELETE'])
 
+@app.route('/secret/del/<sid>/<int:pin>', methods=['DELETE'])
 def dels(sid, pin):
-    if len(sid)>0:
-        del_id = lib.del_secret(sid, pin)
+    if len(sid) > 0:
+        del_id = dblib.del_secret(sid, pin)
         logger.debug("Sid succesfully deleted: " + str(del_id))
     else:
         print("Sid does not exist")
     logger.debug('End my super App')
-    return jsonify(deleted_sid = sid)
+    return jsonify(deleted_sid=sid)
 
+
+# standard 404 error handler
 @app.errorhandler(404)
 def not_found(error=None):
     logger.debug("Start app.errorhandler to confirm status 404")
     message = {
-            'status': 404,
-            'message': 'URL is wrong: ' + request.url,
+        'status': 404,
+        'message': 'URL not found: ' + request.url,
     }
     resp = jsonify(message)
     resp.status_code = 404
     return resp
-
-

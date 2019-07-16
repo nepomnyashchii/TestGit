@@ -1,7 +1,7 @@
 from cryptography.fernet import Fernet
 import logger_module
 
-logger = logger_module.setup_logger("secret-3libencryption")
+logger = logger_module.setup_logger("libencryption")
 
 def get_cryptor():
     logger.debug("Start to write a key to key.txt file")
