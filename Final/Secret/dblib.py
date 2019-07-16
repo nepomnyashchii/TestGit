@@ -117,6 +117,7 @@ def get_secret_from_db(sid, pin):
 
     return myresult
 
+
 def get_secret(sid, pin):
     myresult = get_secret_from_db(sid, pin)
     if myresult is not None:
