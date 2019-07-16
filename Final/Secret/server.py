@@ -41,17 +41,7 @@ def post_secret():
     return jsonify('POST')
 
 
-@app.route('/secret', methods=['GET'])
-def get_secret():
-    return jsonify('GET')
-
-
-@app.route('/secret', methods=['DELETE'])
-def delete_secrete():
-    return jsonify('DELETE')
-
-
-@app.route('/secret/get/<sid>/<int:pin>', methods=['GET'])
+@app.route('/secret/<sid>/<int:pin>', methods=['GET'])
 def get(sid, pin):
     logger.debug("Obtain msg from the database")
     msg = dblib.get_secret(sid, pin)
@@ -66,7 +56,7 @@ def get(sid, pin):
         })
 
 
-@app.route('/secret/del/<sid>/<int:pin>', methods=['DELETE'])
+@app.route('/secret/<sid>/<int:pin>', methods=['DELETE'])
 def dels(sid, pin):
     if len(sid) > 0:
         del_id = dblib.del_secret(sid, pin)
