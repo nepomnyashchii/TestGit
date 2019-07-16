@@ -33,11 +33,11 @@ def put(msg, pin, exp):
 
 @app.route('/secret', methods=['POST'])
 def post_secret():
-    msg = from json
-    pin = from json
-    exp = from json
-    encrypted_msg = libencryption.encrypt(msg)
-    sid = dblib.put_secret(encrypted_msg, pin, exp)
+    # msg = from json
+    # pin = from json
+    # exp = from json
+    # encrypted_msg = libencryption.encrypt(msg)
+    # sid = dblib.put_secret(encrypted_msg, pin, exp)
     return jsonify('POST')
 
 
