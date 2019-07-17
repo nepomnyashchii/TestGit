@@ -5,13 +5,21 @@ import os
 
 
 def createLogFolder():
-    path = "./logs"
+    # path = "./logs"
     try:
-        os.mkdir(path)
-    except OSError:
-        print("Creation of the directory %s failed because it was already created" % path)
-    else:
-        print("Successfully created the directory %s " % path)
+        if not os.path.exists('./logs'):
+            print("Data already exists")
+    except os.makedirs('./logs'):
+        print("Successfully created the directory")
+    # else:
+    #     print("Successfully created the directory %s " % path)
+    # "
+
+    # try:
+    #     os.mkdir(path)
+    # except OSError:
+    #     print("Creation of the directory %s failed because it was already created" % path)
+
 
 
 def setup_logger(loggerName):
