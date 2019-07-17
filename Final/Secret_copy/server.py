@@ -89,7 +89,6 @@ def del_secret(sid, pin):
     return jsonify(deleted_sid=sid)
 
 
-# standard 404 error handler
 @app.errorhandler(404)
 def not_found(error=None):
     logger.debug("Start app.errorhandler to confirm status 404")
