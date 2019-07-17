@@ -40,9 +40,6 @@ def post_secret():
     msg = result["msg"]
     pin = result["pin"]
     exp = result["exp"]
-    # msg = from json
-    # pin = from json
-    # exp = from json
     encrypted_msg = libencryption.encrypt(msg)
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     return jsonify(sid=sid)
@@ -82,6 +79,7 @@ def post_get_secret():
 
 @app.route('/secret/<sid>/<int:pin>', methods=['DELETE'])
 def del_secret(sid, pin):
+    logger.debug("Delete data from database")
     if len(sid) > 0:
         del_id = dblib.del_secret(sid, pin)
         logger.debug("Sid succesfully deleted: " + str(del_id))
