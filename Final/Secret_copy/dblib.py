@@ -6,24 +6,32 @@ import logger_module
 import json
 from cryptography.fernet import Fernet
 
+
 logger = logger_module.setup_logger("dblib")
 
 
 def open_db():
-    logger.debug(logger.debug('Invoke: def open_db()'))
-    mydb = mysql.connector.connect(
-        host="db4free.net",
-        user="coolspammail",
-        passwd="coolspammail-pass",
-        database="coolspammail"
-    )
-    return mydb
+    try:
+        logger.debug(logger.debug('Invoke: def open_db()'))
+        mydb = mysql.connector.connect(
+            host="db4free.net",
+            user="coolspammail",
+            passwd="coolspammail-pass",
+            database="coolspammail"
+        )
+        return mydb
+    except mysql.connector.Error:
+        logger.error('There is no connection: {}'.format(logger.error))
 
 
 def close_db(mydb):
-    logger.debug("close_db invoked")
-    mydb.close()
-    logger.debug("close_db finished")
+    try:
+        logger.debug("close_db invoked")
+        mydb.close()
+        logger.debug("close_db finished")
+
+    except mysql.connector.Error:
+        logger.error('Something happened with the server: {}'.format(logger.error))
 
 
 def is_not_expired(created, exp):
@@ -42,14 +50,12 @@ def is_not_expired(created, exp):
         logger.error('An error occured trying to read the file.')
     except ValueError:
         logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
     except KeyboardInterrupt:
         logger.error('You cancelled the operation.')
     except:
         logger.debug('An error occured.')
+
+
 
 
 def put_secret(msg, pin, exp):
@@ -97,10 +103,6 @@ def get_secret_from_db(sid, pin):
         logger.error('An error occured trying to read the file.')
     except ValueError:
         logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
     except KeyboardInterrupt:
         logger.error('You cancelled the operation.')
     except:
@@ -110,23 +112,32 @@ def get_secret_from_db(sid, pin):
 
 
 def get_secret(sid, pin):
-    myresult = get_secret_from_db(sid, pin)
-    if myresult is not None:
-        logger.debug("Raw data from db: " + " " + str(myresult))
-        msg = myresult[0]
-        logger.debug("Message: " + msg)
-        dbtime = myresult[1]
-        logger.debug("Start dbtime: " + str(dbtime))
-        exp = myresult[2]
-        logger.debug("Expiration time in seconds: " + str(exp))
-        if is_not_expired(dbtime, exp):
-            return_value = msg
-            logger.debug("Return message: " + msg)
+    try:
+        myresult = get_secret_from_db(sid, pin)
+        if myresult is not None:
+            logger.debug("Raw data from db: " + " " + str(myresult))
+            msg = myresult[0]
+            logger.debug("Message: " + msg)
+            dbtime = myresult[1]
+            logger.debug("Start dbtime: " + str(dbtime))
+            exp = myresult[2]
+            logger.debug("Expiration time in seconds: " + str(exp))
+            if is_not_expired(dbtime, exp):
+                return_value = msg
+                logger.debug("Return message: " + msg)
+            else:
+                return_value = ""
         else:
             return_value = ""
-    else:
-        return_value = ""
-    return return_value
+        return return_value
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
+    except:
+        logger.debug('An error occured.')
 
 
 def del_secret(sid, pin):
@@ -151,10 +162,6 @@ def del_secret(sid, pin):
         logger.error('An error occured trying to read the file.')
     except ValueError:
         logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
     except KeyboardInterrupt:
         logger.error('You cancelled the operation.')
     except:
