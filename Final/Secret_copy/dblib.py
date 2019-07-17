@@ -10,6 +10,7 @@ logger = logger_module.setup_logger("dblib")
 
 
 def open_db():
+    logger.debug(logger.debug('Invoke: def open_db()'))
     mydb = mysql.connector.connect(
         host="db4free.net",
         user="coolspammail",
