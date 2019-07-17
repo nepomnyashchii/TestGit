@@ -6,11 +6,11 @@ import os
 
 def createLogFolder():
     # path = "./logs"
-    try:
-        if os.path.exists('./logs'):
+    if os.path.exists('./logs'):
             print("Data already exists")
-    except os.makedirs('./logs'):
-        print("Successfully created the directory")
+    else:
+         os.makedirs('./logs')
+         print("Successfully created the directory")
     # else:
     #     print("Successfully created the directory %s " % path)
     # "
