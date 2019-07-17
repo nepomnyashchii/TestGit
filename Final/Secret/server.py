@@ -27,18 +27,22 @@ def ping():
 @app.route('/secret/put/<msg>/<int:pin>/<int:exp>', methods=['GET'])
 def put(msg, pin, exp):
     encrypted_msg = libencryption.encrypt(msg)
+    logger.debug("Invoke: put a get")
     sid = dblib.put_secret(encrypted_msg, pin, exp)
+    logger.debug("Obtain sid: " + sid)
     return jsonify(sid=sid)
 
 
 @app.route('/secret', methods=['POST'])
 def post_secret():
-    # msg = from json
-    # pin = from json
-    # exp = from json
-    # encrypted_msg = libencryption.encrypt(msg)
-    # sid = dblib.put_secret(encrypted_msg, pin, exp)
-    return jsonify('POST')
+    logger.debug("Invoke: put from a post")
+    result = request.json
+    msg = result["msg"]
+    pin = result["pin"]
+    exp = result["exp"]
+    encrypted_msg = libencryption.encrypt(msg)
+    sid = dblib.put_secret(encrypted_msg, pin, exp)
+    return jsonify(sid=sid)
 
 
 @app.route('/secret/<sid>/<int:pin>', methods=['GET'])
@@ -55,9 +59,27 @@ def get_secret(sid, pin):
             'message': 'pin or sid is wrong: ' + request.url,
         })
 
+@app.route('/get_secret', methods=['POST'])
+def post_get_secret():
+    logger.debug("Obtain msg from the database")
+    result = request.json
+    sid = result["sid"]
+    pin = result["pin"]
+    msg = dblib.get_secret(sid, pin)
+    if len(msg) > 0:
+        logger.debug("Message obtained: " + msg)
+        decrypted_msg = libencryption.decrypt(msg)
+        return jsonify(msg=decrypted_msg)
+    else:
+        return jsonify({
+            'status': "404: request",
+            'message': 'pin or sid is wrong: ' + request.url,
+        })
+
 
 @app.route('/secret/<sid>/<int:pin>', methods=['DELETE'])
 def del_secret(sid, pin):
+    logger.debug("Delete data from database")
     if len(sid) > 0:
         del_id = dblib.del_secret(sid, pin)
         logger.debug("Sid succesfully deleted: " + str(del_id))
@@ -67,7 +89,6 @@ def del_secret(sid, pin):
     return jsonify(deleted_sid=sid)
 
 
-# standard 404 error handler
 @app.errorhandler(404)
 def not_found(error=None):
     logger.debug("Start app.errorhandler to confirm status 404")

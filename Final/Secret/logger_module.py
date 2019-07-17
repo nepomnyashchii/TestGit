@@ -1,11 +1,6 @@
 import logging
 import os
 
-
-os.path.isdir("/home/el")
-
-os.path.exists("/home/el/myfile.txt")
-
 # define the name of the directory to be created
 
 
