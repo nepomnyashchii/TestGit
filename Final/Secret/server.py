@@ -117,8 +117,8 @@ def del_secret(sid, pin):
 # ------------------------------
 
 @app.route('/secret', methods=['DELETE'])
-def delete_secret(sid, pin):
-    return jsonify(data='Not implemented yet')
+def delete_secret():
+    return jsonify(data='Not implemented yet'), 404
 
 
 # ------------------------------
