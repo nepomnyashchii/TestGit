@@ -5,7 +5,7 @@ import libencryption
 
 
 logger = logger_module.setup_logger("secret")
-logger.debug('Start my super App')
+logger.debug('Starting my super App')
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 app.config['APPLICATION_ROOT'] = '/api'
@@ -15,7 +15,7 @@ print("\n\n\n")
 @app.route('/')
 def index():
     logger.debug("Request for testing connection invoked")
-    return 'Secret API is online :)'
+    return 'Cool API is online :)'
 
 
 @app.route('/ping')
@@ -23,18 +23,16 @@ def ping():
     logger.debug("Request for ping")
     return jsonify(data='pong'), 200
 
+# ------------------------------
+# ------- SECRET ROUTES --------
+# ------------------------------
 
-@app.route('/secret/put/<msg>/<int:pin>/<int:exp>', methods=['GET'])
-def put(msg, pin, exp):
-    encrypted_msg = libencryption.encrypt(msg)
-    logger.debug("Invoke: put a get")
-    sid = dblib.put_secret(encrypted_msg, pin, exp)
-    logger.debug("Obtain sid: " + sid)
-    return jsonify(sid=sid)
-
+# ------------------------------
+# ------- ADD SECRET ----------
+# ------------------------------
 
 @app.route('/secret', methods=['POST'])
-def post_secret():
+def add_secret():
     logger.debug("Invoke: put from a post")
     result = request.json
     msg = result["msg"]
@@ -42,25 +40,46 @@ def post_secret():
     exp = result["exp"]
     encrypted_msg = libencryption.encrypt(msg)
     sid = dblib.put_secret(encrypted_msg, pin, exp)
+    logger.debug("put from a post return sid=" + sid)
     return jsonify(sid=sid)
 
 
+# Old Put - method=GET
+# @app.route('/secret/put/<msg>/<int:pin>/<int:exp>', methods=['GET'])
+# def put(msg, pin, exp):
+#     encrypted_msg = libencryption.encrypt(msg)
+#     logger.debug("Invoke: put a get")
+#     sid = dblib.put_secret(encrypted_msg, pin, exp)
+#     logger.debug("Obtain sid: " + sid)
+#     return jsonify(sid=sid)
+
+
+# ------------------------------
+# -------- GET SECRET ----------
+# ------------------------------
+
 @app.route('/secret/<sid>/<int:pin>', methods=['GET'])
-def get_secret(sid, pin):
-    logger.debug("Obtain msg from the database")
+def get_secret_query(sid, pin):
+    logger.debug("/secret GET invoked")
     msg = dblib.get_secret(sid, pin)
     if len(msg) > 0:
-        logger.debug("Message obtained: " + msg)
+        logger.debug("secret obtained from DB: " + msg)
         decrypted_msg = libencryption.decrypt(msg)
+        logger.debug("/secret GET returned OK")
         return jsonify(msg=decrypted_msg)
     else:
+        logger.debug("/secret GET returned 404")
         return jsonify({
             'status': "404: request",
             'message': 'pin or sid is wrong: ' + request.url,
         })
 
-@app.route('/get_secret', methods=['POST'])
-def post_get_secret():
+# ------------------------------
+# -------- GET SECRET (BODY)----
+# ------------------------------
+
+@app.route('/secret', methods=['GET'])
+def get_secret_body():
     logger.debug("Obtain msg from the database")
     result = request.json
     sid = result["sid"]
@@ -77,6 +96,10 @@ def post_get_secret():
         })
 
 
+# ------------------------------
+# -------- DEL SECRET ----------
+# ------------------------------
+
 @app.route('/secret/<sid>/<int:pin>', methods=['DELETE'])
 def del_secret(sid, pin):
     logger.debug("Delete data from database")
@@ -89,9 +112,22 @@ def del_secret(sid, pin):
     return jsonify(deleted_sid=sid)
 
 
+# ------------------------------
+# -------- DEL SECRET ----------
+# ------------------------------
+
+@app.route('/secret', methods=['DELETE'])
+def delete_secret(sid, pin):
+    return jsonify(data='Not implemented yet')
+
+
+# ------------------------------
+# -------- errorhandler  -------
+# ------------------------------
+
 @app.errorhandler(404)
 def not_found(error=None):
-    logger.debug("Start app.errorhandler to confirm status 404")
+    logger.debug("404 errorhandler invoked for:" + request.url)
     message = {
         'status': 404,
         'message': 'URL not found: ' + request.url,

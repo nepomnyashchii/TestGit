@@ -1,8 +1,8 @@
 import sys
 
 try:
-    raise
-    int(a)
+    # raise
+    # int(a)
     f = open('myfile.txt')
     s = f.readline()
     i = int(s.strip())

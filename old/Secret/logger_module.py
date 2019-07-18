@@ -7,14 +7,11 @@ import os
 def createLogFolder():
     path = "./logs"
     try:
-        # raise OSError(2, 'Custom error message', 'asdasdasdasd asd as')
-        if os.path.exists(path):
-            print("Directory logs already exists")
-        else:
-            os.makedirs(path)
-            print("Successfully created the directory logs")
-    except OSError as error:
-        print("Error in createLogFolder :%s " % error)
+        os.mkdir(path)
+    except OSError:
+        print("Creation of the directory %s failed because it was already created" % path)
+    else:
+        print("Successfully created the directory %s " % path)
 
 
 def setup_logger(loggerName):
