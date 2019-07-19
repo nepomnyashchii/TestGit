@@ -91,7 +91,7 @@ def get_secret_body():
         return jsonify(msg=decrypted_msg)
     else:
         return jsonify({
-            'status': "404: request",
+            'status': "200: request",
             'message': 'pin or sid is wrong: ' + request.url,
         })
 
@@ -106,10 +106,15 @@ def del_secret(sid, pin):
     if len(sid) > 0:
         del_id = dblib.del_secret(sid, pin)
         logger.debug("Sid succesfully deleted: " + str(del_id))
+        return jsonify(deleted_sid=sid)
     else:
-        print("Sid does not exist")
+        return jsonify({
+            'status': "200: request",
+            'message': 'pin or sid is wrong: ' + request.url,
+        })
+
     logger.debug('End my super App')
-    return jsonify(deleted_sid=sid)
+
 
 
 # ------------------------------

@@ -152,11 +152,15 @@ def del_secret(sid, pin):
         mycursor = mydb.cursor()
         sql = "DELETE FROM secret WHERE id =  %s AND pin = %s"
         params = (sid, int(pin))
-        mycursor.execute(sql, params)
-        mydb.commit()
-        logger.debug("Data deleted")
-        close_db(mydb)
-
+        if params is not None:
+            mycursor.execute(sql, params)
+            mydb.commit()
+            logger.debug("Data deleted")
+            close_db(mydb)
+            return return_value
+        else:
+            raise Exception
+        logger.error("Id or pin does not exist")
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
@@ -166,4 +170,3 @@ def del_secret(sid, pin):
     except:
         logger.debug('An error occured.')
 
-    return return_value
