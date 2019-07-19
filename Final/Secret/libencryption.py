@@ -40,6 +40,7 @@ def encrypt(msg):
         logger.error(ex)
     return encrypted_msg
 
+
 def decrypt(msg):
     try:
         logger.debug("Start decryption")

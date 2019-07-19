@@ -153,7 +153,7 @@ def del_secret(sid, pin):
         sql = "DELETE FROM secret WHERE id =  %s AND pin = %s"
         params = (sid, int(pin))
         mycursor.execute(sql, params)
-        myresult = mycursor.fetchone()
+        mydb.commit()
         logger.debug("Data deleted")
         close_db(mydb)
 
