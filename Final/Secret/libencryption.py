@@ -4,10 +4,12 @@ import os.path
 
 logger = logger_module.setup_logger("libencryption")
 
-def key (msg):
+def check_key ():
     try:
-        if os.path.isfile('key.txt'):
-            return encrypt(msg)
+        if os.path.isfile('./key.txt'):
+            return True
+        else:
+            return False
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:
