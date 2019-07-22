@@ -39,15 +39,15 @@ def add_secret():
     msg = result["msg"]
     pin = result["pin"]
     exp = result["exp"]
-    # if libencryption.key(msg):
-    #     encrypted_msg = libencryption.encrypt(msg)
-    # else:
-    #     return {"File is not found"}
-    if os.path.isfile('key.txt'):
+    if libencryption.key(msg):
         encrypted_msg = libencryption.encrypt(msg)
     else:
-        # raise FileNotFoundError
-        return jsonify("File does not exist")
+        return jsonify ("File is not found")
+    # if os.path.isfile('key.txt'):
+    #     encrypted_msg = libencryption.encrypt(msg)
+    # else:
+    #     # raise FileNotFoundError
+    #     return jsonify("File does not exist")
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     logger.debug("put from a post return sid=" + sid)
     return jsonify(sid=sid)
