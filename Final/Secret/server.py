@@ -8,9 +8,9 @@ logger = logger_module.setup_logger("secret")
 logger.debug("Check key")
 
 if libencryption.check_key():
-    'Starting my super App'
+    logger.debug('Starting my super App')
 else:
-    return 'Cannot Find Server as file key.txt is not found'
+    return logger.debug('Cannot Find Server as file key.txt is not found')
 
 
 logger.debug('Starting my super App')
@@ -20,8 +20,6 @@ app.config['APPLICATION_ROOT'] = '/api'
 print("\n\n\n")
 
 
-    else:
-        return jsonify ("File key.txt is not found")
 
 @app.route('/')
 def index():
