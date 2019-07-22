@@ -2,7 +2,6 @@ from flask import Flask, request, jsonify
 import dblib
 import logger_module
 import libencryption
-import os.path
 import sys
 
 logger = logger_module.setup_logger("secret")
