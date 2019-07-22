@@ -120,7 +120,7 @@ def del_secret(sid, pin):
     else:
         return jsonify({
             'status': "404: request",
-            'message':' not  deleted '})
+            'message':'Such Sid and/or pin does not exist'})
 # logger.debug('End my super App')
 
 
