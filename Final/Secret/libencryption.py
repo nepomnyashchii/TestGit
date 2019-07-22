@@ -4,12 +4,12 @@ import os.path
 
 logger = logger_module.setup_logger("libencryption")
 
-# def key (msg):
-#     if os.path.isfile('key.txt'):
-#         return encrypt(msg)
-#     else:
-#         # raise FileNotFoundError
-#         return {"File does not exist"}
+def key (msg):
+    if os.path.isfile('key.txt'):
+        return encrypt(msg)
+    # else:
+    #     # raise FileNotFoundError
+    #     return {"File does not exist"}
 
 def get_cryptor():
     try:
