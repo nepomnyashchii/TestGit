@@ -112,18 +112,16 @@ def get_secret_body():
 
 @app.route('/secret/<sid>/<int:pin>', methods=['DELETE'])
 def del_secret(sid, pin):
-    logger.debug("Delete data from database")
-    if len(sid) > 0:
-        del_id = dblib.del_secret(sid, pin)
-        logger.debug("Sid succesfully deleted: " + str(del_id))
-        return jsonify(deleted_sid=sid)
+    # logger.debug("Delete data from database")
+    deleted = dblib.del_secret(sid, pin)
+    if deleted==1:
+        logger.debug("Sid succesfully deleted: " + str(deleted))
+        return  jsonify(deleted_sid=sid)
     else:
         return jsonify({
-            'status': "200: request",
-            'message': 'pin or sid is wrong: ' + request.url,
-        })
-
-    logger.debug('End my super App')
+            'status': "404: request",
+            'message':' not  deleted '})
+# logger.debug('End my super App')
 
 
 
