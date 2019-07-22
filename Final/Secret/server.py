@@ -8,12 +8,14 @@ logger = logger_module.setup_logger("secret")
 logger.debug("Check key")
 
 if libencryption.check_key():
+    print("Starting my super App")
     logger.debug('Starting my super App')
 else:
-    return logger.debug('Cannot Find Server as file key.txt is not found')
+    print ('Cannot Find Server as file key.txt is not found')
+    logger.debug('Cannot Find Server as file key.txt is not found')
 
 
-logger.debug('Starting my super App')
+# logger.debug('Starting my super App')
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 app.config['APPLICATION_ROOT'] = '/api'
