@@ -44,8 +44,8 @@ def ping():
 @app.route('/secret', methods=['POST'])
 def add_secret():
     logger.debug("Invoke: put from a post")
-    result = request.json
-    if len(result)>0:
+    if  len(request.json)>0:
+        result =request.json
         msg = result["msg"]
         pin = result["pin"]
         exp = result["exp"]
