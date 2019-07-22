@@ -79,7 +79,7 @@ def add_secret():
 @app.route('/secret/<sid>/<int:pin>', methods=['GET'])
 def get_secret_query(sid, pin):
     logger.debug("/secret GET invoked")
-    returnMessage(dblib.get_secret(sid, pin))
+    return returnMessage(dblib.get_secret(sid, pin))
 
 # ------------------------------
 # -------- GET SECRET (BODY)----
