@@ -5,8 +5,17 @@ import os.path
 logger = logger_module.setup_logger("libencryption")
 
 def key (msg):
-    if os.path.isfile('key.txt'):
-        return encrypt(msg)
+    try:
+        if os.path.isfile('key.txt'):
+            return encrypt(msg)
+    except IOError:
+        logger.error('An error occured trying to read the file.')
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except KeyboardInterrupt:
+        logger.error('You cancelled the operation.')
+    except Exception as ex:
+        logger.error(ex)
     # else:
     #     # raise FileNotFoundError
     #     return {"File does not exist"}
