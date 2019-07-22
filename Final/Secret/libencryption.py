@@ -6,6 +6,7 @@ logger = logger_module.setup_logger("libencryption")
 
 def check_key ():
     try:
+        logger.debug("Check key")
         if os.path.isfile('./key.txt'):
             return True
         else:

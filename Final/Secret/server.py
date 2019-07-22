@@ -5,7 +5,6 @@ import libencryption
 import os.path
 
 logger = logger_module.setup_logger("secret")
-logger.debug("Check key")
 
 if libencryption.check_key():
     print("Starting my super App")
