@@ -1,8 +1,15 @@
 from cryptography.fernet import Fernet
 import logger_module
+import os.path
 
 logger = logger_module.setup_logger("libencryption")
 
+# def key (msg):
+#     if os.path.isfile('key.txt'):
+#         return encrypt(msg)
+#     else:
+#         # raise FileNotFoundError
+#         return {"File does not exist"}
 
 def get_cryptor():
     try:
@@ -39,6 +46,7 @@ def encrypt(msg):
     except Exception as ex:
         logger.error(ex)
     return encrypted_msg
+
 
 
 def decrypt(msg):

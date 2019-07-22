@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import dblib
 import logger_module
 import libencryption
+import os.path
 
 
 logger = logger_module.setup_logger("secret")
@@ -38,7 +39,15 @@ def add_secret():
     msg = result["msg"]
     pin = result["pin"]
     exp = result["exp"]
-    encrypted_msg = libencryption.encrypt(msg)
+    # if libencryption.key(msg):
+    #     encrypted_msg = libencryption.encrypt(msg)
+    # else:
+    #     return {"File is not found"}
+    if os.path.isfile('key.txt'):
+        encrypted_msg = libencryption.encrypt(msg)
+    else:
+        # raise FileNotFoundError
+        return jsonify("File does not exist")
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     logger.debug("put from a post return sid=" + sid)
     return jsonify(sid=sid)
