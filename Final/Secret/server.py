@@ -45,9 +45,16 @@ def ping():
 def add_secret():
     logger.debug("Invoke: put from a post")
     result = request.json
-    msg = result["msg"]
-    pin = result["pin"]
-    exp = result["exp"]
+    if len(result)>0:
+        msg = result["msg"]
+        pin = result["pin"]
+        exp = result["exp"]
+    else:
+        return jsonify({
+            'status': "404: request",
+            'message': 'body is wrong: ' + request.url,
+        })
+
     encrypted_msg = libencryption.encrypt(msg)
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     logger.debug("put from a post return sid=" + sid)
