@@ -39,10 +39,16 @@ def add_secret():
     msg = result["msg"]
     pin = result["pin"]
     exp = result["exp"]
+    # try:
+    #     if libencryption.key(msg):
+    #         encrypted_msg = libencryption.encrypt(msg)
+    # except Exception:
+    #     logger.error("File does not exist")
+
     if libencryption.key(msg):
         encrypted_msg = libencryption.encrypt(msg)
     else:
-        return jsonify ("File is not found")
+        return jsonify ("File key.txt is not found")
     # if os.path.isfile('key.txt'):
     #     encrypted_msg = libencryption.encrypt(msg)
     # else:
