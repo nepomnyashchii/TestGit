@@ -12,10 +12,6 @@ def check_key ():
             return False
     except IOError:
         logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
     except Exception as ex:
         logger.error(ex)
     # else:
