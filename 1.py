@@ -14,13 +14,15 @@ def car():
     car = input ("Enter: what model is your car: ")
     my_car = car
     print(my_car)
-    if my_car == "Mercedes":
-        return my_car
-    else:
-        sys.exit("Wrong model")
-
+    return my_car
+    
 name()
 age()
-car()
+
+my_car = car()
+if my_car == "Mercedes":
+    print("Everything is good")
+else:
+    sys.exit("Wrong model")
 
 
