@@ -3,6 +3,7 @@ import dblib
 import logger_module
 import libencryption
 import os.path
+import sys
 
 logger = logger_module.setup_logger("secret")
 
@@ -12,7 +13,7 @@ if libencryption.check_key():
 else:
     print ('Cannot Find Server as file key.txt is not found')
     logger.debug('Cannot Find Server as file key.txt is not found')
-    return 1
+    sys.exit("File key.txt is not found ")
 
 
 app = Flask(__name__)
@@ -48,21 +49,7 @@ def add_secret():
     msg = result["msg"]
     pin = result["pin"]
     exp = result["exp"]
-    # try:
-    #     if libencryption.key(msg):
-    #         encrypted_msg = libencryption.encrypt(msg)
-    # except Exception:
-    #     logger.error("File does not exist")
-
-    if libencryption.key(msg):
-        encrypted_msg = libencryption.encrypt(msg)
-    else:
-        return jsonify ("File key.txt is not found")
-    # if os.path.isfile('key.txt'):
-    #     encrypted_msg = libencryption.encrypt(msg)
-    # else:
-    #     # raise FileNotFoundError
-    #     return jsonify("File does not exist")
+    encrypted_msg = libencryption.encrypt(msg)
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     logger.debug("put from a post return sid=" + sid)
     return jsonify(sid=sid)
