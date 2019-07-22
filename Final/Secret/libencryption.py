@@ -14,9 +14,6 @@ def check_key ():
         logger.error('An error occured trying to read the file.')
     except Exception as ex:
         logger.error(ex)
-    # else:
-    #     # raise FileNotFoundError
-    #     return {"File does not exist"}
 
 def get_cryptor():
     try:
