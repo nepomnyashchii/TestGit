@@ -13,9 +13,9 @@ if libencryption.check_key():
 else:
     print ('Cannot Find Server as file key.txt is not found')
     logger.debug('Cannot Find Server as file key.txt is not found')
+    return 1
 
 
-# logger.debug('Starting my super App')
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 app.config['APPLICATION_ROOT'] = '/api'
