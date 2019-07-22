@@ -44,17 +44,18 @@ def ping():
 @app.route('/secret', methods=['POST'])
 def add_secret():
     logger.debug("Invoke: put from a post")
-    if len(request.json) > 0:
+    if request.json is None \
+            or request.json is not None \
+            and ("msg" not in request.json.keys() or "pin" not in request.json.keys() or "exp" not in request.json.keys()):
+            return jsonify({
+            'status': "404: request",
+            'message': 'Invalid Body url: ' + request.url,
+        })
+    else:
         result = request.json
         msg = result["msg"]
         pin = result["pin"]
         exp = result["exp"]
-    else:
-        return jsonify({
-            'status': "404: request",
-            'message': 'body is wrong: ' + request.url,
-        })
-
     encrypted_msg = libencryption.encrypt(msg)
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     logger.debug("put from a post return sid=" + sid)
