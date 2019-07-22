@@ -3,25 +3,23 @@ import mysql.connector
 import datetime
 import time
 import logger_module
-import json
-from cryptography.fernet import Fernet
-
 
 logger = logger_module.setup_logger("dblib")
 
 
 def open_db():
     try:
-        logger.debug(logger.debug('open_db invoked'))
+        logger.debug('open_db invoked')
         mydb = mysql.connector.connect(
             host="db4free.net",
             user="coolspammail",
             passwd="coolspammail-pass",
             database="coolspammail"
         )
+        logger.debug('open_db finished')
         return mydb
-    except mysql.connector.Error:
-        logger.error('There is no connection: {}'.format(logger.error))
+    except mysql.connector.Error as error:
+        logger.error('There is no DB connection: {}'.format(error))
 
 
 def close_db(mydb):
@@ -31,7 +29,8 @@ def close_db(mydb):
         logger.debug("close_db finished")
 
     except mysql.connector.Error:
-        logger.error('Something happened with the server: {}'.format(logger.error))
+        logger.error(
+            'Something happened with the server: {}'.format(logger.error))
 
 
 def is_not_expired(created, exp):
@@ -48,16 +47,11 @@ def is_not_expired(created, exp):
         else:
             logger.debug("is_not_expired return False")
             return False
-    except IOError:
-        logger.error('An error occured trying to read the file.')
+
     except ValueError:
         logger.error('Non-numeric data found in the file.')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
-
-
+    except Exception as err:
+        logger.error(err)
 
 
 def put_secret(msg, pin, exp):
@@ -70,15 +64,16 @@ def put_secret(msg, pin, exp):
         logger.debug("Time created: " + str(created))
         return_value = ''
         mydb = open_db()
-        mycursor = mydb.cursor()
-        sql = "INSERT INTO secret (id, msg, pin, exp, created) VALUES (%s, %s, %s, %s, %s)"
-        val = (sid, msg, pin, exp, created)
-        mycursor.execute(sql, val)
-        logger.debug("Commit changes to the database")
-        mydb.commit()
-        close_db(mydb)
-        return_value = sid
-        logger.debug("sid added to the database: " + str(sid))
+        if mydb is not None:
+            mycursor = mydb.cursor()
+            sql = "INSERT INTO secret (id, msg, pin, exp, created) VALUES (%s, %s, %s, %s, %s)"
+            val = (sid, msg, pin, exp, created)
+            mycursor.execute(sql, val)
+            logger.debug("Commit changes to the database")
+            mydb.commit()
+            close_db(mydb)
+            return_value = sid
+            logger.debug("sid added to the database: " + str(sid))
     except mysql.connector.Error:
         logger.error('Something went wrong: {}'.format(logger.error))
 
@@ -90,25 +85,17 @@ def get_secret_from_db(sid, pin):
     logger.debug("get_secret_from_db sid, pin: " + str(sid) + " " + str(pin))
     try:
         print("DB wait...")
-        return_value = ''
         mydb = open_db()
-        mycursor = mydb.cursor()
-        sql = "SELECT msg, created, exp FROM secret WHERE id =  %s AND pin = %s"
-        params = (sid, int(pin))
-        mycursor.execute(sql, params)
-        myresult = mycursor.fetchone()
-        close_db(mydb)
-
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
-
-    return myresult
+        if mydb is not None:
+            mycursor = mydb.cursor()
+            sql = "SELECT msg, created, exp FROM secret WHERE id =  %s AND pin = %s"
+            params = (sid, int(pin))
+            mycursor.execute(sql, params)
+            myresult = mycursor.fetchone()
+            close_db(mydb)
+            return myresult
+    except mysql.connector.Error as err:
+        logger.error(err)
 
 
 def get_secret(sid, pin):
@@ -130,23 +117,16 @@ def get_secret(sid, pin):
         else:
             return_value = ""
         return return_value
-    except IOError:
-        logger.error('An error occured trying to read the file.')
     except ValueError:
         logger.error('Non-numeric data found in the file.')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
+    except Exception as err:
+        logger.error(err)
 
 
 def del_secret(sid, pin):
     """del secret from db."""
-    print(sid, pin)
-
-    print("Please wait...")
-    # return_value = ''
     try:
+        print("Please wait...")
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
@@ -156,15 +136,8 @@ def del_secret(sid, pin):
         mydb.commit()
         logger.debug("Data deleted")
         close_db(mydb)
-        print(mycursor.rowcount, "record(s) deleted")
-        return mycursor.rowcount
-
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
-
+        if mycursor.rowcount == 1:
+            return True
+        return False
+    except mysql.connector.Error as err:
+        logger.error(err)

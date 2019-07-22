@@ -10,7 +10,7 @@ if libencryption.check_key():
     print("Starting my super App")
     logger.debug('Starting my super App')
 else:
-    print ('Cannot Find Server as file key.txt is not found')
+    print('Cannot Find Server as file key.txt is not found')
     logger.debug('Cannot Find Server as file key.txt is not found')
     sys.exit("File key.txt is not found ")
 
@@ -19,7 +19,6 @@ app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 app.config['APPLICATION_ROOT'] = '/api'
 print("\n\n\n")
-
 
 
 @app.route('/')
@@ -41,11 +40,12 @@ def ping():
 # ------- ADD SECRET ----------
 # ------------------------------
 
+
 @app.route('/secret', methods=['POST'])
 def add_secret():
     logger.debug("Invoke: put from a post")
-    if  len(request.json)>0:
-        result =request.json
+    if len(request.json) > 0:
+        result = request.json
         msg = result["msg"]
         pin = result["pin"]
         exp = result["exp"]
@@ -78,58 +78,57 @@ def add_secret():
 @app.route('/secret/<sid>/<int:pin>', methods=['GET'])
 def get_secret_query(sid, pin):
     logger.debug("/secret GET invoked")
-    msg = dblib.get_secret(sid, pin)
-    if len(msg) > 0:
-        logger.debug("secret obtained from DB: " + msg)
-        decrypted_msg = libencryption.decrypt(msg)
-        logger.debug("/secret GET returned OK")
-        return jsonify(msg=decrypted_msg)
-    else:
-        logger.debug("/secret GET returned 404")
-        return jsonify({
-            'status': "404: request",
-            'message': 'pin or sid is wrong: ' + request.url,
-        })
+    returnMessage(dblib.get_secret(sid, pin))
 
 # ------------------------------
 # -------- GET SECRET (BODY)----
 # ------------------------------
 
+
 @app.route('/secret', methods=['GET'])
 def get_secret_body():
-    logger.debug("Obtain msg from the database")
-    result = request.json
-    sid = result["sid"]
-    pin = result["pin"]
-    msg = dblib.get_secret(sid, pin)
+    logger.debug("/secret GET with BODY invoked")
+    if request.json is None \
+            or request.json is not None \
+            and ("sid" not in request.json.keys() or "pin" not in request.json.keys()):
+        return jsonify({
+            'status': "Bad request",
+            'message': 'invalid body url=' + request.url,
+        }), 400
+    else:
+        return returnMessage(dblib.get_secret(request.json["sid"], request.json["pin"]))
+
+
+# ------------------------------
+# -------- GET SECRET helper----
+# ------------------------------
+
+def returnMessage(msg):
     if len(msg) > 0:
         logger.debug("Message obtained: " + msg)
         decrypted_msg = libencryption.decrypt(msg)
         return jsonify(msg=decrypted_msg)
-    else:
-        return jsonify({
-            'status': "200: request",
-            'message': 'pin or sid is wrong: ' + request.url,
-        })
-
+    return jsonify({
+        'status': "200: request",
+        'message': 'pin or sid is wrong: ' + request.url,
+    })
 
 # ------------------------------
 # -------- DEL SECRET ----------
 # ------------------------------
 
+
 @app.route('/secret/<sid>/<int:pin>', methods=['DELETE'])
 def del_secret(sid, pin):
     # logger.debug("Delete data from database")
     deleted = dblib.del_secret(sid, pin)
-    if deleted==1:
+    if deleted:
         logger.debug("Sid succesfully deleted: " + str(deleted))
-        return  jsonify(deleted_sid=sid)
+        return jsonify(deleted_sid=sid)
     else:
         return jsonify({
             'status': "404: request",
-            'message':'Such Sid and/or pin does not exist'})
-# logger.debug('End my super App')
-
+            'message': 'Such Sid and/or pin does not exist'})
 
 
 # ------------------------------
