@@ -3,7 +3,7 @@ import sys
 def name ():
     name= input("Enter: What is your name: ")
     my_name = "Your name is " + name + "\n"
-    print(name)
+    return age()
 
 def age ():
     age = input("Enter: What is your age: ")
@@ -25,7 +25,7 @@ def car():
     return my_car
 
 name()
-age()
+
 
 
 
