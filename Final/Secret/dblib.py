@@ -86,6 +86,7 @@ def get_secret_from_db(sid, pin):
     try:
         print("DB wait...")
         mydb = open_db()
+        return_value = ""
         if mydb is not None:
             mycursor = mydb.cursor()
             sql = "SELECT msg, created, exp FROM secret WHERE id =  %s AND pin = %s"
@@ -93,9 +94,10 @@ def get_secret_from_db(sid, pin):
             mycursor.execute(sql, params)
             myresult = mycursor.fetchone()
             close_db(mydb)
-            return myresult
-    except mysql.connector.Error as err:
-        logger.error(err)
+            return_value = myresult
+    except mysql.connector.Error as error:
+        logger.error(error)
+    return return_value
 
 
 def get_secret(sid, pin):
