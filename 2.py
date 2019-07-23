@@ -14,9 +14,8 @@ def age ():
 
 def car():
     car = input ("Enter: What model is your car: ")
-    my_car = car
-    print(my_car)
-    return my_car
+    print(car)
+    return car
 
 name()
 age = age()
