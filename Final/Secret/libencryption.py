@@ -52,8 +52,6 @@ def encrypt(msg):
         logger.error(error)
     return encrypted_msg
 
-
-
 def decrypt(msg):
     try:
         logger.debug("Start decryption")
