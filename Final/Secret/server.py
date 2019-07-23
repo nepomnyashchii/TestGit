@@ -59,7 +59,13 @@ def add_secret():
     encrypted_msg = libencryption.encrypt(msg)
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     logger.debug("put from a post return sid=" + sid)
-    return jsonify (sid=sid)
+    # return jsonify(sid=sid)
+    if len(str(sid))>0:
+        return jsonify (sid=sid)
+    else:
+        return jsonify (sid = sid,
+        Data="Data is not received from DB")
+
 
 
 # Old Put - method=GET
@@ -138,16 +144,34 @@ def del_secret(sid, pin):
 
 @app.route('/secret', methods=['DELETE'])
 def delete_secret():
-    return jsonify(data='Not implemented yet'), 404
+    return jsonify(Data='Not implemented yet'), 404
 
 # ------------------------------
-# -------- DEL SECRET ----------
+# -------- CHECK ROUTE /SECRET ----------
 # ------------------------------
 
 @app.route('/secret', methods=['PUT', 'PATCH', 'COPY', 'HEAD' ])
-def invalid_method_request():
+def invalid_method_request_secret():
     if request.method == 'PUT' or 'PATCH'or 'COPY' or'HEAD':
-        return jsonify(data='Invalid request.method'), 404
+        return jsonify(Data='Invalid request.method'), 404
+
+# ------------------------------
+# -------- CHECK ROUTE / ----------
+# ------------------------------
+
+@app.route('/', methods=['POST', 'DELETE','PUT', 'PATCH', 'COPY', 'HEAD' ])
+def invalid_method_request():
+    if request.method == 'POST' or 'DELETE' or 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+        return jsonify(Data='Invalid request.method'), 404
+
+# ------------------------------
+# -------- CHECK ROUTE /SECRET/SID/PIN ----------
+# ------------------------------
+
+@app.route('/secret/<sid>/<int:pin>', methods=['POST','PUT', 'PATCH', 'COPY', 'HEAD' ])
+def invalid_method_request_id_pin():
+    if request.method == 'POST' or 'DELETE' or 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+        return jsonify(Data='Invalid request.method'), 404
 
 
 # ------------------------------
