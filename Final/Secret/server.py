@@ -59,7 +59,7 @@ def add_secret():
     encrypted_msg = libencryption.encrypt(msg)
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     logger.debug("put from a post return sid=" + sid)
-    return jsonify(sid=sid)
+    return jsonify (sid=sid)
 
 
 # Old Put - method=GET
@@ -139,6 +139,15 @@ def del_secret(sid, pin):
 @app.route('/secret', methods=['DELETE'])
 def delete_secret():
     return jsonify(data='Not implemented yet'), 404
+
+# ------------------------------
+# -------- DEL SECRET ----------
+# ------------------------------
+
+@app.route('/secret', methods=['PUT', 'PATCH', 'COPY', 'HEAD' ])
+def invalid_method_request():
+    if request.method == 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+        return jsonify(data='Invalid request.method'), 404
 
 
 # ------------------------------
