@@ -13,8 +13,8 @@ def check_key ():
             return False
     except IOError:
         logger.error('An error occured trying to read the file.')
-    except Exception as ex:
-        logger.error(ex)
+    except Exception as error:
+        logger.error(error)
 
 def get_cryptor():
     try:
@@ -31,8 +31,8 @@ def get_cryptor():
         logger.error('Non-numeric data found in the file.')
     except KeyboardInterrupt:
         logger.error('You cancelled the operation.')
-    except Exception as ex:
-        logger.error(ex)
+    except Exception as error:
+        logger.error(error)
 
 
 def encrypt(msg):
@@ -48,8 +48,8 @@ def encrypt(msg):
         logger.error('Non-numeric data found in the file.')
     except KeyboardInterrupt:
         logger.error('You cancelled the operation.')
-    except Exception as ex:
-        logger.error(ex)
+    except Exception as error:
+        logger.error(error)
     return encrypted_msg
 
 
@@ -67,7 +67,7 @@ def decrypt(msg):
         logger.error('Non-numeric data found in the file.')
     except KeyboardInterrupt:
         logger.error('You cancelled the operation.')
-    except Exception as ex:
-        logger.error(ex)
+    except Exception as error:
+        logger.error(error)
     return decrypted_msg
 
