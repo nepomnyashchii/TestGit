@@ -22,7 +22,7 @@ def car():
         print("It is my car")
     else:
         sys.exit("You are in a wrong car")
-    return my_car
+        return my_car
 
 name()
 
