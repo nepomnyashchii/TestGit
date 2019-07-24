@@ -121,8 +121,8 @@ def get_secret(sid, pin):
         return return_value
     except ValueError:
         logger.error('Non-numeric data found in the file.')
-    except Exception as err:
-        logger.error(err)
+    except Exception as error:
+        logger.error(error)
 
 
 def del_secret(sid, pin):
@@ -142,4 +142,4 @@ def del_secret(sid, pin):
             return True
         return False
     except mysql.connector.Error as err:
-        logger.error(err)
+        logger.error(error)
