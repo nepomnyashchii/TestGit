@@ -144,19 +144,26 @@ def del_secret(sid, pin):
 
 @app.route('/secret', methods=['DELETE'])
 def delete_secret():
-    if request.json is None \
+    result=request.json
+    sid = result["sid"]
+    pin = result["pin"]
+    deleted = dblib.del_secret(sid, pin)
+    if deleted:
+        if request.json is None \
             or request.json is not None \
             and ("sid" not in request.json.keys() or "pin" not in request.json.keys()):
-        return jsonify({
+            return jsonify({
             'status': "Bad request",
             'message': 'invalid body url=' + request.url,
         }), 400
+        else:
+            return jsonify(deleted_sid =sid)
     else:
-        result=request.json
-        sid = result["sid"]
-        pin = result["pin"]
-        deleted = dblib.del_secret(sid, pin)
-        return jsonify(deleted_sid=sid)
+        return jsonify({
+            'status': "404: request",
+            'message': 'Such Sid and/or pin does not exist'})
+
+
 
 # # ------------------------------
 # # -------- CHECK ROUTE /SECRET ----------
