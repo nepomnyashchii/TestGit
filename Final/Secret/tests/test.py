@@ -24,11 +24,22 @@ sid = result["sid"]
 pin = data["pin"]
 
 
-URL = "http://localhost:5000/secret/" + sid + "/" + str(pin)
+URLA = "http://localhost:5000/secret/" + sid + "/" + str(pin)
 
-response = requests.get(URL)
+response = requests.get(URLA)
 response_url = response.text
 print(response_url)
+
+data = {
+    "sid" : sid,
+    "pin": pin}
+
+payload = json.dumps(data)
+response = requests.delete(url, data = payload, headers =headers)
+print(response.text)
+print(response.json())
+
+
 
 
 # print(response.json())
