@@ -146,32 +146,32 @@ def del_secret(sid, pin):
 def delete_secret():
     return jsonify(Data='Not implemented yet'), 404
 
-# ------------------------------
-# -------- CHECK ROUTE /SECRET ----------
-# ------------------------------
+# # ------------------------------
+# # -------- CHECK ROUTE /SECRET ----------
+# # ------------------------------
 
-@app.route('/secret', methods=['PUT', 'PATCH', 'COPY', 'HEAD' ])
-def invalid_method_request_secret():
-    if request.method == 'PUT' or 'PATCH'or 'COPY' or'HEAD':
-        return jsonify(Data='Invalid request.method'), 404
+# @app.route('/secret', methods=['PUT', 'PATCH', 'COPY', 'HEAD' ])
+# def invalid_method_request_secret():
+#     if request.method == 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+#         return jsonify(Data='Invalid request.method'), 404
 
-# ------------------------------
-# -------- CHECK ROUTE / ----------
-# ------------------------------
+# # ------------------------------
+# # -------- CHECK ROUTE / ----------
+# # ------------------------------
 
-@app.route('/', methods=['POST', 'DELETE','PUT', 'PATCH', 'COPY', 'HEAD' ])
-def invalid_method_request():
-    if request.method == 'POST' or 'DELETE' or 'PUT' or 'PATCH'or 'COPY' or'HEAD':
-        return jsonify(Data='Invalid request.method'), 404
+# @app.route('/', methods=['POST', 'DELETE','PUT', 'PATCH', 'COPY', 'HEAD' ])
+# def invalid_method_request():
+#     if request.method == 'POST' or 'DELETE' or 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+#         return jsonify(Data='Invalid request.method'), 404
 
-# ------------------------------
-# -------- CHECK ROUTE /SECRET/SID/PIN ----------
-# ------------------------------
+# # ------------------------------
+# # -------- CHECK ROUTE /SECRET/SID/PIN ----------
+# # ------------------------------
 
-@app.route('/secret/<sid>/<int:pin>', methods=['POST','PUT', 'PATCH', 'COPY', 'HEAD' ])
-def invalid_method_request_id_pin():
-    if request.method == 'POST' or 'DELETE' or 'PUT' or 'PATCH'or 'COPY' or'HEAD':
-        return jsonify(Data='Invalid request.method'), 404
+# @app.route('/secret/<sid>/<int:pin>', methods=['POST','PUT', 'PATCH', 'COPY', 'HEAD' ])
+# def invalid_method_request_id_pin():
+#     if request.method == 'POST' or 'DELETE' or 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+#         return jsonify(Data='Invalid request.method'), 404
 
 
 # ------------------------------
@@ -187,4 +187,17 @@ def not_found(error=None):
     }
     resp = jsonify(message)
     resp.status_code = 404
+    return resp
+
+
+
+@app.errorhandler(405)
+def invalid_method(error=None):
+    logger.debug("405 errorhandler invoked for:" + request.url)
+    message = {
+        'status': 405,
+        'message': '405 Method Not Allowed: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 405
     return resp
