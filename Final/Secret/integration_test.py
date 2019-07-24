@@ -10,5 +10,6 @@ API_ENDPOINT = "https://5000-c2d101ea-6ebb-45c7-aa95-fd28b9062de9.ws-us0.gitpod.
 response = requests.post(url = API_ENDPOINT, data=data)
 
 
-pastebin_url = response.text
-print("The pastebin URL is:%s"%pastebin_url)
+response_url = response.text
+print(response_url)
+
