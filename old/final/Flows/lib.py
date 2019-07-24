@@ -156,8 +156,8 @@ def weather_data(actionline):
     logger.debug("Weather_data: " + str(splited))
     location = splited[1]
     logger.debug("Weather_data: " + str(location))
-    # url = 'https://samples.openweathermap.org/data/2.5/weather?q=' + \
-    #     location + '&appid=1bdcae6b7d23f180361c8878a965c9f8'
+    url = 'https://samples.openweathermap.org/data/2.5/weather?q=' + \
+        location + '&appid=1bdcae6b7d23f180361c8878a965c9f8'
     appid = '1bdcae6b7d23f180361c8878a965c9f8'
     url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
         location, appid)

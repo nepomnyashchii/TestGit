@@ -15,14 +15,20 @@ payload = json.dumps(data)
 
 
 response = requests.post(url, data=payload ,headers=headers)
+print(response.json())
 print(response.text)
 
+result = response.json()
 
-sid = "69e90627-e82d-481a-9818-b5b7b63e33bd"
-msg = 1234
-# URL = "http://localhost:5000/secret/sid/msg"
+sid = result["sid"]
+pin = data["pin"]
 
-response = requests.get("http://localhost:5000/secret/ +sid ")
+
+URL = "http://localhost:5000/secret/" + sid + "/" + str(pin)
+
+response = requests.get(URL)
 response_url = response.text
 print(response_url)
+
+
 # print(response.json())
