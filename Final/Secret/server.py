@@ -139,7 +139,7 @@ def del_secret(sid, pin):
 
 
 # ------------------------------
-# -------- DEL SECRET ----------
+# -------- DEL SECRET BODY ----------
 # ------------------------------
 
 @app.route('/secret', methods=['DELETE'])
