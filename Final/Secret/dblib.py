@@ -141,5 +141,5 @@ def del_secret(sid, pin):
         if mycursor.rowcount == 1:
             return True
         return False
-    except mysql.connector.Error as err:
+    except mysql.connector.Error as error:
         logger.error(error)
