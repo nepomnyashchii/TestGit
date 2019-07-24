@@ -2,6 +2,7 @@ import mysql.connector
 import requests
 import json
 import logger_module
+import pyowm
 
 logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
@@ -23,7 +24,7 @@ def get_flowdata(username, flow):
     """get flowdata from db."""
     myresult = ''
     try:
-        logger.debug('Invoke def open_db()')
+        logger.debug('Invoke: def open_db()')
         mydb = open_db()
         mycursor = mydb.cursor()
         logger.debug("Start executing action for db")
@@ -37,7 +38,7 @@ def get_flowdata(username, flow):
         mycursor.execute(sql, val)
         myresult = mycursor.fetchall()
         logger.debug("All obtained data: " + str(myresult))
-        logger.debug("Invoke def close_db(mydb)")
+        logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
 
     except IOError:
@@ -71,14 +72,14 @@ def run_action(actionline):
         return cocktail_data(actionline)
     if action == "weather":
         return weather_data(actionline)
-    logger.error('action not implemented' + action)
+    logger.error("Action not implemented: " + action)
     return {
         "action": action,
     }
 
 
 def apinews_data(actionline):
-    logger.debug("Invoke Apinews")
+    logger.debug("Invoke: Apinews")
     splited = actionline.split(":")
     logger.debug("Apinews: " + str(splited))
     count = int(splited[1])
@@ -94,7 +95,7 @@ def apinews_data(actionline):
 
 
 def apinorris_data(actionline):
-    logger.debug("Invoke apinorris")
+    logger.debug("Invoke: apinorris")
     splited = actionline.split(":")
     logger.debug("Apinorris: " + str(splited))
     count = int(splited[1])
@@ -108,7 +109,7 @@ def apinorris_data(actionline):
 
 
 def convert_news(news_results, count):
-    logger.debug("Invoke convert_news,apinews json conversion")
+    logger.debug("Invoke: convert_news,apinews json conversion")
     news_obj = news_results.json()
     logger.debug("Convert_news, apinews: " + str(news_obj))
     source_articles = news_obj["articles"]
@@ -125,7 +126,7 @@ def convert_news(news_results, count):
 
 
 def convert_norris(norris_results, actionline):
-    logger.debug("Invoke convert_norris,apinorris json conversion")
+    logger.debug("Invoke: convert_norris,apinorris json conversion")
     obj = norris_results.json()
     logger.debug("Convert_norris_apinorris: " + str(obj))
     source_list = obj["value"]
@@ -138,12 +139,12 @@ def convert_norris(norris_results, actionline):
     for source_item in source_list:
         changed_joke = source_item["joke"].replace("Chuck Norris", name_change)
         return_list.append(changed_joke)
-    logger.debug("Collect all data and name change" + str(return_list))
+    logger.debug("Collect all data and name change: " + str(return_list))
     return return_list
 
 
 def cocktail_data(actionline):
-    logger.debug("Invoke Cocktail_data")
+    logger.debug("Invoke: Cocktail_data")
     response = requests.get(
         'https://www.thecocktaildb.com/api/json/v1/1/random.php')
 
@@ -151,28 +152,19 @@ def cocktail_data(actionline):
     return response.json()
 
 def weather_data(actionline):
-    logger.debug('Invoke weather_data' + actionline)
     splited = actionline.split(":")
     logger.debug("Weather_data: " + str(splited))
     location = splited[1]
-    logger.debug("Weather_data: " + str(location))
-    url = 'https://samples.openweathermap.org/data/2.5/weather?q=' + \
-        location + '&appid=1bdcae6b7d23f180361c8878a965c9f8'
-    appid = '1bdcae6b7d23f180361c8878a965c9f8'
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
-        location, appid)
-    logger.debug('Weather_data url= ' + str(url))
-    response = requests.get(url)
-    if response.status_code != 200:
-        return {"error": response.json()}
-    logger.debug("Weather data: " + str(response))
-    return convert_weather(response)
+    logger.debug("Location: " + location)
+    API_key = '1bdcae6b7d23f180361c8878a965c9f8'
+    owm = pyowm.OWM(API_key)
+    observation = owm.weather_at_place(location)
+    w = observation.get_weather()
+    temperature = w.get_temperature('celsius')['temp']
+    logger.debug("Temperature: " + str(temperature))
+    answer = "In " + location + " temperature now is: " + str(temperature) + " degrees celcius" + "\n"
+    answer +="In our city " + w.get_detailed_status()
+    logger.debug("Information about weather: " + answer)
 
-def convert_weather (weather_results):
-    logger.debug("Invoke convert weather_results")
-    weather = weather_results.json()
-    return_data = {"temperature": weather["main"]["temp"],
-    "pressure": weather["main"]["pressure"],
-    "city name": weather["name"]}
-    logger.debug("Weather results" + str(return_data))
-    return return_data
+    return answer
+

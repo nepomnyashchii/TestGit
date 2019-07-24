@@ -67,6 +67,17 @@ def add_secret():
         Data="Data is not received from DB")
 
 
+
+# Old Put - method=GET
+# @app.route('/secret/put/<msg>/<int:pin>/<int:exp>', methods=['GET'])
+# def put(msg, pin, exp):
+#     encrypted_msg = libencryption.encrypt(msg)
+#     logger.debug("Invoke: put a get")
+#     sid = dblib.put_secret(encrypted_msg, pin, exp)
+#     logger.debug("Obtain sid: " + sid)
+#     return jsonify(sid=sid)
+
+
 # ------------------------------
 # -------- GET SECRET ----------
 # ------------------------------
@@ -116,7 +127,7 @@ def returnMessage(msg):
 
 @app.route('/secret/<sid>/<int:pin>', methods=['DELETE'])
 def del_secret(sid, pin):
-    logger.debug("Delete data from database")
+    # logger.debug("Delete data from database")
     deleted = dblib.del_secret(sid, pin)
     if deleted:
         logger.debug("Sid succesfully deleted: " + str(deleted))
@@ -133,11 +144,9 @@ def del_secret(sid, pin):
 
 @app.route('/secret', methods=['DELETE'])
 def delete_secret():
-    logger.debug("Delete data from the database invoked")
     result=request.json
     sid = result["sid"]
     pin = result["pin"]
-    logger.debug("pin: " + pin)
     deleted = dblib.del_secret(sid, pin)
     if deleted:
         if request.json is None \
@@ -148,12 +157,40 @@ def delete_secret():
             'message': 'invalid body url=' + request.url,
         }), 400
         else:
-            logger.debug("Sid successfully deleted: " + str(deleted))
             return jsonify(deleted_sid =sid)
     else:
         return jsonify({
             'status': "404: request",
             'message': 'Such Sid and/or pin does not exist'})
+
+
+
+# # ------------------------------
+# # -------- CHECK ROUTE /SECRET ----------
+# # ------------------------------
+
+# @app.route('/secret', methods=['PUT', 'PATCH', 'COPY', 'HEAD' ])
+# def invalid_method_request_secret():
+#     if request.method == 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+#         return jsonify(Data='Invalid request.method'), 404
+
+# # ------------------------------
+# # -------- CHECK ROUTE / ----------
+# # ------------------------------
+
+# @app.route('/', methods=['POST', 'DELETE','PUT', 'PATCH', 'COPY', 'HEAD' ])
+# def invalid_method_request():
+#     if request.method == 'POST' or 'DELETE' or 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+#         return jsonify(Data='Invalid request.method'), 404
+
+# # ------------------------------
+# # -------- CHECK ROUTE /SECRET/SID/PIN ----------
+# # ------------------------------
+
+# @app.route('/secret/<sid>/<int:pin>', methods=['POST','PUT', 'PATCH', 'COPY', 'HEAD' ])
+# def invalid_method_request_id_pin():
+#     if request.method == 'POST' or 'DELETE' or 'PUT' or 'PATCH'or 'COPY' or'HEAD':
+#         return jsonify(Data='Invalid request.method'), 404
 
 
 # ------------------------------
@@ -169,7 +206,6 @@ def not_found(error=None):
     }
     resp = jsonify(message)
     resp.status_code = 404
-    logger.debug("Status 404 found with errorhandler")
     return resp
 
 
@@ -183,5 +219,4 @@ def invalid_method(error=None):
     }
     resp = jsonify(message)
     resp.status_code = 405
-    logger.debug("Status 405 found with errorhandler")
     return resp
