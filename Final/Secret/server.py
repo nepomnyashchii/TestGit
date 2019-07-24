@@ -134,24 +134,24 @@ def del_secret(sid, pin):
 @app.route('/secret', methods=['DELETE'])
 def delete_secret():
     logger.debug("Delete data from the database invoked")
-    result=request.json
-    sid = result["sid"]
-    pin = result["pin"]
-    logger.debug("pin: " + pin)
-    deleted = dblib.del_secret(sid, pin)
-    if deleted:
-        if request.json is None \
+    if request.json is None \
             or request.json is not None \
             and ("sid" not in request.json.keys() or "pin" not in request.json.keys()):
             return jsonify({
             'status': "Bad request",
             'message': 'invalid body url=' + request.url,
         }), 400
-        else:
-            logger.debug("Sid successfully deleted: " + str(deleted))
-            return jsonify(deleted_sid =sid)
     else:
-        return jsonify({
+        result=request.json
+        sid = result["sid"]
+        pin = result["pin"]
+        logger.debug("pin: " + str(pin))
+        deleted = dblib.del_secret(sid, pin)
+        if deleted:
+            logger.debug("Sid succesfully deleted: " + str(deleted))
+            return jsonify(deleted_sid=sid)
+        else:
+            return jsonify({
             'status': "404: request",
             'message': 'Such Sid and/or pin does not exist'})
 
@@ -176,7 +176,7 @@ def not_found(error=None):
 
 @app.errorhandler(405)
 def invalid_method(error=None):
-    logger.debug("405 errorhandler invoked for:" + request.url)
+    # logger.debug("405 errorhandler invoked for:" + request.url)
     message = {
         'status': 405,
         'message': '405 Method Not Allowed: ' + request.url,

@@ -14,29 +14,25 @@ data = {'msg': 'success',
 payload = json.dumps(data)
 
 response = requests.post(url, data=payload, headers=headers)
-if response.json() is None:
+if response.json() is None or response.json () is not None and "sid" not in response.json.keys() or "pin" not in response.json.keys():
     print("There is an error in the file")
 else:
     response.json()
     print("Information for post_method succesfully received")
     print(response.json())
 
-result = response.json()
-sid = result["sid"]
+
+sid = response["sid"]
 pin = data["pin"]
-
-
 URL = "http://localhost:5000/secret/" + sid + "/" + str(pin)
-
 response = requests.get(URL)
 
-if response.json() is None:
-    print("There is an error in the file")
+if response.json() is None or response.json() is not None and "msg" not in response.json.keys():
+    print("There is an error in requests_get")
 else:
     response.json()
-    print("Information for post_method succesfully received")
+    print("Information for get_method succesfully received")
     print(response.json())
-
 
 data = {
     "sid": sid,
@@ -44,13 +40,9 @@ data = {
 
 payload = json.dumps(data)
 response = requests.delete(url, data=payload, headers=headers)
+if response.json() is None or response.json() is not None and "deleted_sid" not in response.json.keys():
+    
+print(response.json())
 
-if response.json() is None:
-    print("There is an error in the file")
-else:
-    response.json()
-    print("Information for post_method succesfully received")
-    print(response.json())
 
 # print(response.json())
-
