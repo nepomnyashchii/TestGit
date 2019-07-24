@@ -8,13 +8,13 @@ headers = {'Content-Type': "application/json"}
 # payload = '{"msg":"ggg", "pin": 12345,"exp": 10000}'
 
 data = {'msg': 'success',
-         'pin': 1234,
-         'exp': 10000}
+        'pin': 12345555555555555,
+        'exp': 10000}
 
 payload = json.dumps(data)
 
 
-response = requests.post(url, data=payload ,headers=headers)
+response = requests.post(url, data=payload, headers=headers)
 print(response.json())
 print(response.text)
 
@@ -31,15 +31,13 @@ response_url = response.text
 print(response_url)
 
 data = {
-    "sid" : sid,
+    "sid": sid,
     "pin": pin}
 
 payload = json.dumps(data)
-response = requests.delete(url, data = payload, headers =headers)
+response = requests.delete(url, data=payload, headers=headers)
 print(response.text)
 print(response.json())
-
-
 
 
 # print(response.json())
