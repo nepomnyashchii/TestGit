@@ -22,11 +22,11 @@ else:
     test_1 == True
     result = test_1
     sid = result["sid"]
-    print(sid)
+    print("sid=" + sid)
 
 
 pin = data["pin"]
-print(pin)
+print("pin=" + str(pin))
 
 test_2_response = requests.get("http://localhost:5000/secret/" + sid + "/" + str(pin))
 test_2 = test_2_response.json()
@@ -37,7 +37,7 @@ if test_1:
         test_2_response == True
         result = test_2
         msg = result["msg"]
-        print(msg)
+        print("msg=" + msg)
 
 data = {
     "sid": sid,
@@ -53,7 +53,7 @@ if test_2:
     else:
         result = test_3
         deleted_id = result["deleted_sid"]
-        print(deleted_id)
+        print("deleted_id=" + deleted_id)
 
 sys.exit("All integration tests are done")
 
