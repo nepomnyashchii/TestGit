@@ -104,7 +104,7 @@ def returnMessage(msg):
     logger.debug("returnMessage invoked")
     if len(msg) > 0:
         decrypted_msg = libencryption.decrypt(msg)
-        logger.debug("Decrypted message invoked: "+ decrypted_msg)
+        logger.debug("Decrypted message: "+ decrypted_msg)
         return jsonify(msg=decrypted_msg)
     return jsonify({
         'status': "200: request",
@@ -121,7 +121,7 @@ def del_secret(sid, pin):
     logger.debug("Delete data from database")
     deleted = dblib.del_secret(sid, pin)
     if deleted:
-        logger.debug("sid succesfully deleted: " + str(deleted))
+        logger.debug("sid succesfully deleted: " + str(deleted) + " " + str(sid))
         return jsonify(deleted_sid=sid)
     else:
         logger.debug("Such sid and/or pin does not exist")
@@ -151,12 +151,13 @@ def delete_secret():
         pin = result["pin"]
         deleted = dblib.del_secret(sid, pin)
         if deleted:
-            logger.debug("sid succesfully deleted: " + str(deleted))
+            logger.debug("sid succesfully deleted: " + str(deleted) + " " + str(sid))
             return jsonify(deleted_sid=sid)
         else:
+            logger.debug("Such sid and/or pin does not exist")
             return jsonify({
             'status': "404: request",
-            'message': 'Such sid and/or pin does not exist'})
+            'message': "Such sid and/or pin does not exist"})
 
 
 # ------------------------------

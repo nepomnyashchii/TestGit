@@ -42,10 +42,10 @@ def is_not_expired(created, exp):
         current_time = datetime.datetime.utcnow()
         logger.debug("Current time: " + str(current_time))
         if my_time > current_time:
-            logger.debug("is_not_expired return True")
+            logger.debug("is_not_expired: return True")
             return True
         else:
-            logger.debug("is_not_expired return False")
+            logger.debug("is_not_expired: return False")
             return False
 
     except ValueError:
@@ -130,7 +130,7 @@ def get_secret(sid, pin):
 def del_secret(sid, pin):
     """del secret from db."""
     try:
-        logger.debug("")
+        logger.debug("del_secret function invoked")
         print("Please wait...")
         mydb = open_db()
         logger.debug("Start db")
