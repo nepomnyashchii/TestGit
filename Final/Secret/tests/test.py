@@ -1,4 +1,5 @@
 import requests
+import responses
 import json
 import sys
 
@@ -14,18 +15,18 @@ payload = json.dumps(data)
 test_1_response = requests.post(url, data=payload, headers=headers)
 test_1 = test_1_response.json()
 print(test_1)
-if test_1 is None and "sid" not in test_1.keys() or "pin" not in test_1.keys():
+if test_1 is None and "sid" not in test_1.keys():
     test_1_response == False
-    # sys.exit("test_1 integration test failed")
+    sys.exit("test_1 integration test failed")
 else:
     test_1_response ==True
     result = test_1
     sid = result["sid"]
-    pin = data["pin"]
     print(sid)
-    print(pin)
 
 
+pin = data["pin"]
+print(pin)
 test_2_response = requests.get("http://localhost:5000/secret/" + sid + "/" + str(pin))
 
 test_2 = test_2_response.json()
