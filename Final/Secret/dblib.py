@@ -9,7 +9,7 @@ logger = logger_module.setup_logger("dblib")
 
 def open_db():
     try:
-        logger.debug('open_db invoked')
+        logger.debug('open_db function invoked')
         mydb = mysql.connector.connect(
             host="db4free.net",
             user="coolspammail",
@@ -24,7 +24,7 @@ def open_db():
 
 def close_db(mydb):
     try:
-        logger.debug("close_db invoked")
+        logger.debug("close_db function invoked")
         mydb.close()
         logger.debug("close_db finished")
 
@@ -36,7 +36,7 @@ def close_db(mydb):
 def is_not_expired(created, exp):
     try:
         logger.debug(
-            "Time function to control expiration time of the msg invoked")
+            "is_not expired function to control expiration time of the msg invoked")
         my_time = created + datetime.timedelta(0, exp)
         logger.debug("Time before expiration: " + str(my_time))
         current_time = datetime.datetime.utcnow()
@@ -57,7 +57,7 @@ def is_not_expired(created, exp):
 def put_secret(msg, pin, exp):
     """put secret into db table."""
     try:
-        logger.debug("Put_secret invoked")
+        logger.debug("put_secret function invoked")
         sid = str(uuid.uuid4())
         logger.debug("sid: " + str(sid))
         created = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -82,8 +82,8 @@ def put_secret(msg, pin, exp):
 
 def get_secret_from_db(sid, pin):
     """get secret from db."""
-    logger.debug("get_secret_from_db sid, pin: " + str(sid) + " " + str(pin))
     try:
+        logger.debug("get_secret _from_db function invoked, sid, pin: " + str(sid) + " " + str(pin))
         print("DB wait...")
         mydb = open_db()
         return_value = ""
@@ -103,6 +103,7 @@ def get_secret_from_db(sid, pin):
 
 def get_secret(sid, pin):
     try:
+        logger.debug("get_secret function invoked")
         myresult = get_secret_from_db(sid, pin)
         if myresult is not None:
             logger.debug("Raw data from db: " + " " + str(myresult))
@@ -129,6 +130,7 @@ def get_secret(sid, pin):
 def del_secret(sid, pin):
     """del secret from db."""
     try:
+        logger.debug("")
         print("Please wait...")
         mydb = open_db()
         logger.debug("Start db")
@@ -137,7 +139,6 @@ def del_secret(sid, pin):
         params = (sid, int(pin))
         mycursor.execute(sql, params)
         mydb.commit()
-        logger.debug("Data deleted")
         close_db(mydb)
         if mycursor.rowcount == 1:
             return True

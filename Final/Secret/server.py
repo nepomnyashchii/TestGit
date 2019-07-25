@@ -47,6 +47,7 @@ def add_secret():
     if request.json is None \
             or request.json is not None \
             and ("msg" not in request.json.keys() or "pin" not in request.json.keys() or "exp" not in request.json.keys()):
+            logger.debug("Such sid and/or pin does not exist")
             return jsonify({
             'status': "404: request",
             'message': 'Invalid Body url: ' + request.url,
@@ -120,12 +121,13 @@ def del_secret(sid, pin):
     logger.debug("Delete data from database")
     deleted = dblib.del_secret(sid, pin)
     if deleted:
-        logger.debug("Sid succesfully deleted: " + str(deleted))
+        logger.debug("sid succesfully deleted: " + str(deleted))
         return jsonify(deleted_sid=sid)
     else:
+        logger.debug("Such sid and/or pin does not exist")
         return jsonify({
             'status': "404: request",
-            'message': 'Such Sid and/or pin does not exist'})
+            'message': 'Such sid and/or pin does not exist'})
 
 
 # ------------------------------
@@ -138,6 +140,7 @@ def delete_secret():
     if request.json is None \
             or request.json is not None \
             and ("sid" not in request.json.keys() or "pin" not in request.json.keys()):
+            logger.debug("There is some error in the request_body, status:400")
             return jsonify({
             'status': "Bad request",
             'message': 'invalid body url=' + request.url,
@@ -148,12 +151,12 @@ def delete_secret():
         pin = result["pin"]
         deleted = dblib.del_secret(sid, pin)
         if deleted:
-            logger.debug("Sid succesfully deleted: " + str(deleted))
+            logger.debug("sid succesfully deleted: " + str(deleted))
             return jsonify(deleted_sid=sid)
         else:
             return jsonify({
             'status': "404: request",
-            'message': 'Such Sid and/or pin does not exist'})
+            'message': 'Such sid and/or pin does not exist'})
 
 
 # ------------------------------
@@ -176,7 +179,7 @@ def not_found(error=None):
 
 @app.errorhandler(405)
 def invalid_method(error=None):
-    # logger.debug("405 errorhandler invoked for:" + request.url)
+    logger.debug("405 errorhandler invoked for:" + request.url)
     message = {
         'status': 405,
         'message': '405 Method Not Allowed: ' + request.url,
