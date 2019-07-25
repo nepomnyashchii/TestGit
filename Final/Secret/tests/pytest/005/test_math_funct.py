@@ -32,6 +32,14 @@ def test_product_strings():
     assert type(result) is str
     assert "Hello" in result
 
-"""command in the bash: 
+"""command: pytest test_math_funct_py"""
+"""more detailed command: pytest test_math_func.py"""
+""" we can run command py.test to run the function"""
+""" we can test only one function: test_math_funct.py::test_add"""
+"""pytest -v -k "add or string" """
+"""pytest -v -k "add or string"""
+"""pytest -v -k "add and string"""
+"""pytest -v -m number""" """data with mark number"""
+"""pytest -v -x""" """stop program right away when there is a failure"""
 
 
