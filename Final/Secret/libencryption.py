@@ -58,7 +58,7 @@ def decrypt(msg):
         decryption = get_cryptor()
         msgn = bytes(msg)
         decrypted_msg = decryption.decrypt(msgn)
-        logger.debug("Decrypted message: xxx")
+        logger.debug("Decrypted message: " + decrypted_msg)
     except IOError:
         logger.error('An error occured trying to read the file.')
     except ValueError:

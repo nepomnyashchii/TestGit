@@ -50,14 +50,14 @@ def is_not_expired(created, exp):
 
     except ValueError:
         logger.error('Non-numeric data found in the file.')
-    except Exception as err:
-        logger.error(err)
+    except Exception as error:
+        logger.error(error)
 
 
 def put_secret(msg, pin, exp):
     """put secret into db table."""
     try:
-        logger.debug("put_secret invoked")
+        logger.debug("Put_secret invoked")
         sid = str(uuid.uuid4())
         logger.debug("sid: " + str(sid))
         created = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -95,6 +95,7 @@ def get_secret_from_db(sid, pin):
             myresult = mycursor.fetchone()
             close_db(mydb)
             return_value = myresult
+            logger.debug("Value from DB returned" + str(return_value))
     except mysql.connector.Error as error:
         logger.error(error)
     return return_value

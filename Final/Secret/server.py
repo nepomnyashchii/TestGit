@@ -100,9 +100,10 @@ def get_secret_body():
 # ------------------------------
 
 def returnMessage(msg):
+    logger.debug("returnMessage invoked")
     if len(msg) > 0:
-        logger.debug("Message obtained: " + msg)
         decrypted_msg = libencryption.decrypt(msg)
+        logger.debug("Decrypted message invoked: "+ decrypted_msg)
         return jsonify(msg=decrypted_msg)
     return jsonify({
         'status': "200: request",
@@ -145,7 +146,6 @@ def delete_secret():
         result=request.json
         sid = result["sid"]
         pin = result["pin"]
-        logger.debug("pin: " + str(pin))
         deleted = dblib.del_secret(sid, pin)
         if deleted:
             logger.debug("Sid succesfully deleted: " + str(deleted))
