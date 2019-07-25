@@ -16,7 +16,7 @@ payload = json.dumps(data)
 response = requests.post(url, data=payload, headers=headers)
 
 if response.json() is None:
-    print("There is an error in the file")
+    print("There is no information from the post_request")
 else:
     response.json()
     print("Information for post_method succesfully received")
@@ -32,12 +32,11 @@ URL = "http://localhost:5000/secret/" + sid + "/" + str(pin)
 response = requests.get(URL)
 
 if response.json() is None:
-    print("There is an error in the file")
+    print("There is no information from the get_request")
 else:
     response.json()
     print("Information for post_method succesfully received")
     print(response.json())
-
 
 data = {
     "sid": sid,
@@ -47,7 +46,7 @@ payload = json.dumps(data)
 response = requests.delete(url, data=payload, headers=headers)
 
 if response.json() is None:
-    print("There is an error in the file")
+    print("There is no information from the delete_request")
 else:
     response.json()
     print("Information for post_method succesfully received")
