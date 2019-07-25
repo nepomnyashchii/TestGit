@@ -1,7 +1,6 @@
 import requests
 import json
 
-
 url = "http://localhost:5000/secret"
 headers = {'Content-Type': "application/json"}
 
@@ -22,10 +21,14 @@ else:
     print("Information for post_method succesfully received")
     print(response.json())
 
+
 result = response.json()
+
 sid = result["sid"]
 pin = data["pin"]
 
+print(sid)
+print(pin)
 
 URL = "http://localhost:5000/secret/" + sid + "/" + str(pin)
 
@@ -37,6 +40,10 @@ else:
     response.json()
     print("Information for post_method succesfully received")
     print(response.json())
+
+result = response.json()
+msg = result["msg"]
+print(msg)
 
 data = {
     "sid": sid,
@@ -51,6 +58,10 @@ else:
     response.json()
     print("Information for post_method succesfully received")
     print(response.json())
+
+result = response.json()
+deleted_id = result["deleted_id"]
+
 
 # print(response.json())
 
