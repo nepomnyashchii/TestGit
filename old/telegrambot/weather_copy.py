@@ -13,11 +13,10 @@ def send_echo(message):
     owm = pyowm.OWM(API_key)
     observation = owm.weather_at_place(message.text)
     w = observation.get_weather()
-    temperature = w.get_temperature('celsius')['temp']
-    answer = "In " + message.text + " temperature now is: " + str(temperature) + " degrees celcius" + "\n"
-    answer +="In our city " + w.get_detailed_status()
-    apple = "no such city"
-    if len(message.text)>0:
+    if w is not None:
+        temperature = w.get_temperature('celsius')['temp']
+        answer = "In " + message.text + " temperature now is: " + str(temperature) + " degrees celcius" + "\n"
+        answer +="In our city " + w.get_detailed_status()
         return bot.send_message(message.chat.id, answer, reply_markup=keyboard())
     else:
         return "No such city"
