@@ -7,7 +7,7 @@ bot =telebot.TeleBot("873802609:AAGrF4tID-CD4lufzgMjqNEnqLxhCaEweLM")
 
 
 @bot.message_handler(content_types=['text'])
-def send_echo(message):
+def send_weather(message):
 
     API_key = '1bdcae6b7d23f180361c8878a965c9f8'
     owm = pyowm.OWM(API_key)
