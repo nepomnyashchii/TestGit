@@ -47,8 +47,8 @@ def add_secret():
     if request.json is None \
             or request.json is not None \
             and ("msg" not in request.json.keys() or "pin" not in request.json.keys() or "exp" not in request.json.keys()):
-            logger.debug("Such sid and/or pin does not exist")
-            return jsonify({
+        logger.debug("Such sid and/or pin does not exist")
+        return jsonify({
             'status': "404: request",
             'message': 'Invalid Body url: ' + request.url,
         })
@@ -61,11 +61,11 @@ def add_secret():
     sid = dblib.put_secret(encrypted_msg, pin, exp)
     logger.debug("put from a post return sid=" + sid)
     # return jsonify(sid=sid)
-    if len(str(sid))>0:
-        return jsonify (sid=sid)
+    if len(str(sid)) > 0:
+        return jsonify(sid=sid)
     else:
-        return jsonify (sid = sid,
-        Data="Data is not received from DB")
+        return jsonify(sid=sid,
+                       Data="Data is not received from DB")
 
 
 # ------------------------------
@@ -104,7 +104,7 @@ def returnMessage(msg):
     logger.debug("returnMessage invoked")
     if len(msg) > 0:
         decrypted_msg = libencryption.decrypt(msg)
-        logger.debug("Decrypted message: "+ decrypted_msg)
+        logger.debug("Decrypted message: " + decrypted_msg)
         return jsonify(msg=decrypted_msg)
     return jsonify({
         'status': "200: request",
@@ -121,7 +121,8 @@ def del_secret(sid, pin):
     logger.debug("Delete data from database")
     deleted = dblib.del_secret(sid, pin)
     if deleted:
-        logger.debug("sid succesfully deleted: " + str(deleted) + " " + str(sid))
+        logger.debug("sid succesfully deleted: " +
+                     str(deleted) + " " + str(sid))
         return jsonify(deleted_sid=sid)
     else:
         logger.debug("Such sid and/or pin does not exist")
@@ -140,24 +141,25 @@ def delete_secret():
     if request.json is None \
             or request.json is not None \
             and ("sid" not in request.json.keys() or "pin" not in request.json.keys()):
-            logger.debug("There is some error in the request_body, status:400")
-            return jsonify({
+        logger.debug("There is some error in the request_body, status:400")
+        return jsonify({
             'status': "Bad request",
             'message': 'invalid body url=' + request.url,
         }), 400
     else:
-        result=request.json
+        result = request.json
         sid = result["sid"]
         pin = result["pin"]
         deleted = dblib.del_secret(sid, pin)
         if deleted:
-            logger.debug("sid succesfully deleted: " + str(deleted) + " " + str(sid))
+            logger.debug("sid succesfully deleted: " +
+                         str(deleted) + " " + str(sid))
             return jsonify(deleted_sid=sid)
         else:
             logger.debug("Such sid and/or pin does not exist")
             return jsonify({
-            'status': "404: request",
-            'message': "Such sid and/or pin does not exist"})
+                'status': "404: request",
+                'message': "Such sid and/or pin does not exist"})
 
 
 # ------------------------------
@@ -175,7 +177,6 @@ def not_found(error=None):
     resp.status_code = 404
     logger.debug("Status 404 found with errorhandler")
     return resp
-
 
 
 @app.errorhandler(405)

@@ -4,13 +4,11 @@ import sys
 
 url = "http://localhost:5000/secret"
 headers = {'Content-Type': "application/json"}
-
 data = {'msg': 'success',
         'pin': 1234,
         'exp': 10000}
 
 payload = json.dumps(data)
-
 test_1_response = requests.post(url, data=payload, headers=headers)
 test_1 = test_1_response.json()
 print(test_1)
@@ -27,7 +25,8 @@ else:
 pin = data["pin"]
 print("pin=" + str(pin))
 
-test_2_response = requests.get("http://localhost:5000/secret/" + sid + "/" + str(pin))
+test_2_response = requests.get(
+    "http://localhost:5000/secret/" + sid + "/" + str(pin))
 test_2 = test_2_response.json()
 if test_1:
     if test_2 is None and "msg" not in test_2.keys():
@@ -55,4 +54,3 @@ if test_2:
         print("deleted_id=" + deleted_id)
 
 sys.exit("All integration tests are done")
-
