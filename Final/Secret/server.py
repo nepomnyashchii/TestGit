@@ -10,8 +10,8 @@ if libencryption.check_key():
     print("Starting my super App")
     logger.debug('Starting my super App')
 else:
-    print('Cannot Find Server as file key.txt is not found')
-    logger.debug('Cannot Find Server as file key.txt is not found')
+    print('Cannot start Server as file key.txt is not found')
+    logger.debug('Cannot start Server as file key.txt is not found')
     sys.exit("File key.txt is not found ")
 
 
