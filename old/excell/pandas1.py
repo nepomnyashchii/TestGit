@@ -1,6 +1,5 @@
 import sys
 import pandas as pd
-from prompt_toolkit import prompt
 
 
 def print_as_table(data):
@@ -29,7 +28,9 @@ def print_as_csv(data):
 
 
 def print_as_sql(data):
-    sql_templ = "INSERT INTO xxx (OrderDate,Region,Rep,Item,Units,Unit Cost,Total) VALUES ('%s', '%s', '%s', '%s', %s, %s, %s);"
+    sql_templ = """
+         INSERT INTO xxx (OrderDate,Region,Rep,Item,Units,Unit Cost,Total)
+         VALUES ('%s', '%s', '%s', '%s', %s, %s, %s);"""
     for line_index in data.index:
         values = []
         for column_name in data.columns:
