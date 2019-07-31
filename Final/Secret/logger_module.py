@@ -1,8 +1,6 @@
 import logging
 import os
 
-# define the name of the directory to be created
-
 
 def createLogFolder():
     path = "./logs"
@@ -22,10 +20,10 @@ def setup_logger(loggerName):
     logger = logging.getLogger(loggerName)
     logger.setLevel(logging.DEBUG)
 
-    dh = logging.FileHandler('logs/debug.log')
+    dh = logging.FileHandler('./logs/debug.log')
     dh.setLevel(logging.DEBUG)
 
-    eh = logging.FileHandler('logs/error.log')
+    eh = logging.FileHandler('./logs/error.log')
     eh.setLevel(logging.ERROR)
 
     formatter = logging.Formatter(

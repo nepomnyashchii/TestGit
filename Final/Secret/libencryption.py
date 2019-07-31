@@ -9,31 +9,25 @@ def check_key ():
         logger.debug("Check key")
         if os.path.isfile('./key.txt'):
             return True
-        else:
-            return False
     except IOError:
         logger.error('An error occured trying to read the file.')
     except Exception as error:
         logger.error(error)
+    return False
 
 def get_cryptor():
     try:
         logger.debug("Start to read a key")
-        with open('key.txt', 'r') as f:
+        with open('./key.txt', 'r') as f:
             f_contents = f.read()
         key = f_contents
         # logger.debug("Get a key: " + key)
         cryptography = Fernet(key)
-        return cryptography
     except IOError:
         logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
     except Exception as error:
         logger.error(error)
-
+    return cryptography
 
 def encrypt(msg):
     try:
