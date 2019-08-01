@@ -5,17 +5,6 @@ import config
 
 logger = logger_module.setup_logger("libencryption")
 
-def check_key ():
-    try:
-        logger.debug("Check key")
-        if os.path.isfile('./config.py'):
-            return True
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except Exception as error:
-        logger.error(error)
-    return False
-
 def get_cryptor():
     try:
         logger.debug("Start to read a key")
