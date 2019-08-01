@@ -7,7 +7,6 @@ import config
 
 logger = logger_module.setup_logger("dblib")
 
-
 def open_db():
     try:
         logger.debug('open_db function invoked')
