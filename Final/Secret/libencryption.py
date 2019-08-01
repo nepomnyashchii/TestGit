@@ -1,13 +1,14 @@
 from cryptography.fernet import Fernet
 import logger_module
 import os.path
+import config
 
 logger = logger_module.setup_logger("libencryption")
 
 def check_key ():
     try:
         logger.debug("Check key")
-        if os.path.isfile('./key.txt'):
+        if os.path.isfile('./config.py'):
             return True
     except IOError:
         logger.error('An error occured trying to read the file.')
@@ -18,9 +19,7 @@ def check_key ():
 def get_cryptor():
     try:
         logger.debug("Start to read a key")
-        with open('./key.txt', 'r') as f:
-            f_contents = f.read()
-        key = f_contents
+        key = config.key
         # logger.debug("Get a key: " + key)
         cryptography = Fernet(key)
     except IOError:
