@@ -7,13 +7,14 @@ import config
 
 logger = logger_module.setup_logger("dblib")
 
+
 def open_db():
     try:
         logger.debug('open_db function invoked')
         mydb = mysql.connector.connect(
-            host= config.dbconnection["host"],
-            user= config.dbconnection["user"],
-            passwd= config.dbconnection["passwd"],
+            host=config.dbconnection["host"],
+            user=config.dbconnection["user"],
+            passwd=config.dbconnection["passwd"],
             database=config.dbconnection["database"]
         )
         logger.debug('open_db finished')
@@ -83,7 +84,8 @@ def put_secret(msg, pin, exp):
 def get_secret_from_db(sid, pin):
     """get secret from db."""
     try:
-        logger.debug("get_secret _from_db function invoked, sid, pin: " + str(sid) + " " + str(pin))
+        logger.debug(
+            "get_secret _from_db function invoked, sid, pin: " + str(sid) + " " + str(pin))
         print("DB wait...")
         mydb = open_db()
         return_value = ""
