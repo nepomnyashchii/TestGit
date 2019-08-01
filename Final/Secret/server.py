@@ -2,17 +2,18 @@ from flask import Flask, request, jsonify
 import dblib
 import logger_module
 import libencryption
+import utils
 import sys
 
 logger = logger_module.setup_logger("secret")
 
-if libencryption.check_config():
+if utils.check_config():
     print("Starting my super App")
     logger.debug('Starting my super App')
 else:
-    print('Cannot start Server as file key.txt is not found')
-    logger.debug('Cannot start Server as file key.txt is not found')
-    sys.exit("File key.txt is not found ")
+    print('Cannot start Server as key is not found')
+    logger.debug('Cannot start Server as file key is not found')
+    sys.exit("Key is not found ")
 
 
 app = Flask(__name__)

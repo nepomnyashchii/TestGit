@@ -5,18 +5,6 @@ import config
 
 logger = logger_module.setup_logger("libencryption")
 
-def check_config ():
-    try:
-        logger.debug("Check key")
-        if os.path.isfile('./config.py'):
-            return True
-        else:
-            return False
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except Exception as error:
-        logger.error(error)
-
 
 def get_cryptor():
     try:
@@ -29,6 +17,7 @@ def get_cryptor():
     except Exception as error:
         logger.error(error)
     return cryptography
+
 
 def encrypt(msg):
     try:
@@ -47,6 +36,7 @@ def encrypt(msg):
         logger.error(error)
     return encrypted_msg
 
+
 def decrypt(msg):
     try:
         logger.debug("Start decryption")
@@ -63,4 +53,3 @@ def decrypt(msg):
     except Exception as error:
         logger.error(error)
     return decrypted_msg
-
