@@ -12,6 +12,6 @@ def check_config():
         else:
             return False
     except IOError:
-        logger.error('An error occured trying to read the file.')
+        logger.error('An error occured trying to read the key.')
     except Exception as error:
         logger.error(error)
