@@ -85,7 +85,7 @@ def get_secret_from_db(sid, pin):
     """get secret from db."""
     try:
         logger.debug(
-            "get_secret _from_db function invoked, sid, pin: " + str(sid) + " " + str(pin))
+            "get_secret _from_db function invoked, sid, pin: " + str(sid) + ", " + str(pin))
         print("DB wait...")
         mydb = open_db()
         return_value = ""
