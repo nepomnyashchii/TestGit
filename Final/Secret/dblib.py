@@ -3,12 +3,24 @@ import mysql.connector
 import datetime
 import time
 import logger_module
-import open_dblib
 
 logger = logger_module.setup_logger("dblib")
 
-mydb = open_dblib.open_db()
-print(mydb)
+
+def open_db():
+    try:
+        logger.debug('open_db function invoked')
+        mydb = mysql.connector.connect(
+            host="db4free.net",
+            user="coolspammail",
+            passwd="coolspammail-pass",
+            database="coolspammail"
+        )
+        logger.debug('open_db finished')
+        return mydb
+    except mysql.connector.Error as error:
+        logger.error('There is no DB connection: {}'.format(error))
+
 
 def close_db(mydb):
     try:
@@ -51,8 +63,7 @@ def put_secret(msg, pin, exp):
         created = time.strftime('%Y-%m-%d %H:%M:%S')
         logger.debug("Time created: " + str(created))
         return_value = ''
-        mydb
-        print(mydb)
+        mydb = open_db()
         if mydb is not None:
             mycursor = mydb.cursor()
             sql = "INSERT INTO secret (id, msg, pin, exp, created) VALUES (%s, %s, %s, %s, %s)"
@@ -74,7 +85,7 @@ def get_secret_from_db(sid, pin):
     try:
         logger.debug("get_secret _from_db function invoked, sid, pin: " + str(sid) + " " + str(pin))
         print("DB wait...")
-        mydb
+        mydb = open_db()
         return_value = ""
         if mydb is not None:
             mycursor = mydb.cursor()
@@ -121,7 +132,7 @@ def del_secret(sid, pin):
     try:
         logger.debug("del_secret function invoked")
         print("Please wait...")
-        mydb
+        mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
         sql = "DELETE FROM secret WHERE id =  %s AND pin = %s"
