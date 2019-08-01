@@ -12,7 +12,7 @@ def open_db():
     try:
         logger.debug('open_db function invoked')
         mydb = mysql.connector.connect(
-            host= config.dbconnection["host"]
+            host= config.dbconnection["host"],
             user= config.dbconnection["user"],
             passwd= config.dbconnection["passwd"],
             database=config.dbconnection["database"]
