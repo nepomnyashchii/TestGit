@@ -12,7 +12,7 @@ if utils.check_config():
     logger.debug('Starting my super App')
 else:
     print('Cannot start Server as key is not found')
-    logger.debug('Cannot start Server as file key is not found')
+    logger.debug('Cannot start Server as key is not found')
     sys.exit("Key is not found ")
 
 
