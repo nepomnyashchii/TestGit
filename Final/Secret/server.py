@@ -6,7 +6,7 @@ import sys
 
 logger = logger_module.setup_logger("secret")
 
-if libencryption.check_key():
+if libencryption.check_config():
     print("Starting my super App")
     logger.debug('Starting my super App')
 else:
