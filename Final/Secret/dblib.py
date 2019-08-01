@@ -7,8 +7,8 @@ import open_dblib
 
 logger = logger_module.setup_logger("dblib")
 
-open_db = open_dblib.open_db()
-# print(mydb)
+mydb = open_dblib.open_db()
+print(mydb)
 
 def close_db(mydb):
     try:
@@ -51,7 +51,7 @@ def put_secret(msg, pin, exp):
         created = time.strftime('%Y-%m-%d %H:%M:%S')
         logger.debug("Time created: " + str(created))
         return_value = ''
-        mydb =open_db
+        mydb
         print(mydb)
         if mydb is not None:
             mycursor = mydb.cursor()
@@ -74,7 +74,7 @@ def get_secret_from_db(sid, pin):
     try:
         logger.debug("get_secret _from_db function invoked, sid, pin: " + str(sid) + " " + str(pin))
         print("DB wait...")
-        mydb =open_db
+        mydb
         return_value = ""
         if mydb is not None:
             mycursor = mydb.cursor()
@@ -121,7 +121,7 @@ def del_secret(sid, pin):
     try:
         logger.debug("del_secret function invoked")
         print("Please wait...")
-        mydb = open_db
+        mydb
         logger.debug("Start db")
         mycursor = mydb.cursor()
         sql = "DELETE FROM secret WHERE id =  %s AND pin = %s"
