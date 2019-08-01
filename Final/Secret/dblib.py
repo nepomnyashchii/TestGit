@@ -3,6 +3,7 @@ import mysql.connector
 import datetime
 import time
 import logger_module
+import config
 
 logger = logger_module.setup_logger("dblib")
 
@@ -11,7 +12,7 @@ def open_db():
     try:
         logger.debug('open_db function invoked')
         mydb = mysql.connector.connect(
-            host="db4free.net",
+            host= dbconne
             user="coolspammail",
             passwd="coolspammail-pass",
             database="coolspammail"
