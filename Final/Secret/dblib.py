@@ -7,7 +7,7 @@ import open_dblib
 
 logger = logger_module.setup_logger("dblib")
 
-open_db = open_dblib.open_db()
+mydb = open_dblib.open_db()
 # print(mydb)
 
 def close_db(mydb):
