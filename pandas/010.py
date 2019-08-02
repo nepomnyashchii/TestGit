@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv('zillow.csv', index_col=0)
+df = pd.read_csv('zillow.csv', index_col=0, skipinitialspace=True)
 print(type(df))
 df.head()
 data = df.tail(2)
