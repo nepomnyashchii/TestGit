@@ -5,6 +5,6 @@ df = pd.read_csv('zillow.csv', index_col=0, skipinitialspace=True)
 
 """to read the data for the columns we need to skip initialspace"""
 
-data = df.loc[10]
-
+data = (df['Beds'] == 3)
+print(df)
 print(data)
