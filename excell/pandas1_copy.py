@@ -20,7 +20,7 @@ def print_as_csv(data):
     print(first_line[:-1])
     # print values
     for line_index in data.index:
-        line_str = str(line_index) + "\t"
+        line_str = ""
         for column_name in data.columns:
             line_str += str(data[column_name][line_index]) + ","
         print(line_str[:-1])
