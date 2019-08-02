@@ -18,6 +18,10 @@ myresult = mycursor.fetchall()
 
 df = pd.DataFrame(myresult)
 
+df.columns = mycursor.column_names
+
+data = df.columns
+
 data3 = df.to_csv(index=False)
 data4 = df.to_excel(r'File Name.xlsx', index=False)
 

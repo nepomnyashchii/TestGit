@@ -15,11 +15,15 @@ mycursor.execute(sql)
 
 myresult = mycursor.fetchall()
 
+
 df = pd.DataFrame(myresult)
 
+df.columns = mycursor.column_names
+
+data = df.columns
+
 data3 = df.to_json()
+
 print(df)
+
 print(data3)
-
-
-

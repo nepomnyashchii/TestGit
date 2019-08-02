@@ -16,9 +16,17 @@ mycursor.execute(sql)
 
 myresult = mycursor.fetchall()
 
+
+
 df =pd.DataFrame(myresult)
 
-print(df)
+df.columns = mycursor.column_names
+
+data = df.columns
+
+data3 = df.to_csv(index=False)
+
+print(data3)
 
 
 
