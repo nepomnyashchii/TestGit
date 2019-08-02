@@ -1,14 +1,15 @@
 import pandas as pd
 
 df = pd.read_csv('zillow.csv', index_col=0)
-print(type(df))
 df.head()
 data = df.tail(2)
 # df.info()
 df.shape
 # print(df)
 
-data=df.describe()
-data1 = df.corr()
-# print(data)
+"""we can see five top rows of the data"""
 
+# print(data)
+# print(df.head())
+# print(df.info())
+print(df.shape)
