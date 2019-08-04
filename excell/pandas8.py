@@ -10,12 +10,13 @@ mydb = mysql.connector.connect(
     passwd="coolspammail-pass",
     database="coolspammail")
 
-engine = create_engine ('mysql+mysqlconnector://[coolspammail]:[coolspammail-pass]@[db4free.net]:[port]/[schema]')
+engine = create_engine(
+    'mysql+mysqlconnector://[coolspammail]:[coolspammail-pass]@[db4free.net]:[port]/[schema]')
 
 connection = engine.connect()
 
 
-data= df.to_sql('connection','test_pandas4', index =False)
+data = df.to_sql('connection', 'test_pandas4', index=False)
 
 test_query = '''INSERT INTO test_pandas4 (A,B) VALUES (%s, %s)'''
 
