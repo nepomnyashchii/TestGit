@@ -15,11 +15,9 @@ c = mydb.cursor()
 
 # data= df.to_sql(mydb,'test_pandas4', index =False)
 
-test_query = ''' CREATE TABLE test_pandas
-                (A INT,
-                B VARCHAR (255)
-                ) '''
+test_query = '''INSERT INTO test_pandas (A,B)
+                VALUES (%s,%s) '''
 
 c = mydb.cursor()
 
-c.execute(test_query)
+c.execute(test_query, df)
