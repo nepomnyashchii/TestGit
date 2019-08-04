@@ -17,19 +17,17 @@ mydb = mysql.connector.connect(
 
 # conn = connect(driver='{SQL Server}', server='server_nm', database='db_nm', turbodbc_options=options)
 
-test_query = '''DROP TABLE IF EXISTS test_pandas
-
-                CREATE TABLE test_pandas
-                (OrderDate VARCHAR(255)
-                    Region VARCHAR (255)
-                    Rep VARCHAR (255)
-                    Item VARCHAR (255)
-                    Units INT
-                    Unit Cost INT
+test_query = ''' CREATE TABLE test_pandas2
+                (OrderDate VARCHAR(255),
+                    Region VARCHAR (255),
+                    Rep VARCHAR (255),
+                    Item VARCHAR (255),
+                    Units INT,
+                    Unit_Cost INT,
                     Total INT
                 )
 
-                INSERT INTO test_pandas (OrderData, Region, Rep, item, Units, Unit Cost, Total)
+                INSERT INTO test_pandas (OrderData, Region, Rep, item, Units, Unit_Cost, Total)
                 VALUES (%s,%s,%s,%s,%s,%s,%s)'''
 
 mycursor = mydb.cursor()
