@@ -1,9 +1,8 @@
 import pandas as pd
 import mysql.connector
 
-
-  """INSERT INTO xxx (OrderDate,Region,Rep,Item,Units,Unit Cost,Total)
-         VALUES ('%s', '%s', '%s', '%s', %s, %s, %s);"""
+# """INSERT INTO xxx (OrderDate,Region,Rep,Item,Units,Unit Cost,Total)
+#            VALUES ('%s', '%s', '%s', '%s', %s, %s, %s);"""
 
 data = pd.read_excel('./data.xlsx', sheet_name='SalesOrders')
 
@@ -18,17 +17,16 @@ mydb = mysql.connector.connect(
 
 # conn = connect(driver='{SQL Server}', server='server_nm', database='db_nm', turbodbc_options=options)
 
-test_query = '''DROP TABLE IF EXISTS "test_pandas"
+test_query = '''DROP TABLE IF EXISTS test_pandas
 
-                CREATE TABLE Order
-                (
-                    OrderDate, VARCHAR(20)
-                    Region,
-                    Rep,
-                    Item,
-                    Units,
-                    Unit Cost,
-                    Total,
+                CREATE TABLE test_pandas
+                (OrderDate VARCHAR(255)
+                    Region VARCHAR (255)
+                    Rep VARCHAR (255)
+                    Item VARCHAR (255)
+                    Units INT
+                    Unit Cost INT
+                    Total INT
                 )
 
                 INSERT INTO test_pandas (OrderData, Region, Rep, item, Units, Unit Cost, Total)
@@ -36,5 +34,4 @@ test_query = '''DROP TABLE IF EXISTS "test_pandas"
 
 mycursor = mydb.cursor()
 
-mycursor.executeman(test_query)
-
+mycursor.execute(test_query)
