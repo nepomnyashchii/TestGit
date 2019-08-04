@@ -19,7 +19,6 @@ def print_as_sql(data):
             values.append(data[column_name][line_index])
         print(sql_templ % tuple(values))
 
-
 data = pd.read_excel('./alec.xlsx')
 
 print_as_sql(data)
