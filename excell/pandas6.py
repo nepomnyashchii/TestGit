@@ -32,7 +32,7 @@ test_query = '''DROP TABLE IF EXISTS "test_pandas"
                 )
 
                 INSERT INTO test_pandas (OrderData, Region, Rep, item, Units, Unit Cost, Total)
-                VALUES (%s,%s,%s,%s) '''
+                VALUES (%s,%s,%s,%s,%s,%s,%s)'''
 
 mycursor = mydb.cursor()
 
