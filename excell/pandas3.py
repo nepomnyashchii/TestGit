@@ -16,8 +16,6 @@ mycursor.execute(sql)
 
 myresult = mycursor.fetchall()
 
-
-
 df =pd.DataFrame(myresult)
 
 df.columns = mycursor.column_names
