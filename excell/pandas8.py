@@ -11,7 +11,7 @@ mydb = mysql.connector.connect(
     database="coolspammail")
 
 engine = create_engine(
-    'mysql+mysqlconnector://[coolspammail]:[coolspammail-pass]@[db4free.net]:[port]/[schema]')
+    'mysql+mysqlconnector://coolspammail:coolspammail-pass@db4free.net/coolspammail')
 
 connection = engine.connect()
 
