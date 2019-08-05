@@ -14,6 +14,7 @@ df.shape
 # print(df.info())
 
 df = df.append(df)
+print(type(df))
 
 # df = df.drop_duplicates()
 
