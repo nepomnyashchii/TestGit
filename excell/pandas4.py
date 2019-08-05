@@ -7,8 +7,10 @@ from sqlalchemy.engine import create_engine
 engine = create_engine(
     'mysql+mysqlconnector://coolspammail:coolspammail-pass@db4free.net/coolspammail')
 
+print(type (engine))
+
 
 df = pd.read_sql_table("test_pandas", engine)
 
 
-# print(df)
+# # print(df)
