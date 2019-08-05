@@ -14,10 +14,18 @@ Base = declarative_base()
 
 
 class User(Base):
-    __tablename__ = 'ORMalchemy'
+    __tablename__ = 'alchemy'
     id = Column(Integer, primary_key=True)
     name = Column(String)
     fullname = Column(String)
     nickname = Column(String)
     def __repr__(self):
         return "<User(name='%s', fullname='%s', nickname='%s')>" % (self.name, self.fullname, self.nickname)
+
+
+print(User.__table__)
+Table('alchemy', MetaData(bind=None),
+    Column('id', Integer(), table="alchemy", primary_key=True, nullable=False),
+    Column('name', String(), table="alchemy"),
+    Column('fullname', String(), table="alchemy"),
+    Column('nickname', String(), table="alchemy"), schema=None)
