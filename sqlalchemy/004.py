@@ -1,13 +1,12 @@
 from sqlalchemy import *
 
-db = create_engine(
-    'mysql+mysqlconnector://coolspammail:coolspammail-pass@db4free.net/coolspammail')
+db = create_engine('sqlite:///tutorial.db')
 
 db.echo = False  # Try changing this to True and see what happens
 
 metadata = BoundMetaData(db)
 
-users = Table('alchemy', metadata,
+users = Table('users', metadata,
     Column('user_id', Integer, primary_key=True),
     Column('name', String(40)),
     Column('age', Integer),
@@ -32,5 +31,3 @@ print ('Password:', row[users.c.password])
 
 for row in rs:
     print (row.name, 'is', row.age, 'years old')
-
-
