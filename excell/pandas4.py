@@ -9,8 +9,10 @@ engine = create_engine(
 
 print(type (engine))
 
+sql = '''SELECT * FROM test_pandas2'''
+df = pd.read_sql(sql, engine)
 
-df = pd.read_sql_table("test_pandas", engine)
+# df = pd.read_sql_table("test_pandas_2", engine)
 
 
-# # print(df)
+print(df)
