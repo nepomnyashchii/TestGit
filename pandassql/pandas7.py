@@ -10,3 +10,4 @@ engine = create_engine(
 
 data = df.to_sql(name = 'test_pandas', con='connection', index=False, if_exists = "append")
 
+data4 = df.to_excel(r'File Name.xlsx', index=False)
