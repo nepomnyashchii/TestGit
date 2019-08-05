@@ -20,3 +20,7 @@ data1 = df.corr()
 data = df*2
 print(data)
 
+""" Series is a single column of DataFrame"""
+
+
+
