@@ -12,6 +12,8 @@ print(type (engine))
 sql = '''SELECT * FROM test_pandas2'''
 df = pd.read_sql(sql, engine)
 
+data = df.to_excel('sqlalchemy.xlsx', index=False)
+
 # df = pd.read_sql_table("test_pandas_2", engine)
 
 
