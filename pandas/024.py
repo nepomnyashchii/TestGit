@@ -8,3 +8,8 @@ ser = pd.Series(df["Beds"])
 print(ser)
 data = ser.head(10)
 print(data)
+data=data[3:6]
+print(data)
+
+data=data.loc[3:6]
+print(data)
