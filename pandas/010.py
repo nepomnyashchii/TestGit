@@ -10,5 +10,8 @@ df.shape
 
 data=df.describe()
 data1 = df.corr()
+# print(df.columns)
+# print(df.dtypes)
+print(df.values)
 # print(data)
 
