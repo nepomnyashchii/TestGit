@@ -1,45 +1,16 @@
-import mysql.connector
 import pandas as pd
-import openpyxl
+import mysql.connector
+from sqlalchemy.engine import create_engine
 
-mydb = mysql.connector.connect(
-    host="db4free.net",
-    user="coolspammail",
-    passwd="coolspammail-pass",
-    database="coolspammail")
+df = pd.read_excel('./data.xlsx', sheet_name='SalesOrders')
+df=df.rename(columns={'Unit Cost' : 'Unit_Cost'})
 
-sql = "SELECT * FROM secret"
-
-mycursor = mydb.cursor()
-
-mycursor.execute(sql)
-
-myresult = mycursor.fetchall()
-
-df = pd.DataFrame(myresult)
-
-df.columns = mycursor.column_names
-
-data = df.columns
-
-data3 = df.to_csv(index=False)
-data4 = df.to_excel(r'File Name.xlsx', index=False)
 
 print(df)
-print(data3)
-# print(data4)
+
+engine = create_engine(
+    'mysql+mysqlconnector://coolspammail:coolspammail-pass@db4free.net/coolspammail')
 
 
-# mycursor.execute('SELECT * FROM table_name')
+data = df.to_sql(name = 'test_pandas2', con= engine, index=False, if_exists = "append")
 
-# table_rows = db_cursor.fetchall()
-
-# df = pd.DataFrame(table_rows)
-
-# sql = "SELECT msg, created, exp FROM secret WHERE id =  %s AND pin = %s"
-# params = (sid, int(pin))
-# mycursor.execute(sql, params)
-# myresult = mycursor.fetchone()
-# close_db(mydb)
-# return_value = myresult
-# logger.debug("Value from DB returned" + str(return_value))
