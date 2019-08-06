@@ -7,6 +7,7 @@ import config
 
 logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
+
 def open_db():
     try:
         logger.debug('open_db function invoked')
@@ -31,6 +32,7 @@ def close_db(mydb):
     except mysql.connector.Error:
         logger.error(
             'Something happened with the server: {}'.format(logger.error))
+
 
 def get_flowdata(username, flow):
     logger.debug("get_flowdata invoked with:" + username + " " + flow)
@@ -83,7 +85,6 @@ def run_action(actionline):
         logger.error(error)
 
 
-
 def apinews_data(actionline):
     logger.debug("Invoke: Apinews")
     try:
@@ -103,7 +104,6 @@ def apinews_data(actionline):
         logger.error(error)
 
 
-
 def apinorris_data(actionline):
     logger.debug("Invoke: apinorris")
     try:
@@ -121,7 +121,6 @@ def apinorris_data(actionline):
         logger.error(error)
 
 
-
 def convert_news(news_results, count):
     logger.debug("Invoke: convert_news,apinews json conversion")
     try:
@@ -136,10 +135,11 @@ def convert_news(news_results, count):
                 "description": source_article["description"]
             }
             return_articles_list.append(article)
-        logger.debug("Convert_news, apinews finished: " + str(return_articles_list))
+        logger.debug("Convert_news, apinews finished: " +
+                     str(return_articles_list))
         return return_articles_list
     except mysql.connector.Error as error:
-            logger.error(error)
+        logger.error(error)
 
 
 def convert_norris(norris_results, actionline):
@@ -150,12 +150,14 @@ def convert_norris(norris_results, actionline):
         source_list = obj["value"]
         logger.debug("Convert_norris, apinorris: " + str(source_list))
         splited = actionline.split(":")
-        logger.debug("Convert_norris, apinorris for change of name: " +str(splited))
+        logger.debug(
+            "Convert_norris, apinorris for change of name: " + str(splited))
         name_change = splited[2]
         logger.debug("Convert_norris, apinorris new name: " + str(name_change))
         return_list = []
         for source_item in source_list:
-            changed_joke = source_item["joke"].replace("Chuck Norris", name_change)
+            changed_joke = source_item["joke"].replace(
+                "Chuck Norris", name_change)
             return_list.append(changed_joke)
         logger.debug("Collect all data and name change: " + str(return_list))
         return return_list
@@ -187,11 +189,10 @@ def weather_data(actionline):
         w = observation.get_weather()
         temperature = w.get_temperature('celsius')['temp']
         logger.debug("Temperature: " + str(temperature))
-        answer = "In " + location + " temperature now is: " + str(temperature) + " degrees celcius" + "\n"
-        answer +="In our city " + w.get_detailed_status()
+        answer = "In " + location + " temperature now is: " + \
+            str(temperature) + " degrees celcius" + "\n"
+        answer += "In our city " + w.get_detailed_status()
         logger.debug("Information about weather: " + answer)
         return answer
     except mysql.connector.Error as error:
         logger.error(error)
-
-
