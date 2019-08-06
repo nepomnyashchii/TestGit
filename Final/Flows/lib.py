@@ -56,7 +56,9 @@ def get_flowdata(username, flow):
         logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
 
-    except mysql.connector.Error as error:
+    except ValueError:
+        logger.error('Non-numeric data found in the file.')
+    except Exception as error:
         logger.error(error)
     return myresult
 
