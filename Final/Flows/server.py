@@ -26,9 +26,8 @@ def run(username, flow):
     logger.debug('Run invoked')
     data = lib.get_flowdata(username, flow)
     print(data)
-    # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
     logger.debug("Data from DB(actionline):" + str(data))
-    if not data:  # len(data) == 0:
+    if not data:
         return jsonify(
             error="no data for this user and flow",
             username=username,
@@ -61,15 +60,13 @@ def run(username, flow):
 # ------------------------------
 
 @app.route('/run/<string:username>')
-
 def run_user(username):
     logger.debug('Run invoked')
     flow = "goodmorning"
     data = lib.get_flowdata(username, flow)
     print(data)
-    # data = [(u'weather:Brooklyn, NY',), (u'news:3',), (u'norris:3',), (u'news:2',), (u'thecocktail:random',), (u'thecocktail:random',)]
     logger.debug("Data from DB(actionline):" + str(data))
-    if not data:  # len(data) == 0:
+    if not data:
         return jsonify(
             error="no data for this user and flow",
             username=username,
