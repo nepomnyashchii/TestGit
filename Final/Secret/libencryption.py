@@ -1,28 +1,43 @@
 from cryptography.fernet import Fernet
 import logger_module
 import os.path
-import config
 
+key = ''
 logger = logger_module.setup_logger("libencryption")
 
 
+def set_key(my_key):
+    global key
+    key = my_key
+    print("\n\n-------------\n\n\n")
+    print(key)
+
 def get_cryptor():
+    global key
     try:
         logger.debug("Start to read a key")
-        key = config.key
         # logger.debug("Get a key: " + key)
+        print("\n\n-------------\n\n\n")
+        print(key)
         cryptography = Fernet(key)
+        print("\n\n-------------\n\n\n")
+        print(cryptography)
+        print("\n\n-------------\n\n\n")
+        return cryptography
     except IOError:
         logger.error('An error occured trying to read the file.')
     except Exception as error:
         logger.error(error)
-    return cryptography
+    return None
 
 
 def encrypt(msg):
     try:
         logger.debug("Start encryption with a key")
+        print("\n\n-------------\n\n\n")
         encryption = get_cryptor()
+        print(encryption)
+        print("\n\n-------------\n\n\n")
         msgn = bytes(msg)
         encrypted_msg = encryption.encrypt(msgn)
         logger.debug("Encrypted message: " + encrypted_msg)
