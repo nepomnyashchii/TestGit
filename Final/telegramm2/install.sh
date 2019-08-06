@@ -1,0 +1,3 @@
+pip install pipenv
+pipenv install beautifulsoup4
+pipenv install PyTelegramBotAPI
