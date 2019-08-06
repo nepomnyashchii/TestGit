@@ -54,19 +54,8 @@ def get_flowdata(username, flow):
         logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
 
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.error('An error occured.')
-    logger.debug("get_flowdata finished with: " + str(myresult))
+    except mysql.connector.Error as error:
+        logger.error(error)
     return myresult
 
 

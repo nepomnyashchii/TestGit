@@ -5,18 +5,21 @@ import logger_module
 logger = logger_module.setup_logger("flowsapp")
 logger.debug('Start my super App')
 
-
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
-
-print("\n\n\n\n\n\n\n\n\n\n")
+app.config['APPLICATION_ROOT'] = '/api'
+print("\n\n\n")
 
 
 @app.route('/')
 def index():
     logger.debug("Request for testing connection invoked")
-    return 'Flow Runner :)'
+    return 'Flow runner is online :)'
 
+
+# ------------------------------
+# -------- GET FLOW ----------
+# ------------------------------
 
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
@@ -52,14 +55,32 @@ def run(username, flow):
         data=simple_list
     )
 
+# ------------------------------
+# -------- errorhandler  -------
+# ------------------------------
+
+
 @app.errorhandler(404)
 def not_found(error=None):
-    logger.debug("Start app.errorhandler to confirm status 404")
+    logger.debug("404 errorhandler invoked for:" + request.url)
     message = {
-            'status': 404,
-            'message': 'URL is wrong: ' + request.url,
+        'status': 404,
+        'message': 'URL not found: ' + request.url,
     }
     resp = jsonify(message)
     resp.status_code = 404
+    logger.debug("Status 404 found with errorhandler")
     return resp
 
+
+@app.errorhandler(405)
+def invalid_method(error=None):
+    logger.debug("405 errorhandler invoked for:" + request.url)
+    message = {
+        'status': 405,
+        'message': '405 Method Not Allowed: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 405
+    logger.debug("Status 405 found with errorhandler")
+    return resp
