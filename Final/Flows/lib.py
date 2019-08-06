@@ -3,21 +3,34 @@ import requests
 import json
 import logger_module
 import pyowm
+import config
 
 logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
 def open_db():
-    mydb = mysql.connector.connect(
-        host="db4free.net",
-        user="coolspammail",
-        passwd="coolspammail-pass",
-        database="coolspammail"
-    )
-    return mydb
+    try:
+        logger.debug('open_db function invoked')
+        mydb = mysql.connector.connect(
+            host=config.dbconnection["host"],
+            user=config.dbconnection["user"],
+            passwd=config.dbconnection["passwd"],
+            database=config.dbconnection["database"]
+        )
+        logger.debug('open_db finished')
+        return mydb
+    except mysql.connector.Error as error:
+        logger.error('There is no DB connection: {}'.format(error))
+
 
 def close_db(mydb):
-    mydb.close()
+    try:
+        logger.debug("close_db function invoked")
+        mydb.close()
+        logger.debug("close_db finished")
 
+    except mysql.connector.Error:
+        logger.error(
+            'Something happened with the server: {}'.format(logger.error))
 
 def get_flowdata(username, flow):
     logger.debug("get_flowdata invoked with:" + username + " " + flow)
