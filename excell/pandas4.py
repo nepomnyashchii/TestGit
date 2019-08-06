@@ -14,7 +14,7 @@ df = pd.read_sql(sql, engine)
 
 print(type(df))
 
-data = df.to_excel('sqlalchemy.xlsx', index=False)
+data = df.to_excel('./sqlalchemy.xlsx', index=False)
 
 print(type(data))
 

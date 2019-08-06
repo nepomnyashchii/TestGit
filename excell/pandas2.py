@@ -7,7 +7,7 @@ mydb = mysql.connector.connect(
     passwd="coolspammail-pass",
     database="coolspammail")
 
-test_query = ''' CREATE TABLE test_pandas2
+test_query = ''' CREATE TABLE test_pandas3
                 (OrderDate DATE PRIMARY KEY,
                     Region VARCHAR (255),
                     Rep VARCHAR (255),
