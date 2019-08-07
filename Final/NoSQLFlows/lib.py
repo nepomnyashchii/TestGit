@@ -11,14 +11,13 @@ logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 def get_flowdata(user_name, user_flow):
     logger.debug("get_flowdata invoked with:" + user_name + " " + user_flow)
     """get flowdata from db."""
-    logger.debug("Mongodb invoked")
     client = pymongo.MongoClient(config.MongoClient)
     db = client["test"]
-    logger.debug("Connection with required collection invoked")
     mycol = db["flows"]
     myquery = {"name": user_name}
     mydoc = mycol.find(myquery)
-    logger.debug("My query" + str(mydoc))
+    logger.debug("My query returned" + str(mydoc))
+    print(mydoc)
     data = mydoc[0]
     logger.debug("Query data from the database: " + str(data))
     flows = data["flows"]
@@ -28,6 +27,7 @@ def get_flowdata(user_name, user_flow):
             myresult = flow.get(user_flow)
     logger.debug("get_flowdata finished with:" + str(myresult))
     return myresult
+
 
 def run_action(actionline):
     logger.debug('Run_action invoked actionline: ' + str(actionline))
@@ -108,6 +108,7 @@ def cocktail_data(actionline):
     logger.debug("Cocktail_data" + str(response))
     return response.json()
 
+
 def weather_data(actionline):
     logger.debug("Weather_data invoked: " + actionline)
     splited = actionline.split(":")
@@ -124,12 +125,12 @@ def weather_data(actionline):
     logger.debug("Weather_data: " + str(response))
     return convert_weather(response)
 
-def convert_weather (weather_data):
+
+def convert_weather(weather_data):
     weather = weather_data.json()
     logger.debug("weather_data" + str(weather))
     return_data = {"temperature": weather["main"]["temp"],
-    "pressure": weather["main"]["pressure"],
-    "city name": weather["name"]}
+                   "pressure": weather["main"]["pressure"],
+                   "city name": weather["name"]}
     logger.debug("weather data" + str(return_data))
     return return_data
-
