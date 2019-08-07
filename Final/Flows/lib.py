@@ -41,20 +41,21 @@ def get_flowdata(username, flow):
     try:
         logger.debug('Invoke: def open_db()')
         mydb = open_db()
-        mycursor = mydb.cursor()
-        logger.debug("Start executing action for db")
-        sql = """
-            SELECT action
-            FROM `flows` INNER JOIN users ON flows.user_id = users.id
-            WHERE LOWER(users.name)=%s AND flows.name =%s
-            ORDER BY action_order
-        """
-        val = (username, flow)
-        mycursor.execute(sql, val)
-        myresult = mycursor.fetchall()
-        logger.debug("All obtained data: " + str(myresult))
-        logger.debug("Invoke: def close_db(mydb)")
-        close_db(mydb)
+        if mydb is not None:
+            mycursor = mydb.cursor()
+            logger.debug("Start executing action for db")
+            sql = """
+                SELECT action
+                FROM `flows` INNER JOIN users ON flows.user_id = users.id
+                WHERE LOWER(users.name)=%s AND flows.name =%s
+                ORDER BY action_order
+            """
+            val = (username, flow)
+            mycursor.execute(sql, val)
+            myresult = mycursor.fetchall()
+            logger.debug("All obtained data: " + str(myresult))
+            logger.debug("Invoke: def close_db(mydb)")
+            close_db(mydb)
 
     except ValueError:
         logger.error('Non-numeric data found in the file.')
@@ -83,9 +84,8 @@ def run_action(actionline):
         return {
             "action": action,
         }
-    except mysql.connector.Error as error:
+    except Exception as error:
         logger.error(error)
-
 
 def apinews_data(actionline):
     logger.debug("Invoke: Apinews")
@@ -102,7 +102,7 @@ def apinews_data(actionline):
         return_articles_list = convert_news(response, count)
         logger.debug("Apinews_collected: " + str(return_articles_list))
         return return_articles_list
-    except mysql.connector.Error as error:
+    except Exception as error:
         logger.error(error)
 
 
@@ -119,9 +119,8 @@ def apinorris_data(actionline):
         jokes = convert_norris(response, actionline)
         logger.debug("Apinorris_collected: " + str(jokes))
         return jokes
-    except mysql.connector.Error as error:
+    except Exception as error:
         logger.error(error)
-
 
 def convert_news(news_results, count):
     logger.debug("Invoke: convert_news,apinews json conversion")
@@ -140,9 +139,8 @@ def convert_news(news_results, count):
         logger.debug("Convert_news, apinews finished: " +
                      str(return_articles_list))
         return return_articles_list
-    except mysql.connector.Error as error:
+    except Exception as error:
         logger.error(error)
-
 
 def convert_norris(norris_results, actionline):
     logger.debug("Invoke: convert_norris,apinorris json conversion")
@@ -163,7 +161,7 @@ def convert_norris(norris_results, actionline):
             return_list.append(changed_joke)
         logger.debug("Collect all data and name change: " + str(return_list))
         return return_list
-    except mysql.connector.Error as error:
+    except Exception as error:
         logger.error(error)
 
 
@@ -175,7 +173,7 @@ def cocktail_data(actionline):
 
         logger.debug("Cocktail_data: " + str(response))
         return response.json()
-    except mysql.connector.Error as error:
+    except Exception as error:
         logger.error(error)
 
 
@@ -196,5 +194,5 @@ def weather_data(actionline):
         answer += "In our city " + w.get_detailed_status()
         logger.debug("Information about weather: " + answer)
         return answer
-    except mysql.connector.Error as error:
+    except Exception as error:
         logger.error(error)
