@@ -131,7 +131,7 @@ def weather_data(actionline):
 def convert_weather(weather_data):
     weather = weather_data.json()
     logger.debug("weather_data" + str(weather))
-    return_data = {"temperature": (weather["main"]["temp"]),
+    return_data = {"temperature": weather["main"]["temp"],
                    "pressure": weather["main"]["pressure"],
                    "city name": weather["name"]}
     logger.debug("weather data" + str(return_data))
