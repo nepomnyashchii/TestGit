@@ -16,10 +16,52 @@ def index():
     logger.debug("Request for testing connection invoked")
     return 'Flow runner is online :)'
 
-
 # ------------------------------
 # -------- GET FLOW ----------
 # ------------------------------
+
+
+@app.route('/flow/<string:username>')
+def flow(username):
+    logger.debug('Run invoked')
+    data = lib.get_users(username)
+    print(data)
+    logger.debug("Data from DB(actionline):" + str(data))
+    if not data:
+        return jsonify(
+            error="no data for this user and flow",
+            username=username,
+            time=datetime.datetime.now()
+        )
+    else:
+        return jsonify(
+            username=data,
+            time=datetime.datetime.now()
+        )
+
+
+# ------------------------------
+# -------- GET USER ----------
+# ------------------------------
+
+@app.route('/username/<string:flow>')
+def user(flow):
+    logger.debug('Run invoked')
+    data = lib.get_flows(flow)
+    print(data)
+    logger.debug("Data from DB(actionline):" + str(data))
+    if not data:
+        return jsonify(
+            error="no data for this user and flow",
+            username=data,
+            time=datetime.datetime.now()
+        )
+    else:
+        return jsonify(
+            flow=data,
+            time=datetime.datetime.now()
+        )
+
 
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
