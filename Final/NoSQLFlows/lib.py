@@ -3,6 +3,7 @@ import dns
 import requests
 import json
 import logger_module
+import config
 
 logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
@@ -11,7 +12,7 @@ def get_flowdata(user_name, user_flow):
     logger.debug("get_flowdata invoked with:" + user_name + " " + user_flow)
     """get flowdata from db."""
     logger.debug("Mongodb invoked")
-    client = pymongo.MongoClient("mongodb+srv://nepomnyashchii:natasha1977#5@cluster0-6p7nv.mongodb.net/test?retryWrites=true&w=majority")
+    client = pymongo.MongoClient(config.MongoClient)
     db = client["test"]
     logger.debug("Connection with required collection invoked")
     mycol = db["flows"]
