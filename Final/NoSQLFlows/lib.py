@@ -10,25 +10,28 @@ logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
 def get_flowdata(user_name, user_flow):
     myresult = None
-    logger.debug("get_flowdata invoked with:" + user_name + " " + user_flow)
-    """get flowdata from db."""
-    client = pymongo.MongoClient(config.MongoClient)
-    db = client["test"]
-    mycol = db["flows"]
-    myquery = {"name": user_name}
-    mydoc = mycol.find_one(myquery)
-    if (mydoc is None):
-        logger.debug("My query returned None")
-        return None
-    logger.debug("My query returned" + str(mydoc))
-    data = mydoc
-    logger.debug("Query data from the database: " + str(data))
-    flows = data["flows"]
-    logger.debug("Queery data for flows" + str(flows))
-    for flow in flows:
-        if flow.get(user_flow):
-            myresult = flow.get(user_flow)
-    logger.debug("get_flowdata finished with:" + str(myresult))
+    try:
+        logger.debug("get_flowdata invoked :" + user_name + " " + user_flow)
+        """get flowdata from db."""
+        client = pymongo.MongoClient(config.MongoClient)
+        db = client["test"]
+        mycol = db["flows"]
+        myquery = {"name": user_name}
+        mydoc = mycol.find_one(myquery)
+        if (mydoc is None):
+            logger.debug("My query returned None")
+            return None
+        logger.debug("My query returned" + str(mydoc))
+        data = mydoc
+        logger.debug("Query data from the database: " + str(data))
+        flows = data["flows"]
+        logger.debug("Queery data for flows" + str(flows))
+        for flow in flows:
+            if flow.get(user_flow):
+                myresult = flow.get(user_flow)
+        logger.debug("get_flowdata finished with:" + str(myresult))
+    except Exception as error:
+        logger.error(error)
     return myresult
 
 
