@@ -61,6 +61,7 @@ def not_found(error=None):
     resp.status_code = 404
     return resp
 
+
 @app.errorhandler(405)
 def invalid_method(error=None):
     logger.debug("405 errorhandler invoked for:" + request.url)
