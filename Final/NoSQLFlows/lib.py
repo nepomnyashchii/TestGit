@@ -53,19 +53,22 @@ def run_action(actionline):
 
 
 def apinews_data(actionline):
-    splited = actionline.split(":")
-    logger.debug("Apinews_data: " + str(splited))
-    count = int(splited[1])
-    logger.debug("Apinews_data: " + str(count))
-    response = requests.get(
-        "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
+    try:
+        splited = actionline.split(":")
+        logger.debug("Apinews_data: " + str(splited))
+        count = int(splited[1])
+        logger.debug("Apinews_data: " + str(count))
+        response = requests.get(
+            "https://newsapi.org/v1/articles?pageSize=3&source=hacker-news&apiKey=c39a26d9c12f48dba2a5c00e35684ecc")
 
-    if response.status_code != 200:
-        return {"error": response.json()}
+        if response.status_code != 200:
+            return {"error": response.json()}
 
-    return_articles_list = convert_news(response, count)
-    logger.debug("apinews_data result: " + str(return_articles_list))
-    return return_articles_list
+        return_articles_list = convert_news(response, count)
+        logger.debug("apinews_data result: " + str(return_articles_list))
+    except Exception as error:
+        logger.error(error)
+        return return_articles_list
 
 
 def apinorris_data(actionline):
