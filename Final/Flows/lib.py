@@ -42,7 +42,9 @@ def get_flows (flow):
             mycursor = mydb.cursor()
             logger.debug("Start executing action for db")
             sql = """
-                SELECT name from `users`
+                SELECT name
+                FROM `flows` INNER JOIN users ON flows.user_id = users.id
+                WHERE LOWER(users.name)=%s
             """
             val = (flow)
             mycursor.execute(sql, val)
@@ -65,11 +67,14 @@ def get_users (username):
             mycursor = mydb.cursor()
             logger.debug("Start executing action for db")
             sql = """
-                SELECT name from flows
+                SELECT flows.name
+                FROM `flows`
+                INNER JOIN users ON flows.user_id = users.id WHERE LOWER(users.name)=%s
             """
             val = (username)
             mycursor.execute(sql, val)
             myresult = mycursor.fetchall()
+            print(myresult)
             logger.debug("All obtained data: " + str(myresult))
             logger.debug("Invoke: def close_db(mydb)")
             close_db(mydb)
