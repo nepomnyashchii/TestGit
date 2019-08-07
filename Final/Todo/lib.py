@@ -1,8 +1,9 @@
+import config
 import json
 import mysql.connector
 import logger_module
 logger = logger_module.setup_logger("todo-2lib")
-import config
+
 
 def open_db():
     try:
@@ -29,6 +30,7 @@ def close_db(mydb):
         logger.error(
             'Something happened with the server: {}'.format(logger.error))
 
+
 def get_all():
     """get flowdata from db."""
 
@@ -43,15 +45,17 @@ def get_all():
         # this will extract row headers
         logger.debug("Collect list of tuples for all ids")
         rv = mycursor.fetchall()
-        logger.debug("All obtained data from database" +str(rv))
+        logger.debug("All obtained data from database" + str(rv))
         row_headers = [x[0] for x in mycursor.description]
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
-        logger.debug("Create dictionary with inserted row_headers from tuple" +str(json_data))
+        logger.debug(
+            "Create dictionary with inserted row_headers from tuple" + str(json_data))
         logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
-
+    except Exception as error:
+        logger.error(error)
     return json_data
 
 
@@ -68,27 +72,18 @@ def get_todo_by_id(id):
         # this will extract row headers
         logger.debug("Collect list of tuples for all ids")
         rv = mycursor.fetchall()
-        logger.debug("All obtained data from database" +str(rv))
+        logger.debug("All obtained data from database" + str(rv))
         row_headers = [x[0] for x in mycursor.description]
         json_data = []
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
-        logger.debug("Create dictionary with inserted row_headers from tuples" +str(json_data))
+        logger.debug(
+            "Create dictionary with inserted row_headers from tuples" + str(json_data))
         logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
         return json_data
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
+    except Exception as error:
+        logger.error(error)
 
 
 def insert_todo(text):
@@ -105,18 +100,9 @@ def insert_todo(text):
         logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
         return mycursor.lastrowid
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
+    except Exception as error:
+        logger.error(error)
+
 
 def delete_todo_by_id(id):
     try:
@@ -132,18 +118,9 @@ def delete_todo_by_id(id):
         logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
         return mycursor.rowcount
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
+    except Exception as error:
+        logger.error(error)
+
 
 def update_todo_by_id(id, text, done):
     try:
@@ -160,15 +137,5 @@ def update_todo_by_id(id, text, done):
         close_db(mydb)
         # print(mycursor.rowcount, "record(s) affected")
         return id
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
+    except Exception as error:
+        logger.error(error)
