@@ -33,20 +33,23 @@ def get_flowdata(user_name, user_flow):
 
 def run_action(actionline):
     logger.debug('Run_action invoked actionline: ' + str(actionline))
-    splited = actionline.split(":")
-    action = splited[0]
-    if action == "news":
-        return apinews_data(actionline)
-    if action == "norris":
-        return apinorris_data(actionline)
-    if action == "coctail":
-        return cocktail_data(actionline)
-    if action == "weather":
-        return weather_data(actionline)
-    logger.error("Action is not implemented: " + action)
-    return {
-        "action": action,
-    }
+    try:
+        splited = actionline.split(":")
+        action = splited[0]
+        if action == "news":
+            return apinews_data(actionline)
+        if action == "norris":
+            return apinorris_data(actionline)
+        if action == "coctail":
+            return cocktail_data(actionline)
+        if action == "weather":
+            return weather_data(actionline)
+        logger.error("Action is not implemented: " + action)
+    except Exception as error:
+        logger.error(error)
+        return {
+            "action": action,
+        }
 
 
 def apinews_data(actionline):
