@@ -2,20 +2,32 @@ import json
 import mysql.connector
 import logger_module
 logger = logger_module.setup_logger("todo-2lib")
-
+import config
 
 def open_db():
-    mydb = mysql.connector.connect(
-        host="db4free.net",
-        user="coolspammail",
-        passwd="coolspammail-pass",
-        database="coolspammail"
-    )
-    return mydb
+    try:
+        logger.debug('open_db function invoked')
+        mydb = mysql.connector.connect(
+            host=config.dbconnection["host"],
+            user=config.dbconnection["user"],
+            passwd=config.dbconnection["passwd"],
+            database=config.dbconnection["database"]
+        )
+        logger.debug('open_db finished')
+        return mydb
+    except mysql.connector.Error as error:
+        logger.error('There is no DB connection: {}'.format(error))
+
 
 def close_db(mydb):
-    mydb.close()
+    try:
+        logger.debug("close_db function invoked")
+        mydb.close()
+        logger.debug("close_db finished")
 
+    except mysql.connector.Error:
+        logger.error(
+            'Something happened with the server: {}'.format(logger.error))
 
 def get_all():
     """get flowdata from db."""
@@ -39,18 +51,7 @@ def get_all():
         logger.debug("Create dictionary with inserted row_headers from tuple" +str(json_data))
         logger.debug("Invoke: def close_db(mydb)")
         close_db(mydb)
-    except IOError:
-        logger.error('An error occured trying to read the file.')
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except ImportError:
-        logger.error("NO module found")
-    except EOFError:
-        logger.error('Why did you do an EOF on me?')
-    except KeyboardInterrupt:
-        logger.error('You cancelled the operation.')
-    except:
-        logger.debug('An error occured.')
+
     return json_data
 
 
