@@ -15,10 +15,12 @@ def get_flowdata(user_name, user_flow):
     db = client["test"]
     mycol = db["flows"]
     myquery = {"name": user_name}
-    mydoc = mycol.find(myquery)
+    mydoc = mycol.find_one(myquery)
+    if (mydoc is None):
+        logger.debug("My query returned None")
+        return None
     logger.debug("My query returned" + str(mydoc))
-    print(mydoc)
-    data = mydoc[0]
+    data = mydoc
     logger.debug("Query data from the database: " + str(data))
     flows = data["flows"]
     logger.debug("Queery data for flows" + str(flows))
