@@ -110,6 +110,7 @@ def cocktail_data(actionline):
     logger.debug("Cocktail_data" + str(response))
     return response.json()
 
+
 def weather_data(actionline):
     logger.debug('Weather_data invoked' + actionline)
     splited = actionline.split(":")
@@ -126,11 +127,12 @@ def weather_data(actionline):
     logger.debug("Weather_data: " + str(response))
     return convert_weather(response)
 
-def convert_weather (weather_data):
+
+def convert_weather(weather_data):
     weather = weather_data.json()
     logger.debug("weather_data" + str(weather))
     return_data = {"temperature": (weather["main"]["temp"]),
-    "pressure": weather["main"]["pressure"],
-    "city name": weather["name"]}
+                   "pressure": weather["main"]["pressure"],
+                   "city name": weather["name"]}
     logger.debug("weather data" + str(return_data))
     return return_data
