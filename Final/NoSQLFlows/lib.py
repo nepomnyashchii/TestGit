@@ -26,10 +26,9 @@ def get_flowdata(user_name, user_flow):
     for flow in flows:
         if flow.get(user_flow):
             myresult = flow.get(user_flow)
-        logger.error('An error occured.')
     logger.debug("get_flowdata finished with:" + str(myresult))
     return myresult
-    
+
 def run_action(actionline):
     logger.debug('Run_action invoked actionline: ' + str(actionline))
     splited = actionline.split(":")
@@ -110,7 +109,7 @@ def cocktail_data(actionline):
     return response.json()
 
 def weather_data(actionline):
-    logger.debug('Weather_data invoked' + actionline)
+    logger.debug("Weather_data invoked: " + actionline)
     splited = actionline.split(":")
     logger.debug("Weather_data" + str(splited))
     location = splited[1]
