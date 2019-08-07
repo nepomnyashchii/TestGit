@@ -72,42 +72,52 @@ def apinews_data(actionline):
 
 
 def apinorris_data(actionline):
-    splited = actionline.split(":")
-    logger.debug("Apinorris_data: " + str(splited))
-    count = int(splited[1])
-    logger.debug("Apinorris_data: " + str(count))
-    response = requests.get(
-        'http://api.icndb.com/jokes/random/' + str(count))
-    jokes = convert_norris(response)
-    logger.debug("apinorris_data_results: " + str(jokes))
-    return jokes
+    try:
+        splited = actionline.split(":")
+        logger.debug("Apinorris_data: " + str(splited))
+        count = int(splited[1])
+        logger.debug("Apinorris_data: " + str(count))
+        response = requests.get(
+            'http://api.icndb.com/jokes/random/' + str(count))
+        jokes = convert_norris(response)
+        logger.debug("apinorris_data_results: " + str(jokes))
+    except Exception as error:
+        logger.error(error)
+        return jokes
 
 
 def convert_news(news_results, count):
-    news_obj = news_results.json()
-    logger.debug("Convert_news, apinews: " + str(news_obj))
-    source_articles = news_obj["articles"]
-    logger.debug("Convert_news, api_news: " + str(source_articles))
-    return_articles_list = []
-    for source_article in source_articles[:count]:
-        article = {
-            "title": source_article["title"],
-            "description": source_article["description"]
-        }
-        return_articles_list.append(article)
-    logger.debug("Convert_news, apinews results: " + str(return_articles_list))
-    return return_articles_list
+    try:
+        news_obj = news_results.json()
+        logger.debug("Convert_news, apinews: " + str(news_obj))
+        source_articles = news_obj["articles"]
+        logger.debug("Convert_news, api_news: " + str(source_articles))
+        return_articles_list = []
+        for source_article in source_articles[:count]:
+            article = {
+                "title": source_article["title"],
+                "description": source_article["description"]
+            }
+            return_articles_list.append(article)
+        logger.debug("Convert_news, apinews results: " +
+                     str(return_articles_list))
+    except Exception as error:
+        logger.error(error)
+        return return_articles_list
 
 
 def convert_norris(norris_results):
-    obj = norris_results.json()
-    logger.debug("Convert_norris, norris_results: " + str(obj))
-    source_list = obj["value"]
-    return_list = []
-    for source_item in source_list:
-        return_list.append(source_item["joke"])
-    logger.debug("convert norris finished: " + str(return_list))
-    return return_list
+    try:
+        obj = norris_results.json()
+        logger.debug("Convert_norris, norris_results: " + str(obj))
+        source_list = obj["value"]
+        return_list = []
+        for source_item in source_list:
+            return_list.append(source_item["joke"])
+        logger.debug("convert norris finished: " + str(return_list))
+    except Exception as error:
+        logger.error(error)
+        return return_list
 
 
 def cocktail_data(actionline):
