@@ -17,6 +17,11 @@ def index():
     return 'Flow Runner :)'
 
 
+# ------------------------------
+# -------- GET FLOW ----------
+# ------------------------------
+
+
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
     logger.debug('run invoked')
@@ -40,17 +45,33 @@ def run(username, flow):
         data=simple_list
     )
 
+
+# ------------------------------
+# -------- errorhandler  -------
+# ------------------------------
+
 @app.errorhandler(404)
 def not_found(error=None):
     logger.debug("Start app.errorhandler to confirm status 404")
     message = {
-            'status': 404,
-            'message': 'URL is wrong: ' + request.url,
+        'status': 404,
+        'message': 'URL is wrong: ' + request.url,
     }
     resp = jsonify(message)
     resp.status_code = 404
     return resp
 
+@app.errorhandler(405)
+def invalid_method(error=None):
+    logger.debug("405 errorhandler invoked for:" + request.url)
+    message = {
+        'status': 405,
+        'message': '405 Method Not Allowed: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 405
+    logger.debug("Status 405 found with errorhandler")
+    return resp
 
 
 # {
