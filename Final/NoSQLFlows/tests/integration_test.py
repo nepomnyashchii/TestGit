@@ -1,8 +1,11 @@
 import requests
 import json
 import sys
+from colorama import Fore, Style
 base_url = "http://localhost:5000/run"
 
+
+print(Fore.YELLOW + "Test flows APIs " + Style.RESET_ALL)
 
 # Prepare Values for test 1
 username = "alex"
@@ -20,9 +23,7 @@ except ValueError:
 
 if (test_1_json is None) or ("data" not in test_1_json.keys()):
     sys.exit("Test failed bed response data")
-print("Test 1 Success")
-
-
+print(Fore.GREEN + "Test 1 Success" + Style.RESET_ALL)
 
 
 # Prepare Values for test 2
@@ -33,11 +34,9 @@ url = base_url + "/" + username + "/" + flow
 print("Starting Test 2")
 test_2_response = requests.get(url)
 if (test_2_response.status_code == 404):
-    print("Test 2 Success")
+    print(Fore.GREEN + "Test 2 Success" + Style.RESET_ALL)
 else:
     sys.exit("Test 2 failed status = " + str(test_2_response.status_code))
-
-
 
 
 # Prepare Values for test 3
@@ -48,7 +47,7 @@ url = base_url + "/" + username + "/" + flow
 print("Starting Test 3")
 test_3_response = requests.get(url)
 if (test_3_response.status_code == 404):
-    print("Test 3 Success")
+    print(Fore.GREEN + "Test 3 Success" + Style.RESET_ALL)
 else:
     sys.exit("Test 3 failed status = " + str(test_3_response.status_code))
 
