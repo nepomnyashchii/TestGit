@@ -75,7 +75,7 @@ def run(username, flow):
             username=username,
             flow=flow,
             time=datetime.datetime.now()
-        )
+        ), 404
 
     simple_list = []
     for idx, line in enumerate(data):
