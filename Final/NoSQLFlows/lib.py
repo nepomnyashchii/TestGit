@@ -21,14 +21,15 @@ def get_flowdata(user_name, user_flow):
     logger.debug("My query" + str(mydoc))
     data = mydoc[0]
     logger.debug("Query data from the database: " + str(data))
-    flows=data["flows"]
+    flows = data["flows"]
     logger.debug("Queery data for flows" + str(flows))
     for flow in flows:
-        if flow.get (user_flow):
+        if flow.get(user_flow):
             myresult = flow.get(user_flow)
         logger.error('An error occured.')
     logger.debug("get_flowdata finished with:" + str(myresult))
     return myresult
+
 
 def run_action(actionline):
     logger.debug('Run_action invoked actionline: ' + str(actionline))
@@ -49,6 +50,7 @@ def run_action(actionline):
         return {
             "action": action,
         }
+
 
 def apinews_data(actionline):
     try:
@@ -97,7 +99,8 @@ def convert_news(news_results, count):
                 "description": source_article["description"]
             }
             return_articles_list.append(article)
-        logger.debug("Convert_news, apinews results: " + str(return_articles_list))
+        logger.debug("Convert_news, apinews results: " +
+                     str(return_articles_list))
     except Exception as error:
         logger.error(error)
     return return_articles_list
@@ -126,6 +129,7 @@ def cocktail_data(actionline):
     except Exception as error:
         logger.error(error)
 
+
 def weather_data(actionline):
     try:
         logger.debug('Weather_data invoked' + actionline)
@@ -145,13 +149,14 @@ def weather_data(actionline):
         logger.error(error)
         return convert_weather(response)
 
-def convert_weather (weather_data):
+
+def convert_weather(weather_data):
     try:
         weather = weather_data.json()
         logger.debug("weather_data" + str(weather))
         return_data = {"temperature": weather["main"]["temp"],
-        "pressure": weather["main"]["pressure"],
-        "city name": weather["name"]}
+                       "pressure": weather["main"]["pressure"],
+                       "city name": weather["name"]}
         logger.debug("weather data" + str(return_data))
     except Exception as error:
         logger.error(error)
