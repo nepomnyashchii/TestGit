@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify
-import utils
-import logger_module
-import sys
 import dblib
+import logger_module
 import libencryption
+import utils
+import sys
 
 logger = logger_module.setup_logger("secret")
 
@@ -14,10 +14,6 @@ else:
     print('Cannot start Server as key is not found')
     logger.debug('Cannot start Server as key is not found')
     sys.exit("Key is not found ")
-
-config = utils.get_config()
-libencryption.set_key(config["key"])
-dblib.set_db_credentials(config["dbconnection"])
 
 
 app = Flask(__name__)

@@ -3,24 +3,19 @@ import mysql.connector
 import datetime
 import time
 import logger_module
-
+import config
 
 logger = logger_module.setup_logger("dblib")
-dbconnection = {}
-
-
-def set_db_credentials(db_connection):
-    dbconnection = db_connection
 
 
 def open_db():
     try:
         logger.debug('open_db function invoked')
         mydb = mysql.connector.connect(
-            host=dbconnection["host"],
-            user=dbconnection["user"],
-            passwd=dbconnection["passwd"],
-            database=dbconnection["database"]
+            host=config.dbconnection["host"],
+            user=config.dbconnection["user"],
+            passwd=config.dbconnection["passwd"],
+            database=config.dbconnection["database"]
         )
         logger.debug('open_db finished')
         return mydb
