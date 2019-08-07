@@ -27,7 +27,7 @@ def run(username, flow):
     logger.debug('run invoked')
     data = lib.get_flowdata(username, flow)
     if data is None:
-        return jsonify(error="User not Found"), 404
+        return jsonify(error="User or flow not Found"), 404
     simple_list = []
     for idx, line in enumerate(data):
         actionline = line

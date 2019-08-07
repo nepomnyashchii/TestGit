@@ -9,6 +9,7 @@ logger = logger_module.getModuleLogger('flowsapp.MYLIB')
 
 
 def get_flowdata(user_name, user_flow):
+    myresult = None
     logger.debug("get_flowdata invoked with:" + user_name + " " + user_flow)
     """get flowdata from db."""
     client = pymongo.MongoClient(config.MongoClient)
