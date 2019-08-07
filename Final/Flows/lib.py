@@ -33,31 +33,6 @@ def close_db(mydb):
         logger.error(
             'Something happened with the server: {}'.format(logger.error))
 
-def get_flows (flow):
-    myresult = ''
-    try:
-        logger.debug('Invoke: def open_db()')
-        mydb = open_db()
-        if mydb is not None:
-            mycursor = mydb.cursor()
-            logger.debug("Start executing action for db")
-            sql = """
-                SELECT name
-                FROM `flows` INNER JOIN users ON flows.user_id = users.id
-                WHERE LOWER(users.name)=%s
-            """
-            val = (flow)
-            mycursor.execute(sql, val)
-            myresult = mycursor.fetchall()
-            logger.debug("All obtained data: " + str(myresult))
-            logger.debug("Invoke: def close_db(mydb)")
-            close_db(mydb)
-    except ValueError:
-        logger.error('Non-numeric data found in the file.')
-    except Exception as error:
-        logger.error(error)
-    return myresult
-
 def get_users (username):
     myresult = ''
     try:
@@ -69,7 +44,8 @@ def get_users (username):
             sql = """
                 SELECT flows.name
                 FROM `flows`
-                INNER JOIN users ON flows.user_id = users.id WHERE LOWER(users.name)=%s
+                INNER JOIN users ON flows.user_id = users.id
+                WHERE LOWER(users.name)=%s
             """
             val = (username)
             mycursor.execute(sql, val)

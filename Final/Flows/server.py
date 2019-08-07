@@ -39,30 +39,9 @@ def flow(username):
             time=datetime.datetime.now()
         )
 
-
 # ------------------------------
 # -------- GET USER ----------
 # ------------------------------
-
-@app.route('/username/<string:flow>')
-def user(flow):
-    logger.debug('Run invoked')
-    data = lib.get_flows(flow)
-    print(data)
-    logger.debug("Data from DB(actionline):" + str(data))
-    if not data:
-        return jsonify(
-            error="no data for this user and flow",
-            username=data,
-            time=datetime.datetime.now()
-        )
-    else:
-        return jsonify(
-            flow=data,
-            time=datetime.datetime.now()
-        )
-
-
 @app.route('/run/<string:username>/<string:flow>')
 def run(username, flow):
     logger.debug('Run invoked')
