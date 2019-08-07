@@ -83,6 +83,20 @@ def not_found(error=None):
 
     return resp
 
+
+@app.errorhandler(405)
+def invalid_method(error=None):
+    logger.debug("405 errorhandler invoked for:" + request.url)
+    message = {
+        'status': 405,
+        'message': '405 Method Not Allowed: ' + request.url,
+    }
+    resp = jsonify(message)
+    resp.status_code = 405
+    logger.debug("Status 405 found with errorhandler")
+    return resp
+
+
 # {
 #     "text":"asdasd",
 #     "done":true
