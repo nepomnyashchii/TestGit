@@ -109,45 +109,58 @@ def convert_news(news_results, count):
 
 
 def convert_norris(norris_results):
-    obj = norris_results.json()
-    logger.debug("Convert_norris, norris_results: " + str(obj))
-    source_list = obj["value"]
-    return_list = []
-    for source_item in source_list:
-        return_list.append(source_item["joke"])
-    logger.debug("convert norris finished: " + str(return_list))
-    return return_list
+    try:
+        obj = norris_results.json()
+        logger.debug("Convert_norris, norris_results: " + str(obj))
+        source_list = obj["value"]
+        return_list = []
+        for source_item in source_list:
+            return_list.append(source_item["joke"])
+        logger.debug("convert norris finished: " + str(return_list))
+        return return_list
+    except Exception as error:
+            logger.error(error)
 
 
 def cocktail_data(actionline):
-    response = requests.get(
-        'https://www.thecocktaildb.com/api/json/v1/1/random.php')
-    logger.debug("Cocktail_data" + str(response))
-    return response.json()
+    try:
+        response = requests.get(
+            'https://www.thecocktaildb.com/api/json/v1/1/random.php')
+        logger.debug("Cocktail_data" + str(response))
+        return response.json()
+    except Exception as error:
+            logger.error(error)
+
 
 
 def weather_data(actionline):
-    logger.debug("Weather_data invoked: " + actionline)
-    splited = actionline.split(":")
-    logger.debug("Weather_data" + str(splited))
-    location = splited[1]
-    logger.debug('Weather_data location=' + location)
-    appid = '1bdcae6b7d23f180361c8878a965c9f8'
-    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
-        location, appid)
-    logger.debug('weather_data url=' + url)
-    response = requests.get(url)
-    if response.status_code != 200:
-        return {"error": response.json()}
-    logger.debug("Weather_data: " + str(response))
-    return convert_weather(response)
+    try:
+        logger.debug("Weather_data invoked: " + actionline)
+        splited = actionline.split(":")
+        logger.debug("Weather_data" + str(splited))
+        location = splited[1]
+        logger.debug('Weather_data location=' + location)
+        appid = '1bdcae6b7d23f180361c8878a965c9f8'
+        url = 'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}'.format(
+            location, appid)
+        logger.debug('weather_data url=' + url)
+        response = requests.get(url)
+        if response.status_code != 200:
+            return {"error": response.json()}
+        logger.debug("Weather_data: " + str(response))
+        return convert_weather(response)
+    except Exception as error:
+            logger.error(error)
 
 
 def convert_weather(weather_data):
-    weather = weather_data.json()
-    logger.debug("weather_data" + str(weather))
-    return_data = {"temperature": weather["main"]["temp"],
-                   "pressure": weather["main"]["pressure"],
-                   "city name": weather["name"]}
-    logger.debug("weather data" + str(return_data))
-    return return_data
+    try:
+        weather = weather_data.json()
+        logger.debug("weather_data" + str(weather))
+        return_data = {"temperature": weather["main"]["temp"],
+                    "pressure": weather["main"]["pressure"],
+                    "city name": weather["name"]}
+        logger.debug("weather data" + str(return_data))
+        return return_data
+    except Exception as error:
+            logger.error(error)
