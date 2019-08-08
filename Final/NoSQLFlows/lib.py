@@ -89,6 +89,7 @@ def apinorris_data(actionline):
     except Exception as error:
         logger.error(error)
 
+
 def convert_news(news_results, count):
     try:
         news_obj = news_results.json()
@@ -102,10 +103,11 @@ def convert_news(news_results, count):
                 "description": source_article["description"]
             }
             return_articles_list.append(article)
-        logger.debug("Convert_news, apinews results: " + str(return_articles_list))
+        logger.debug("Convert_news, apinews results: " +
+                     str(return_articles_list))
         return return_articles_list
     except Exception as error:
-            logger.error(error)
+        logger.error(error)
 
 
 def convert_norris(norris_results):
@@ -119,7 +121,7 @@ def convert_norris(norris_results):
         logger.debug("convert norris finished: " + str(return_list))
         return return_list
     except Exception as error:
-            logger.error(error)
+        logger.error(error)
 
 
 def cocktail_data(actionline):
@@ -129,8 +131,7 @@ def cocktail_data(actionline):
         logger.debug("Cocktail_data" + str(response))
         return response.json()
     except Exception as error:
-            logger.error(error)
-
+        logger.error(error)
 
 
 def weather_data(actionline):
@@ -150,7 +151,7 @@ def weather_data(actionline):
         logger.debug("Weather_data: " + str(response))
         return convert_weather(response)
     except Exception as error:
-            logger.error(error)
+        logger.error(error)
 
 
 def convert_weather(weather_data):
@@ -158,9 +159,9 @@ def convert_weather(weather_data):
         weather = weather_data.json()
         logger.debug("weather_data" + str(weather))
         return_data = {"temperature": weather["main"]["temp"],
-                    "pressure": weather["main"]["pressure"],
-                    "city name": weather["name"]}
+                       "pressure": weather["main"]["pressure"],
+                       "city name": weather["name"]}
         logger.debug("weather data" + str(return_data))
         return return_data
     except Exception as error:
-            logger.error(error)
+        logger.error(error)
