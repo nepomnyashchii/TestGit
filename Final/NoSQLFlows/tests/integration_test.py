@@ -22,7 +22,7 @@ except ValueError:
     sys.exit("Test 1 failed no json in response")
 
 if (test_1_json is None) or ("data" not in test_1_json.keys()):
-    sys.exit("Test failed bed response data")
+    sys.exit("Test failed: bad response data")
 print(Fore.GREEN + "Test 1 Success" + Style.RESET_ALL)
 
 
