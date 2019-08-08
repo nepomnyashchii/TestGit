@@ -20,13 +20,6 @@ def index():
 # get data through todo (not forget to transfer obtained tuple to the string)
 
 
-@app.route('/todo/<username>', methods=['GET'])
-def get_username():
-    logger.debug('Run invoked to obtain data for all ids')
-    users_name = lib.get_participant(username)
-    logger.debug("Username" + str(users_name))
-    return jsonify(data=users_name)
-
 @app.route('/todo', methods=['GET'])
 def get_todo():
     logger.debug('Run invoked to obtain data for all ids')
