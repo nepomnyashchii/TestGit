@@ -217,8 +217,8 @@ def weather_data(actionline):
         temperature = w.get_temperature('celsius')['temp']
         logger.debug("Temperature: " + str(temperature))
         answer = "In " + location + " temperature now is: " + \
-            str(temperature) + " degrees celcius" + "\n"
-        answer += "In our city " + w.get_detailed_status()
+            str(temperature) + " degrees celcius."
+        answer += " In our city " + w.get_detailed_status()
         logger.debug("Information about weather: " + answer)
         return answer
     except Exception as error:
