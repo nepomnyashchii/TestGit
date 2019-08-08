@@ -42,7 +42,7 @@ def get_users (username):
             mycursor = mydb.cursor()
             logger.debug("Start executing action for db")
             sql = """
-                SELECT flows.name
+                SELECT distinct flows.name
                 FROM `flows`
                 INNER JOIN users ON flows.user_id = users.id
                 WHERE LOWER(users.name)= %s;
