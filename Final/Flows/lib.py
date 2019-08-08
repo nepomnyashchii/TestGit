@@ -45,9 +45,9 @@ def get_users (username):
                 SELECT flows.name
                 FROM `flows`
                 INNER JOIN users ON flows.user_id = users.id
-                WHERE LOWER(users.name)=%s
+                WHERE LOWER(users.name)= %s;
             """
-            val = (username)
+            val = (username,)
             mycursor.execute(sql, val)
             myresult = mycursor.fetchall()
             print(myresult)
