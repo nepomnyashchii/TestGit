@@ -25,7 +25,7 @@ def get_flowdata(user_name, user_flow):
         data = mydoc
         logger.debug("Query data from the database: " + str(data))
         flows = data["flows"]
-        logger.debug("Queery data for flows" + str(flows))
+        logger.debug("Query data for flows" + str(flows))
         for flow in flows:
             if flow.get(user_flow):
                 myresult = flow.get(user_flow)
