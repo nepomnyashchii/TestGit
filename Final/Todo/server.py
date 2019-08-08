@@ -21,9 +21,9 @@ def index():
 
 
 @app.route('/todo/<username>', methods=['GET'])
-def get_username():
+def get_username(username):
     logger.debug('Run invoked to obtain data for all ids')
-    users_name = lib.get_participant(username)
+    users_name = lib.insert_username_todo(username)
     logger.debug("Username" + str(users_name))
     return jsonify(data=users_name)
 
