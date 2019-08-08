@@ -17,15 +17,6 @@ print("\n\n\n")
 def index():
     logger.debug("Request for testing connection invoked")
     return 'Todo Experience :)'
-# get data through todo (not forget to transfer obtained tuple to the string)
-
-
-@app.route('/todo/<username>', methods=['GET'])
-def get_username(username):
-    logger.debug('Run invoked to obtain data for all ids')
-    users_name = lib.insert_username_todo(username)
-    logger.debug("Username" + str(users_name))
-    return jsonify(data=users_name)
 
 @app.route('/todo', methods=['GET'])
 def get_todo():
@@ -42,15 +33,15 @@ def get_all(id):
     logger.debug("Data for asked id: " + str(id_data))
     return jsonify(data=id_data)
 
-
 @app.route('/todo', methods=['POST'])
 def insert_todo():
     logger.debug("Run invoked to insert data with new id to the database")
     result = request.json
     logger.debug("Json new_data from the dictionary in the body" + str(result))
     data = result["text"]
+    username = result["username"]
     logger.debug("Data from the body: " + str(data))
-    new_id = lib.insert_todo(data)
+    new_id = lib.insert_todo(data, username)
     logger.debug("Inserted id: " + str(new_id))
     return jsonify(id=new_id)
 
