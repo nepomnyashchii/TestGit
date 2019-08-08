@@ -30,7 +30,7 @@ def close_db(mydb):
         logger.error(
             'Something happened with the server: {}'.format(logger.error))
 
-def insertusername_todo(username):
+def insert_username_todo(username):
     try:
         logger.debug('Invoke: def open_db()')
         mydb = open_db()
@@ -47,7 +47,7 @@ def insertusername_todo(username):
     except Exception as error:
         logger.error(error)
 
-        
+
 def get_all():
     """get flowdata from db."""
 
