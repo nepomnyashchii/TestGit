@@ -36,7 +36,7 @@ def insert_username_todo(username):
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
-        sql = "INSERT INTO `todo` (participants) VALUES (%s)"
+        sql = "INSERT INTO `todo` (username) VALUES (%s)"
         val = (username,)
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
