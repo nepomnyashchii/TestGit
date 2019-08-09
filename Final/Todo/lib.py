@@ -30,24 +30,6 @@ def close_db(mydb):
         logger.error(
             'Something happened with the server: {}'.format(logger.error))
 
-def insert_username_todo(username):
-    try:
-        logger.debug('Invoke: def open_db()')
-        mydb = open_db()
-        logger.debug("Start db")
-        mycursor = mydb.cursor()
-        sql = "INSERT INTO `todo` (username) VALUES (%s)"
-        val = (username,)
-        mycursor.execute(sql, val)
-        logger.debug("Commit changes to the database")
-        mydb.commit()
-        logger.debug("Invoke: def close_db(mydb)")
-        close_db(mydb)
-        return mycursor.lastrowid
-    except Exception as error:
-        logger.error(error)
-
-
 def get_all():
     """get flowdata from db."""
 
@@ -109,7 +91,7 @@ def insert_todo(text, username):
         mydb = open_db()
         logger.debug("Start db")
         mycursor = mydb.cursor()
-        sql = "INSERT INTO `todo` (`text`,`done`, `username`) VALUES (%s,%s,%s)"
+        sql = "INSERT INTO `todo` (`text`,`done`,`username`) VALUES (%s,%s,%s)"
         val = (text, 0, username)
         mycursor.execute(sql, val)
         logger.debug("Commit changes to the database")
