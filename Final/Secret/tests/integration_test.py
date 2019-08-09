@@ -23,7 +23,7 @@ print(test_1_json)
 
 if test_1_json is None or (test_1_json is not None and "sid" not in test_1_json.keys()):
     sys.exit("Test 1 failed", 1)
-print("Test 1 passed")
+print(Fore.GREEN + "Test 1 Success" + Style.RESET_ALL)
 
 # Prepare Values for tests
 sid = test_1_json["sid"]
@@ -36,7 +36,7 @@ test_2_response = requests.get(url + "/" + sid + "/" + str(pin))
 test_2_json = test_2_response.json()
 if test_2_json is None or (test_2_json is not None and "msg" not in test_2_json.keys()):
     sys.exit("Test 2 failed", 2)
-print("Test 2 passed")
+print(Fore.GREEN + "Test 2 Success" + Style.RESET_ALL)
 
 
 # Prepare Values for tests
@@ -52,6 +52,6 @@ if test_3_json is None or (test_3_json is not None and "deleted_sid" not in test
     sys.exit("Test 3 failed", 3)
 deleted_id = test_3_json["deleted_sid"]
 
-print("Test 3 passed \n\n\n")
+print(Fore.GREEN + "Test 3 Success" + Style.RESET_ALL)
 
 sys.exit("All integration tests are done\n\n\n")
