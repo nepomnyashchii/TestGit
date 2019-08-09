@@ -18,6 +18,7 @@ def index():
     logger.debug("Request for testing connection invoked")
     return 'Todo Experience :)'
 
+
 @app.route('/todo', methods=['GET'])
 def get_todo():
     logger.debug('Run invoked to obtain data for all ids')
@@ -32,6 +33,7 @@ def get_all(id):
     id_data = lib.get_todo_by_id(id)
     logger.debug("Data for asked id: " + str(id_data))
     return jsonify(data=id_data)
+
 
 @app.route('/todo', methods=['POST'])
 def insert_todo():
