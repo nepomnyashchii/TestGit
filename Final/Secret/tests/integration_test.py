@@ -17,7 +17,7 @@ test_1_response = requests.post(url, data=payload, headers=headers)
 test_1_json = test_1_response.json()
 print(test_1_json)
 
-if test_1_json is None or (test_1_json is not None and "sid" not in test_1_json.keys() or "sid" != ""):
+if test_1_json is None or (test_1_json is not None and "sid" not in test_1_json.keys()):
     sys.exit("Test 1 failed", 1)
 print("Test 1 passed")
 
