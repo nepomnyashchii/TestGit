@@ -1,6 +1,10 @@
 import requests
 import json
 import sys
+from colorama import Fore, Style
+
+
+print(Fore.YELLOW + "Test Secret" + Style.RESET_ALL)
 
 # Prepare Values for tests
 url = "http://localhost:5000/secret"
