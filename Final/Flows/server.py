@@ -24,7 +24,7 @@ def index():
 @app.route('/flow/<string:username>')
 def flow(username):
     logger.debug('Run invoked')
-    data = lib.get_users(username)
+    data = lib.get_user_flows(username)
     print(data)
     logger.debug("Data from DB(actionline):" + str(data))
     if not data:

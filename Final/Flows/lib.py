@@ -33,8 +33,9 @@ def close_db(mydb):
         logger.error(
             'Something happened with the server: {}'.format(logger.error))
 
-def get_users (username):
-    myresult = ''
+
+def get_user_flows(username):
+    myresult = []
     try:
         logger.debug('Invoke: def open_db()')
         mydb = open_db()
@@ -50,7 +51,6 @@ def get_users (username):
             val = (username,)
             mycursor.execute(sql, val)
             myresult = mycursor.fetchall()
-            print(myresult)
             logger.debug("All obtained data: " + str(myresult))
             logger.debug("Invoke: def close_db(mydb)")
             close_db(mydb)
@@ -114,6 +114,7 @@ def run_action(actionline):
     except Exception as error:
         logger.error(error)
 
+
 def apinews_data(actionline):
     logger.debug("Invoke: Apinews")
     try:
@@ -149,6 +150,7 @@ def apinorris_data(actionline):
     except Exception as error:
         logger.error(error)
 
+
 def convert_news(news_results, count):
     logger.debug("Invoke: convert_news,apinews json conversion")
     try:
@@ -168,6 +170,7 @@ def convert_news(news_results, count):
         return return_articles_list
     except Exception as error:
         logger.error(error)
+
 
 def convert_norris(norris_results, actionline):
     logger.debug("Invoke: convert_norris,apinorris json conversion")
