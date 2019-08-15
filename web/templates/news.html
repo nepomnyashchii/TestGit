@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<style>
+	.joppaCss {
+		color: red;
+		font-size: 500px;
+	}
+</style>
+<script>
+	var str='{{news}}'
+    str= str.replace(/&#34;/g,'"')
+    //var decoded = decodeURI(str)
+    var obj=JSON.parse(str)
+    //console.log(str)
+    console.log(obj)
+    alert(obj.name)
+    var jopa={
+        "asd":"asd",
+        "complex":        {
+            "name":"alex from native json"
+            }
+        }
+    console.log(jopa.complex.name)
+
+</script>
+
+<body>
+	<h1>Our News is {{quote}}</h1>
+	<p class="joppaCss">My first paragraph.</p>
+	<button id="btn1" onclick="alert(obj.age)" >Push Me</button>
+</body>
+
+</html>
