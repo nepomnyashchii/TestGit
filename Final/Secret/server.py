@@ -68,6 +68,12 @@ def add_secret():
         return jsonify(sid=sid,
                        Data="Data is not received from DB")
 
+# {
+# 	"msg" :"success",
+#     "pin": 1234,
+#     "exp": 1000
+# }
+
 
 # ------------------------------
 # -------- GET SECRET ----------
@@ -95,6 +101,11 @@ def get_secret_body():
         }), 400
     else:
         return returnMessage(dblib.get_secret(request.json["sid"], request.json["pin"]))
+
+# {
+#     "sid": "25b22c6c-cd4f-44e5-b992-3c0b12cf7e2f",
+#     "pin" : 1234
+# }
 
 
 # ------------------------------
@@ -132,6 +143,11 @@ def del_secret(sid, pin):
             'message': 'Such sid and/or pin does not exist'})
 
 
+
+
+
+
+
 # ------------------------------
 # -------- DEL SECRET BODY ----------
 # ------------------------------
@@ -161,7 +177,10 @@ def delete_secret():
             return jsonify({
                 'status': "404: request",
                 'message': "Such sid and/or pin does not exist"})
-
+# {
+#     "pin": 1234,
+#     "sid" : "d9b7f9f3-d377-4a08-b802-02eb772632fa"
+# }
 
 # ------------------------------
 # -------- errorhandler  -------
