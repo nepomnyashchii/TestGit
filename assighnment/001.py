@@ -21,3 +21,4 @@ x = mycol.insert_one(result)
 
 print(x.inserted_id)
 
+
