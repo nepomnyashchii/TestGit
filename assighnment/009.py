@@ -12,3 +12,5 @@ mycursor = mydb.cursor()
 y = mycursor.execute(
     "CREATE TABLE clients (name VARCHAR(255), phone VARCHAR(255), email VARCHAR(255))")
 print(y)
+
+# gggg
