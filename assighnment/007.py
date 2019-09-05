@@ -6,10 +6,20 @@ mycol = db["sasha3"]
 myquery = { "name": { "$regex": "a" } }
 mydoc = mycol.find(myquery)
 phone = []
+name = []
+email = []
 for x in mydoc:
-  print(x)
+#   print(x)
   result = x["phone"]
-  print(result)
   phone.append(result)
-print(phone)
+  result2 = x["name"]
+  name.append(result2)
+  result3 = x["email"]
+  email.append(result3)
+data = tuple(phone)
+data1 = tuple(name)
+data2 = tuple(email)
+print(data)
+print(data1)
+print(data2)
 
