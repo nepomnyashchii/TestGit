@@ -21,6 +21,6 @@ mydb = mysql.connector.connect(
 )
 
 mycursor = mydb.cursor()
-mycursor.execute(sql, multi=True)
+mycursor.execute(sql)
 mydb.commit()
 print(mycursor.rowcount)
