@@ -10,6 +10,6 @@ data = [data3, 2, 3, "number"]
 
 a = [1,2,3,4]
 
-a[2] = 6
+a[2] = a[2] + 10
 
 print(a)
