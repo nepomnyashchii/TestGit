@@ -25,6 +25,6 @@ data = x["phone"]
 print(type(data))
 print(data)
 
-print(''"x["phone"]"')
-
-print(type('"+ x["phone"] + "'))
+data = '" + "alex" + "'
+print(data)
+print('"alex"')
