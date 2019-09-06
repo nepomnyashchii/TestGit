@@ -33,6 +33,9 @@ def executeSQL(sql):
     mydb.commit()
 
 
+
+
+
 sql = getSQL()
 print(sql)
 executeSQL(sql)
