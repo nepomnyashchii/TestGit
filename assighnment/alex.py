@@ -22,14 +22,13 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-mycursor.execute(sql, params=None, multi=True)
-
-# for i in mycursor.execute(sql, params=None, multi=True):
-#     print(i)
+for i in mycursor.execute(sql, params=None, multi=True):
+    print(mycursor.rowcount)
+    print(i)
 
 # it = mycursor.execute(sql, params=None, multi=True)
 # for i in it:
 #     print(i)
 
 mydb.commit()
-print(mycursor.rowcount)
+
