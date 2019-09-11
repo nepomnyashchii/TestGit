@@ -17,8 +17,9 @@
 <hr>
 
 <form action = "{% url 'articles:leave_comment' article.id %" method = "POST">
-
-
+    <input type='text' required placeholder = "Your name" name="name"><br>
+    <textarea name="text" required = '' placeholder = "TextComments" cols='30' rows='10'></textarea><br>
+    <button type = "submit"><"Left Comments"</button>
 
 </form>
 
