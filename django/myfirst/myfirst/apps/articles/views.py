@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from django.urls import reverse
 
-from .models import Article, Comment
+from .models import Article
 
 # def index(request):
 #     return HttpResponse("Hello World")
