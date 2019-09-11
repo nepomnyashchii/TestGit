@@ -11,12 +11,29 @@
 
 <em>{{article.pub_date}}</em>
 
+{% if article.was_published_recently %}
+New Article!
+{% endif %}
+
 <hr>
 
+{% if latest_comments_list %}
+
+    {% for c in latest_comments_list %}
+        <p>
+            <strong>{{c.author_name}}</strong>
+            <p>{{c.comment_text}}</p>
+        </p>
+    {% endfor %}
+
+{% else %}
+Comments are not found! You will be the first ;)
+{% endif %}
 
 <hr>
 
-<form action = "{% url 'articles:leave_comment' article.id %" method = "POST">
+<form action = "{% url 'articles:leave_comment' article.id %}" method = "POST">
+    {% csrf_token %}
     <input type='text' required placeholder = "Your name" name="name"><br>
     <textarea name="text" required = '' placeholder = "TextComments" cols='30' rows='10'></textarea><br>
     <button type = "submit"><"Left Comments"</button>
