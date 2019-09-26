@@ -1,9 +1,13 @@
 
-def isAlphabet(x):
-    return x.isalpha()
+def Listconversion(string):
+    List = []
+    for i in string:
+        List.append(i)
+    return List
+
 
 def reverse(string):
-    LIST = toList(string)
+    LIST =Listconversion(string)
     r = len(LIST) - 1
     l = 0
     while l < r:
@@ -12,20 +16,14 @@ def reverse(string):
         r -= 1
     return toString(LIST)
 
-def toList(string):
-    List = []
-    for i in string:
-        List.append(i)
-    return List
+def swap(a, b):
+    return b, a
 
 def toString(List):
     return ''.join(List)
 
-def swap(a, b):
-    return b, a
 
-# Driver
-string = "sshshh*8888"
+string = "papai"
 print ("Input string: ") + string
 string = reverse(string)
 print ("Output string: " + string)
