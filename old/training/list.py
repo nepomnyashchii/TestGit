@@ -1,9 +1,9 @@
 
-import json
+# import json
 # """Check what actions are possible in the directory list"""
 # print(dir(list))
 
-# list1 = ["orange", "apple", "peach"]
+list1 = ["orange", "apple", "peach"]
 
 # """Obtain certain information from the list"""
 # data = list1[0]
@@ -13,9 +13,9 @@ import json
 
 # """ Take two parameters from the list"""
 
-# data = list1[0:1]
-# print(type(data))
-# print(data)
+data = list1[0:1]
+print(type(data))
+print(data)
 # """Answer is ["orange"] (element of the list) and not the element(string)"""
 
 # data = list1[0:2]
@@ -63,64 +63,64 @@ import json
 # data = list((1,2,3))
 # print(data)
 
-""" Obtain from the list of tuples: two different parameters"""
-data = [(0,2,3) ,(3,4,5)]
-new_list = []
-for element in data:
-    data1 =element
-    # print(data1)
-    data =list(data1)
-    # print(data)
-    for element in data:
-        data1 = element
-        # print(data1)
-        new_list.append(data1)
-        # print(new_list)
-data1 = new_list
-print(data1)
+# """ Obtain from the list of tuples: two different parameters"""
+# data = [(0,2,3) ,(3,4,5)]
+# new_list = []
+# for element in data:
+#     data1 =element
+#     # print(data1)
+#     data =list(data1)
+#     # print(data)
+#     for element in data:
+#         data1 = element
+#         # print(data1)
+#         new_list.append(data1)
+#         # print(new_list)
+# data1 = new_list
+# print(data1)
 
-""" Make from the list a dictionary"""
-dictOfWords = { i : "lake" for i in data1 }
-print(dictOfWords)
+# """ Make from the list a dictionary"""
+# dictOfWords = { i : "lake" for i in data1 }
+# print(dictOfWords)
 
-""" Make enumarating dictionary from list of dictionaries"""
+# """ Make enumarating dictionary from list of dictionaries"""
 
-dictOfWords = { i : data1[i] for i in range(0, len(data1))}
-print(dictOfWords)
+# dictOfWords = { i : data1[i] for i in range(0, len(data1))}
+# print(dictOfWords)
 
-"""Convert two lists into a dictionary"""
-list1 = ["orange", "apple", "keys", "elephant", "mama", "papa"]
+# """Convert two lists into a dictionary"""
+# list1 = ["orange", "apple", "keys", "elephant", "mama", "papa"]
 
-""" Function zip creates from 2 lists list of tuples with the header of the list and the parameter """
-Ziplists = zip(data1, list1)
-Ziplists1 = zip(list1, data1)
-print(Ziplists)
-print(Ziplists1)
-""" there are two number:3, parameters can be removed from the list"""
-dictofWords = dict(Ziplists)
-dictofWords1 = dict(Ziplists1)
-print(dictofWords)
-print(dictofWords1)
+# """ Function zip creates from 2 lists list of tuples with the header of the list and the parameter """
+# Ziplists = zip(data1, list1)
+# Ziplists1 = zip(list1, data1)
+# print(Ziplists)
+# print(Ziplists1)
+# """ there are two number:3, parameters can be removed from the list"""
+# dictofWords = dict(Ziplists)
+# dictofWords1 = dict(Ziplists1)
+# print(dictofWords)
+# print(dictofWords1)
 
 """Choose the result from the dictionary """
 # result = dictofWords[3]
 # print(result)
 
-list4 = [("apple", "orange"), ("green" , "yellow")]
-dicte = dict(list4)
-print(dicte)
+# list4 = [("apple", "orange"), ("green" , "yellow")]
+# dicte = dict(list4)
+# print(dicte)
 
-list5 = ["Mike", "Jerry", "John", "William"]
-for element in list5:
-    # print(element)
-    if element == "Jerry":
-        print("Noel")
+# list5 = ["Mike", "Jerry", "John", "William"]
+# for element in list5:
+#     # print(element)
+#     if element == "Jerry":
+#         print("Noel")
 
-list6 = ["apple", "peach", "grapes"]
-for element in list6:
-    print(element)
-    if element=="apple":
-        print("my day is great")
+# list6 = ["apple", "peach", "grapes"]
+# for element in list6:
+#     print(element)
+#     if element=="apple":
+#         print("my day is great")
 
 
 
