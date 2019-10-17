@@ -1,8 +1,9 @@
-# array=['a','b','b','a']
+# array=['a','b','b','a', 'c']
 
+# def reverse(s):
+#     return s[::-1]
 
-def reverse(s):
-    return s[::-1]
+# print(reverse("money"))
 
 # string='abr1rba'
 
@@ -82,18 +83,26 @@ def reverse(s):
 # print(my_reverse_short_version('abc1d'))
 
 
-def char_count(my_char, my_str):
-    count = 0
-    for e in my_str:
-        if e == my_char:
-            count += 1
-    return count
+# def char_count(my_char, my_str):
+#     count = 0
+#     for e in my_str:
+#         if e == my_char:
+#             count += 1
+#     return count
 
 
-# print(char_count("a", "jopajopasajopa"))
+# # print(char_count("a", "jopajopasajopa"))
 
 
-a = ['a', 1, [1, 3, "s"]]
-print(a)
-a[0], a[2][-1] = a[2][-1], a[0]
-print(a)
+# a = ['a', 1, [1, 3, "s"]]
+# print(a)
+# a[0], a[2][-1] = a[2][-1], a[0]
+# print(a)
+
+a = "alec"
+b = list(a)
+print(b)
+b[1], b[0] = b[0], b[1]
+print(b)
+c ="".join(b)
+print(c)
