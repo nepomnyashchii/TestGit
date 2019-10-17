@@ -1,8 +1,8 @@
 # array=['a','b','b','a']
 
 
-# def reverse(s):
-#     return s[::-1]
+def reverse(s):
+    return s[::-1]
 
 # string='abr1rba'
 
@@ -25,24 +25,24 @@
 #     return True
 
 
-# # tmp=array[0]
-# # array[0]=array[1]
-# # array[1]=tmp
-# # print(array)
+# tmp=array[0]
+# array[0]=array[1]
+# array[1]=tmp
+# print(array)
 
 
-# # for e in array:
-# #     print(e)
+# for e in array:
+#     print(e)
 
-# # tmp=array[0]
-# # array[0]=array[-1]
-# # array[-1]=tmp
+# tmp=array[0]
+# array[0]=array[-1]
+# array[-1]=tmp
 
-# # for e in array:
-# #     print(e)
+# for e in array:
+#     print(e)
 
 
-# # array[array.len()-1]
+# array[array.len()-1]
 
 
 # str="abcdefghij"
@@ -60,26 +60,26 @@
 # print(myIsPolyndrom('asssa'))
 
 
-def my_reverse_short_version(my_str):
-    ls = list(my_str)
-    for i in xrange(0, len(ls)/2):
-        bi = len(ls)-i-1
-        ls[i], ls[bi] = ls[bi], ls[i]
-    return "".join(ls)
+# def my_reverse_short_version(my_str):
+#     ls = list(my_str)
+#     for i in xrange(0, len(ls)/2):
+#         bi = len(ls)-i-1
+#         ls[i], ls[bi] = ls[bi], ls[i]
+#     return "".join(ls)
 
 
-def my_reverse(my_str):
-    ls = list(my_str)
-    for i in xrange(0, len(ls)/2):
-        bi = len(ls)-i-1
-        tmp = ls[i]
-        ls[i] = ls[bi]
-        ls[bi] = tmp
-    return "".join(ls)
+# def my_reverse(my_str):
+#     ls = list(my_str)
+#     for i in xrange(0, len(ls)/2):
+#         bi = len(ls)-i-1
+#         tmp = ls[i]
+#         ls[i] = ls[bi]
+#         ls[bi] = tmp
+#     return "".join(ls)
 
 
-print(my_reverse('abc1d'))
-print(my_reverse_short_version('abc1d'))
+# print(my_reverse('abc1d'))
+# print(my_reverse_short_version('abc1d'))
 
 
 def char_count(my_char, my_str):
@@ -90,7 +90,7 @@ def char_count(my_char, my_str):
     return count
 
 
-print(char_count("a", "jopajopasajopa"))
+# print(char_count("a", "jopajopasajopa"))
 
 
 a = ['a', 1, [1, 3, "s"]]
