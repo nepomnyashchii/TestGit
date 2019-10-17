@@ -99,10 +99,25 @@
 # a[0], a[2][-1] = a[2][-1], a[0]
 # print(a)
 
-a = "alec"
-b = list(a)
-print(b)
-b[1], b[0] = b[0], b[1]
-print(b)
-c ="".join(b)
-print(c)
+# a = "alec"
+# b = list(a)
+# print(b)
+# b[1], b[0] = b[0], b[1]
+# print(b)
+# c ="".join(b)
+# print(c)
+
+data = ["a", 'b', 'c', 'd']
+
+def result(data):
+    d_new = []
+    for element in data:
+        if element == 'a' or element == 'b':
+            new_result = d_new.append(element)
+            print(new_result)
+    else:
+        return "Data is not right"
+result(data)
+
+
+
