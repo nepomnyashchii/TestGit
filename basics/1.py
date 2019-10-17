@@ -110,11 +110,11 @@
 data = ["a", 'b', 'c', 'd']
 
 def result(data):
-    d_new = []
+    my_list = []
     for element in data:
         if element == 'a' or element == 'b':
-            new_result = d_new.append(element)
-            print(new_result)
+            my_list = my_list.append(element)
+            print(my_list)
     else:
         return "Data is not right"
 result(data)
