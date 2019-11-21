@@ -107,17 +107,30 @@
 # c ="".join(b)
 # print(c)
 
-data = ["a", 'b', 'c', 'd']
+# data = ["a", 'b', 'c', 'd']
 
-def result(data):
-    my_list = []
-    for element in data:
-        if element == 'a' or element == 'b':
-            my_list = my_list.append(element)
-            print(my_list)
-    else:
-        return "Data is not right"
-result(data)
+# def result(data):
+#     my_list = []
+#     for element in data:
+#         if element == 'a' or element == 'b':
+#             my_list = my_list.append(element)
+#             print(my_list)
+#     else:
+#         return "Data is not right"
+# result(data)
+
+
+data = {"fruit": "apple", "vegetable": "orange"}
+# for k,v in data.items():
+#     print[k,v]
+# element = data["fruit"]
+data1 = list(data.items())
+# print(data1)
+for element in data1:
+    print(element)
+
+
+
 
 
 
