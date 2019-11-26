@@ -143,18 +143,18 @@
 # print(data)
 
 
-def myFun(*argv):
-    data = []
-    value = " "
-    for arg in argv:
-        result = data.append(arg)
-    print(data)
-    if data.count(data[0]) == len(data):
-        return "Yes"
-    else:
-        return "No"
-data = myFun(1,1,1)
-print(data)
+# def myFun(*argv):
+#     data = []
+#     value = " "
+#     for arg in argv:
+#         result = data.append(arg)
+#     print(data)
+#     if data.count(data[0]) == len(data):
+#         return "Yes"
+#     else:
+#         return "No"
+# data = myFun(1,1,1)
+# print(data)
 
 
 
@@ -177,7 +177,42 @@ print(data)
 # print(data)
 
 
+# def myFun(*argv):
+#     data = []
+#     value = " "
+#     for arg in argv:
+#         result = data.append(arg)
+#     print(data)
+#     if data.count(data[0]) == len(data):
+#         return "Yes"
+#     else:
+#         return "No"
+# data = myFun(1,1,1)
+# print(data)
 
+
+# def myFun(*argv):
+#     if argv.count(argv[0]) == len(argv):
+#         return "Yes"
+#     else:
+#         return "No"
+# print(myFun(1,2,1))
+
+
+def myFun(*argv):
+    for arg in argv:
+        if arg!=argv[0]:
+            return "No"
+    else:
+        return ("Yes")
+print(myFun(1,10,1))
+
+
+
+
+# data = [9,10,10]
+# if data[0]!=data[1]:
+#     print("Yes")
 
 
 
