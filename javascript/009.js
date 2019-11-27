@@ -8,7 +8,7 @@ console.log(y,x)
 var x = 5;
 var y = 5;
 var z = 6;
-(x == y)       // Returns true
-(x == z)       // Returns false
+// (x == y)       // Returns true
+// (x == z)       // Returns false
 
-console.log(x)
+console.log(x==y)
