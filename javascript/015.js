@@ -1,6 +1,6 @@
 
 function myFunction() {
-  var carName = "Volvo";
+  var carName= "Volvo";
 }
 
 console.log(myFunction())
