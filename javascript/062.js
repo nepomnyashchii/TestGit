@@ -7,3 +7,6 @@ if (jeans <= balance) {
   console.log("You have enough money to purchase the item!");
 }
 else {console.log("Come to see me next day")};
+
+
+

@@ -5,11 +5,15 @@ var person = {
   eyeColor: "blue"
 };
 
-console.log(person)
+// console.log(person)
 
-console.log(person.lastName, person.firstName, person.age, person.eyeColor)
+// console.log(person.lastName, person.firstName, person.age, person.eyeColor)
 
-console.log(person["lastName"])
+// console.log(person["lastName"])
+
+var name = person["lastName"]
+
+console.log(name)
 
 
 
