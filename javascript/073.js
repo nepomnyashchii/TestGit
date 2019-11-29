@@ -8,3 +8,4 @@ var validateObject = function (obj, callback) {
 validateObject('123', function (err) {
     console.log('Callback: ' + err.message);
 });
+
