@@ -12,4 +12,8 @@ console.log(lake)
 
 console.log(apple.length)
 
+if (10==21)
+{ console.log("I am a champion")}
+else
+{console.log("My friend is a champion")}
 
