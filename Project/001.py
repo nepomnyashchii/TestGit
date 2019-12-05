@@ -205,8 +205,7 @@ def myFun(*argv):
             return "No"
     else:
         return ("Yes")
-print(myFun(1,10,1))
-
+print(myFun(1,1,3,1))
 
 
 
