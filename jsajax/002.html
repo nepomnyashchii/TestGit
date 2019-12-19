@@ -1,25 +1,38 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <title>asd</title>
+</head>
 <body>
 
-<div id="demo">
-<h2>The XMLHttpRequest Object</h2>
-<button type="button" onclick="loadDoc()">Change Content</button>
-</div>
+	<div id="demo">
+		<h2>The XMLHttpRequest Object</h2>
+		<button type="button" onclick="loadDoc()">Change Content</button>
+	</div>
+    <aaa style="color:red" id="state"></aaa>
 
-<script>
-function loadDoc() {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML =
-      this.responseText;
-    }
-  };
-  xhttp.open("GET", "ajax_info.txt", true);
-  xhttp.send();
-}
-</script>
+	<script>
+		function loadDoc() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = callback    
+            xhttp.open("GET", "https://jsonplaceholder.typicode.com/posts/1", true);
+            // xhttp.open("GET", "data.json", true);
+            xhttp.send();
+        }
 
+        function callback() {
+            const now= new Date();
+            const statePlaceHolder=document.getElementById("state");
+            statePlaceHolder.innerHTML = statePlaceHolder.innerHTML + "<br>" +  this.readyState + " " + this.status+ "-" +   now.toJSON();
+
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML = this.responseText;
+            }     
+             if (this.readyState == 4 && this.status == 404) {
+                document.getElementById("demo").innerHTML = 'Bad URL';
+            }
+        }
+	</script>
 </body>
+
 </html>
